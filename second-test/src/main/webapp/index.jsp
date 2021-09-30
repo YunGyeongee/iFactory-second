@@ -2,11 +2,11 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>Smart Factory</title>
 </head>
 <body>
 
-<h1>Hello world!</h1>
+	<jsp:forward page="WEB-INF/views/member/loginForm.jsp"/>
 
 </body>
 </html>

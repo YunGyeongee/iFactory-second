@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+ 	<resultMap type="Member" id="memberResultSet">
+ 		<result property="memberNo" column="member_no"  />
+ 		<result property="memberName" column="member_name" />
+ 		<result property="memberId" column="memnber_id" />
+ 		<result property="memberPwd" column="member_pwd" />
+ 		<result property="memberPhone" column="member_phone" />
+ 		<result property="memberProfile" column="member_profile" />
+ 		<result property="enrollDate" column="enroll_date" />
+ 		<result property="modifyDate" column="modify_date" />
+ 		<result property="memberStatus" column="member_status" />
+ 	</resultMap>
+  	
+  	
+  	<!-- 로그인용 -->
+  	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+  		select 
+  		       member_name,
+  		       member_id,
+  		       member_pwd,
+  		       member_phone,
+  		       member_profile,
+  		       enroll_date,
+  		       modify_date,
+  		       member_status
+  		  from sample.member
+  		 where member_id = #{memberId}
+  		   and member_status = 'Y'
+  	</select>
+  	
+  	
+  	<!-- 회원가입용 -->
+  	<insert id="insertMember" parameterType="Member">
+  		insert
+  		  into sample.member
+  		       (
+  		       member_name,
+  		       member_id,
+  		       member_pwd,
+  		       member_phone,
+  		       member_profile,
+  		       enroll_date,
+  		       modify_date,
+  		       member_status
+  		       )
+  		values
+  		       (
+  		       #{memberName},
+  		       #{memberId},
+  		       #{memberPwd},
+  		       #{memberPhone},
+  		       null,
+  		       default,
+  		       default,
+  		       default    
+  		       )
+  	</insert>
+  	
+  	<!-- 프로필사진 수정용 -->
+  	<update id="updateMember" parameterType="Member">
+  		update
+  		       sample.member
+  		   set member_profile = #{memberProfile}
+  		 where member_ id = #{memberId}
+  	</update>
+  	
+  	<!-- 아이디 중복체크 -->
+  	<select id="idCheck" parameterType="string" resultType="_int">
+  		select count(*)
+  		  from sample.member
+  		 where member_id = #{memberId}
+  	</select>
+  	
+  	
+  	<!-- 비밀번호 확인 -->
+  	<select id="checkPwd" resultType="_int">
+  		select count(*)
+  		  from sample.member
+  		 where user_id = #{memberId}
+  		   and user_pwd = #{memberPwd}
+  	</select>
+  	
+  	<!-- 비밀번호 수정용 -->
+  	<update id="updatePwd" parameterType="Member">
+  		update
+  		       sample.member
+  		   set 
+  		       member_pwd = #{memberPwd}
+  		 where member_id = #{memberId} 
+  	</update>
+  	
+  	
+  	<!-- 회원탈퇴용 -->
+  	<update id="deleteMember" parameterType="string">
+  		update
+  			   sample.member
+  		   set
+  		       member_status = 'N',
+  		       modify_date = now()
+  		 where member_id = #{memberId}
+  	</update>
+  	
+  	
+  	
+  	
+  	
+  
+</mapper>
+
+
