@@ -36,12 +36,17 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.checkPwd", map);
 	}
 
-	public int deleteMember(SqlSessionTemplate sqlSession, String memberId) {
-		return sqlSession.update("memberMapper.deleteMember", memberId);
+	public Member deleteModal(SqlSessionTemplate sqlSession, int memberId) {
+		return sqlSession.selectOne("memberMapper.deleteModal", memberId);
+	}
+	
+	public int deleteMember(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.update("memberMapper.deleteMember", map);
 	}
 
 	public int idCheck(SqlSessionTemplate sqlSession, String memberId) {
 		return sqlSession.selectOne("memberMapper.idCheck", memberId);
 	}
+	
 
 }

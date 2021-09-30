@@ -1,5 +1,7 @@
 package com.ivh.second.member.model.service;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,13 +45,17 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteMember(String memberId) {
-		return mDao.deleteMember(sqlSession, memberId);
+	public Member deleteModal(int memberId) {
+		return mDao.deleteModal(sqlSession, memberId);
+	}
+	
+	@Override
+	public int deleteMember(HashMap<String, Object> map) {
+		return mDao.deleteMember(sqlSession, map);
 	}
 
 	@Override
 	public int idCheck(String memberId) {
 		return mDao.idCheck(sqlSession, memberId);
 	}
-
 }

@@ -1,5 +1,7 @@
 package com.ivh.second.member.model.service;
 
+import java.util.HashMap;
+
 import com.ivh.second.member.model.vo.Member;
 
 public interface MemberService {
@@ -16,9 +18,10 @@ public interface MemberService {
 	boolean checkPwd(String memberId, String memberPwd);
 	
 	// 4. 회원 탈퇴용 서비스
-	int deleteMember(String memberId);
+	Member deleteModal(int memberId);
+	int deleteMember(HashMap<String, Object> map);
 	
 	// 5. 아이디 중복체크용 서비스
 	int idCheck(String memberId);
-
+	
 }

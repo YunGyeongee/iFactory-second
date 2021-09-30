@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
  	<resultMap type="Member" id="memberResultSet">
- 		<result property="memberNo" column="member_no"  />
+ 		<result property="memberNo" column="member_no"  /> 
  		<result property="memberName" column="member_name" />
  		<result property="memberId" column="memnber_id" />
  		<result property="memberPwd" column="member_pwd" />
@@ -91,9 +91,17 @@
   		 where member_id = #{memberId} 
   	</update>
   	
+  	<!-- 탈퇴하기 클릭시 모달 -->
+  	<select id="deleteModal" parameterType="_int" resultMap="memberResultSet">
+		select 
+		       member_id,
+		       member_name
+		  from sample.member
+		 where member_id = #{memberId}  	
+  	</select>
   	
   	<!-- 회원탈퇴용 -->
-  	<update id="deleteMember" parameterType="string">
+  	<update id="deleteMember" parameterType="hashMap">
   		update
   			   sample.member
   		   set

@@ -382,6 +382,7 @@
     
     
     <!-- 회원탈퇴 버튼 클릭시 띄울 Modal -->
+    <form id="deleteModal" action="delete.me" method="post">
     <div class="modal" id="deleteForm">
     	<div class="modal-dialog">
     		<div class="modal-content">
@@ -398,23 +399,34 @@
 			                        탈퇴 후 복구가 불가능합니다. <br>   
 			                        정말로 탈퇴 하시겠습니까?
                     </b>
-                    <form id="deleteModal" action="delete.me" method="post">
+                    <br>
+                    <div class="deleteMo">
                                                       비밀번호 : 
                         <input type="password" name="memberPwd" required>
                         <button type="submit" class="btn btn-danger">탈퇴하기</button>
-                    </form>
+                    </div>
                 </div>
     		</div>
     	</div>
     </div>
+    </form>
     
     <script>
 	    function ajaxInfo(){
-			var $memberId = $(event.target).parent().siblings(".mno").text();
+			var $memberId = $(event.target).parent().siblings(".mId").text();
 			console.log("$memberId");
+			
+			$.ajax({
+		    	url:"delete.mo",
+		    	data:{mId:$memberId},
+		    	success:function(m){
+		    		console.log(m);
+		    	}, error: function(){
+		    		console.log("모달 조회 실패");
+		    	}
+		    });
 		}
     </script>
-    
 
 </body>
 </html>
