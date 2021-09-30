@@ -357,58 +357,133 @@
     -->
     
     <!-- change 버튼 클릭시 띄울 Modal -->
-    <div class="modal fade" id="changeForm" tabindex="-1" role="dialog" aria-labelleadby="modalLable" aria-hidden="true">
-    	<div class="modal-dialog">
-    		<div class="modal-content">
+    <form class="changeForm" action="updatePwd.me" method="post">
+	    <div class="modal fade" tabindex="-1" role="dialog" aria-labelleadby="modalLable" aria-hidden="true">
+	    	<div class="modal-dialog">
+	    		<div class="modal-content">
+	    		
+	    			<div class="modal-header">
+	    				<h4 class="modal-title" id="modalLabel1">비밀번호 변경</h4>
+	    			</div>
+	    			
+	    			<div class="modal-body">
+	    				<table>
+	    					<tr>기존 비밀번호 : <input type="password" id="checkPwd"></tr> <br><br>
+	    					<tr>새 비밀번호 : <input type="password" id="newPwd"></tr> <br><br>
+	    					<tr>새 비밀번호 확인 : <input type="password" id="newPwdCheck"></tr> <br><br>
+	    					<tr><input type="hidden" id="memberId" name="member_id"></tr> <br><br>
+	    				</table>
+	    			</div>
+	    			
+	    			<div class="modal-footer">
+	    				<input type="hidden" name="memberId" value="${ loginUser.memberId }" >
+	    				<input type="hidden" name="memberPwd" value="${ loginUser.memberPwd }" >
+	    				<button type="submit" class="btn btn-danger" id="changeBtn" onclick="updatePwd();">Change</button>
+	    				<input type="hidden" name="confirmPwd">
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div>
+    </form>
+    
+    
+    <!-- 현재 비밀번호 확인 ajax -->
+    <script>
+    	$(function(){
+    		var checkPwd = $("#checkPwd");
     		
-    			<div class="modal-header">
-    				<h4 class="modal-title" id="modalLabel1">비밀번호 변경</h4>
-    			</div>
+    		checkPwd.keyup(function(){
     			
-    			<div class="modal-body">
-    				기존 비밀번호 : <input type="password" id="memberPwd"><br>
-    				새 비밀번호 : <input type="password" id="newPwd"><br>
-    				새 비밀번호 확인 : <input type="password" id="rePwd"><br>
-    				
-    				<input type="hidden" id="memberNewPwd" name="member_id">
-    			</div>
+    			$.ajax({
+    				url:"pwd.me",
+    				data:{checkPwd:checkPwd.val()},
+    				seccess:function(result){
+    					if(result == "N") { // 사용불가능
+    						console.log("비밀번호 불일치");
+    						$("#confirmPwd").val("no");
+    					} else { // 사용가능
+    						console.log("비밀번호 일치");
+    						$("#confirmPwd").val("ok");
+    					}
+    				}, error:function(){
+    					console.log("ajax 통신 실패")
+    				}
+    			})
+    		})
+    	})
+    </script>
+    
+    
+    <!-- 비밀번호 유효성 검사 -->
+    <script>
+    
+    	function updatePwd(){
+    		var newPwd = $("#newPwd").val();
+    		var newPwdCheck = $("newPwdCheck").val();
+    		
+    		if(newPwd == newPwdCheck) { // 두 번호 일치할 때
     			
-    			<div class="modal-footer">
-    				<input id="btn" class="btn" type="submit" value="Change" >
-    			</div>
-    		</div>
-    	</div>
-    </div>
+    			if( $("#confirmPwd").val()=="ok"){
+	    			
+	    			var result = confirm("비밀번호를 변경 하시겠습니까?");
+                	
+                	if(result){
+                		
+                		
+                	} else {
+                		alert("취소되었습니다");
+                		return false;
+                	}
+	    			
+	    			
+	    		} else {
+	    			
+	    			alert("현재 비밀번호가 일치하지않습니다");
+	    			$("#checkPwd").val("");
+	    			$("#checkPwd").focus();
+	    			return false;
+	    		}
+    			
+    		} else {
+    			
+    			alert("새 비밀번호가 일치하지않습니다.");
+    			$("#newPwdCheck").val("");
+    			$("#newPwdCheck").focus();
+    			return false;
+    		}
+    	}
+    
+    </script>
     
     
     <!-- 회원탈퇴 버튼 클릭시 띄울 Modal -->
     <form id="deleteModal" action="delete.me" method="post">
-    <div class="modal" id="deleteForm">
-    	<div class="modal-dialog">
-    		<div class="modal-content">
-    		
-    			<!-- Modal Header -->
-    			<div class="modal-header">
-	                <h4 class="modal-title">회원탈퇴</h4>
-	                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                
-                <!-- Modal body -->
-                <div class="modal-body" align="center">
-                    <b>
-			                        탈퇴 후 복구가 불가능합니다. <br>   
-			                        정말로 탈퇴 하시겠습니까?
-                    </b>
-                    <br>
-                    <div class="deleteMo">
-                                                      비밀번호 : 
-                        <input type="password" name="memberPwd" required>
-                        <button type="submit" class="btn btn-danger">탈퇴하기</button>
-                    </div>
-                </div>
-    		</div>
-    	</div>
-    </div>
+	    <div class="modal" id="deleteForm">
+	    	<div class="modal-dialog">
+	    		<div class="modal-content">
+	    		
+	    			<!-- Modal Header -->
+	    			<div class="modal-header">
+		                <h4 class="modal-title">회원탈퇴</h4>
+		                <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                </div>
+	                
+	                <!-- Modal body -->
+	                <div class="modal-body" align="center">
+	                    <b>
+				                        탈퇴 후 복구가 불가능합니다. <br>   
+				                        정말로 탈퇴 하시겠습니까?
+	                    </b>
+	                    <br>
+	                    <div class="deleteMo">
+	                                                      비밀번호 : 
+	                        <input type="password" name="memberPwd" required>
+	                        <button type="submit" class="btn btn-danger">탈퇴하기</button>
+	                    </div>
+	                </div>
+	    		</div>
+	    	</div>
+	    </div>
     </form>
     
     <script>

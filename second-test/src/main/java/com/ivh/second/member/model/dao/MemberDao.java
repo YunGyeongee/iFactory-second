@@ -22,6 +22,10 @@ public class MemberDao {
 	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateMember", m);
 	}
+	
+	public int pwdConfirm(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.pwdConfirm", m);
+	}
 
 	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updatePwd", m);

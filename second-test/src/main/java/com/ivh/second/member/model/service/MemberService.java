@@ -15,6 +15,7 @@ public interface MemberService {
 	// 3. 회원 정보수정용 서비스
 	int updateMember(Member m);
 	int updatePwd(Member m);
+	int pwdConfirm(Member m);
 	boolean checkPwd(String memberId, String memberPwd);
 	
 	// 4. 회원 탈퇴용 서비스

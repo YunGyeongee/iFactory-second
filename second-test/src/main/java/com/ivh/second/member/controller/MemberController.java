@@ -88,7 +88,7 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
-	
+	/*
 	@RequestMapping("update.me")
 	public String updateMember(Member m, MultipartFile file, HttpSession session, Model model, String deleteProfile) {
 		
@@ -115,8 +115,37 @@ public class MemberController {
 		
 		}
 		
-		// 회원정보 변경용 서비스 호출
-		int result = mService.updateMember(m);
+	}
+	
+	// 첨부파일 
+		private String saveFile(HttpSession session, MultipartFile file) {
+			String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
+			String originName = file.getOriginalFilename();
+			String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			int ranNum = (int)(Math.random() * 9000000 + 10000);
+			String ext = originName.substring(originName.lastIndexOf("."));
+			
+			String changeName = currentTime + ranNum + ext;
+			
+			try {
+				file.transferTo(new File(savePath + changeName));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			return changeName;
+		}
+		*/
+	
+	// 비밀번호 변경
+	@RequestMapping("updatePwd.me")
+	public String updatePwd(String newPwd, Member m, HttpSession session, Model model) {
+		
+		// 비밀번호 변경용 서비스 호출
+		int result = mService.updatePwd(m);
+		System.out.println(m);
 		
 		if(result > 0) { // 정보 수정 성공
 			session.setAttribute("loginUser", mService.loginMember(m));
@@ -126,30 +155,42 @@ public class MemberController {
 			model.addAttribute("errorMsg", "정보 수정 실패");
 			return "common/errorPage";
 		}
-		
 	}
 	
-	
-	// 첨부파일 
-	private String saveFile(HttpSession session, MultipartFile file) {
-		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
-		String originName = file.getOriginalFilename();
-		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		int ranNum = (int)(Math.random() * 9000000 + 10000);
-		String ext = originName.substring(originName.lastIndexOf("."));
+	// 기존 비밀번호 확인 --> 9/30 ajax로 바꿔야됨
+	@RequestMapping("pwdConfirm.me")
+	public String pwdConfirm(String memberPwd, HttpServletRequest request, HttpSession session, Model model) {
 		
-		String changeName = currentTime + ranNum + ext;
+//		String memberPwd = request.getParameter("memberPwd");
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		try {
-			file.transferTo(new File(savePath + changeName));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(memberPwd.equals(loginUser.getMemberPwd())) {
+			session.setAttribute("alertMsg", "비밀번호 확인 성공");
+			return "redirect:/";
+		} else {
+			model.addAttribute("errorMsg", "비밀번호 확인 실패");
+			return "common/errorPage";
 		}
 		
-		return changeName;
 	}
+	
+	// 비밀번호 변경 시 새비밀번호 확인
+	@ResponseBody
+	@RequestMapping("pwd.me")
+	public String pwd(String checkPwd, HttpSession session) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		if(checkPwd.equals(loginUser.getMemberPwd())) {
+			return "Y";
+		} else {
+			return "N";
+		}
+		
+	}
+	
+	
+	
 
 	@ResponseBody
 	@RequestMapping(value="delete.mo", produces="pllication/json; charset=utf-8")
@@ -162,7 +203,6 @@ public class MemberController {
 		return new Gson().toJson(m);
 	}
 
-	@ResponseBody
 	@RequestMapping("delete.me")
 	public String deleteMember(@RequestParam(defaultValue="") String mStatus,
 			                   @RequestParam(defaultValue="") String mName,
