@@ -10,7 +10,7 @@ import com.ivh.second.member.model.vo.Member;
 
 @Repository
 public class MemberDao {
-
+	
 	public Member loginMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}
@@ -21,23 +21,6 @@ public class MemberDao {
 
 	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateMember", m);
-	}
-	
-	public int pwdConfirm(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.selectOne("memberMapper.pwdConfirm", m);
-	}
-
-	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.update("memberMapper.updatePwd", m);
-	}
-
-	public boolean checkPwd(SqlSessionTemplate sqlSession, String memberId, String memberPwd) {
-		boolean result = false;
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("memberId", memberId);
-		map.put("memberPwd", memberPwd);
-		
-		return sqlSession.selectOne("memberMapper.checkPwd", map);
 	}
 
 	public Member deleteModal(SqlSessionTemplate sqlSession, int memberId) {
@@ -51,6 +34,13 @@ public class MemberDao {
 	public int idCheck(SqlSessionTemplate sqlSession, String memberId) {
 		return sqlSession.selectOne("memberMapper.idCheck", memberId);
 	}
+	
+	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updatePwd", m);
+	}
+
+	
+
 	
 
 }

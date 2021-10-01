@@ -27,6 +27,7 @@
   		       member_status
   		  from member
   		 where member_id = #{memberId}
+  		   and member_pwd = #{memberPwd}
   		   and member_status = 'Y'
   	</select>
   	
@@ -72,25 +73,7 @@
   		  from member
   		 where member_id = #{memberId}
   	</select>
-  	
-  	
-  	<!-- 비밀번호 확인 -->
-  	<select id="checkPwd" resultType="_int">
-  		select count(*)
-  		  from member
-  		 where user_id = #{memberId}
-  		   and user_pwd = #{memberPwd}
-  	</select>
-  	
-  	<!-- 비밀번호 수정용 -->
-  	<update id="updatePwd" parameterType="Member">
-  		update
-  		       member
-  		   set 
-  		       member_pwd = #{memberPwd}
-  		 where member_id = #{memberId} 
-  	</update>
-  	
+
   	<!-- 탈퇴하기 클릭시 모달 -->
   	<select id="deleteModal" parameterType="_int" resultMap="memberResultSet">
 		select 
@@ -110,7 +93,14 @@
   		 where member_id = #{memberId}
   	</update>
   	
-  	
+  	<!-- 비밀번호 변경 -->
+  	<update id="updatePwd" parameterType="string">
+  		update 
+  		       member
+  		   set
+  		       member_pwd = #{memberPwd}
+  		 where member_id = #{memberId}
+  	</update>
   	
   	
   	

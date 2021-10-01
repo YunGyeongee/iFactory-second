@@ -33,22 +33,6 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMember(Member m) {
 		return mDao.updateMember(sqlSession, m);
 	}
-	
-	
-	@Override
-	public int pwdConfirm(Member m) {
-		return mDao.pwdConfirm(sqlSession, m);
-	}
-
-	@Override
-	public int updatePwd(Member m) {
-		return mDao.updatePwd(sqlSession, m);
-	}
-
-	@Override
-	public boolean checkPwd(String memberId, String memberPwd) {
-		return mDao.checkPwd(sqlSession, memberId, memberPwd);
-	}
 
 	@Override
 	public Member deleteModal(int memberId) {
@@ -64,4 +48,13 @@ public class MemberServiceImpl implements MemberService {
 	public int idCheck(String memberId) {
 		return mDao.idCheck(sqlSession, memberId);
 	}
+
+	@Override
+	public int updatePwd(Member m) {
+		return mDao.updatePwd(sqlSession, m);
+	}
+	
+	
+	
+	
 }

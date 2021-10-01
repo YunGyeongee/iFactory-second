@@ -12,11 +12,8 @@ public interface MemberService {
 	// 2. 회원가입용 서비스
 	int insertMember(Member m);
 	
-	// 3. 회원 정보수정용 서비스
-	int updateMember(Member m);
-	int updatePwd(Member m);
-	int pwdConfirm(Member m);
-	boolean checkPwd(String memberId, String memberPwd);
+	// 3. 프로필사진 변경 서비스
+	int updateMember(Member m); 
 	
 	// 4. 회원 탈퇴용 서비스
 	Member deleteModal(int memberId);
@@ -24,5 +21,9 @@ public interface MemberService {
 	
 	// 5. 아이디 중복체크용 서비스
 	int idCheck(String memberId);
+	
+	// 6. 비밀번호 변경 서비스
+	int updatePwd(Member m);
+	
 	
 }

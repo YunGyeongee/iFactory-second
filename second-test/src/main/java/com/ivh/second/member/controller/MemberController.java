@@ -1,9 +1,5 @@
 package com.ivh.second.member.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,10 +8,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -139,6 +135,7 @@ public class MemberController {
 		}
 		*/
 	
+	/*
 	// 비밀번호 변경
 	@RequestMapping("updatePwd")
 	public String updatePwd(String newPwd, Member m, HttpSession session, Model model) {
@@ -190,8 +187,7 @@ public class MemberController {
 		}
 		
 	}
-	
-	
+	*/
 	
 
 	@ResponseBody
@@ -260,6 +256,36 @@ public class MemberController {
 		} else { // 사용가능
 			return "Y";
 		}
+	}
+	
+	
+	@RequestMapping("updatePwd.me")
+	public String changePwd(String newPwd, Member m, HttpSession session, Model model) {
+		
+		// Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		m.setMemberPwd(newPwd);
+		
+//		System.out.println(newPwd);
+		
+		
+		int result = mService.updatePwd(m);
+		
+//		System.out.println(m);
+//		Member [memberNo=0, memberName=null, memberId=, memberPwd=pass10, memberPhone=null, memberProfile=null, enrollDate=null, modifyDate=null, memberStatus=null]
+		
+		System.out.println(result);
+		
+		if(result > 0) { // 정보 수정 성공
+			session.setAttribute("loginUser", mService.updatePwd(m));
+			session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
+			return "member/myPage";
+		} else { // 정보 수정 실패
+			model.addAttribute("errorMsg", "정보 수정 실패");
+			return "common/errorPage";
+		}
+		
 	}
 	
 

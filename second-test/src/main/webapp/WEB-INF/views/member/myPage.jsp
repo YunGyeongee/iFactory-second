@@ -357,7 +357,7 @@
     -->
     
     <!-- change 버튼 클릭시 띄울 Modal -->
-    <form class="changeModal" action="updatePwd.me" method="post">
+    <form  action="updatePwd.me" method="post">
 	    <div class="modal fade" id="changeForm" tabindex="-1" role="dialog" aria-labelleadby="modalLable" aria-hidden="true">
 	    	<div class="modal-dialog">
 	    		<div class="modal-content">
@@ -368,24 +368,38 @@
 	    			
 	    			<div class="modal-body">
 	    				<table>
-	    					<!-- <tr>기존 비밀번호 : <input type="password" name="memberPWd" id="checkPwd"></tr> <br>  
-	    					<tr id="checkPwdText"></tr><br>-->
-	    					<tr>새 비밀번호 : <input type="password" name="newPwd" id="newPwd"></tr> <br><br>
-	    					<tr>새 비밀번호 확인 : <input type="password" name="newPwdChange" id="newPwdCheck"></tr> <br><br>
-	    					<tr><input type="hidden" id="memberId" name="memberId"></tr>
+	    					<!-- <tr>기존 비밀번호 : <input type="password" id="checkPwd"></tr> <br><br> -->
+	    					<tr>새 비밀번호 : <input type="password" id="newPwd" name="newPwd"></tr> <br><br>
+	    					<tr>새 비밀번호 확인 : <input type="password" id="newPwdCheck" name="newPwdCheck"></tr> <br><br>
+	    					<tr><input type="hidden" id="memberId" name="member_id"></tr> <br><br>
 	    				</table>
 	    			</div>
 	    			
 	    			<div class="modal-footer">
 	    				<input type="hidden" name="memberId" value="${ loginUser.memberId }" >
 	    				<input type="hidden" name="memberPwd" value="${ loginUser.memberPwd }" >
-	    				<button type="submit" class="btn btn-danger" id="changeBtn" onclick="return updatePwd();">Change</button>
-	    				<input type="hidden" id="confirmPwd" value="no">
+	    				<button type="submit" class="btn btn-danger" id="changeBtn" onclick="updatePwd();">Change</button>
+	    				<input type="hidden" name="confirmPwd">
 	    			</div>
 	    		</div>
 	    	</div>
 	    </div>
     </form>
+    
+    <script>
+    	function updatePwd(){
+    		var newPwd = documnet.getElemnetById('newPwd').value;
+    		var newPwdCheck = document.getElementByID('newPwdCheck').value;
+    		
+    		if(newPwd != newPwdCheckPwd) {
+    			alert("비밀번호가 일치 하지 않습니다.");
+    			return false;
+    		} else {
+    			window.location.href = "updatePwd.me";
+    		}
+    		
+    	}
+    </script>
     
     
     <!-- 현재 비밀번호 확인 ajax 
@@ -400,12 +414,10 @@
     				data:{checkPwd:checkPwd.val()},
     				seccess:function(result){
     					if(result == "N") { // 사용불가능
-    						$("#checkPwdText").show();
-    						$("#checkPwdText").css("color", "red").text("비밀번호가 일치하지 않습니다. 다시 입력해주세요");
+    						console.log("비밀번호 불일치");
     						$("#confirmPwd").val("no");
     					} else { // 사용가능
-    						$("#checkPwdText").show();
-							$("#checkPwdText").css("color", "blue").text("비밀번호가 일치합니다.");
+    						console.log("비밀번호 일치");
     						$("#confirmPwd").val("ok");
     					}
     				}, error:function(){
@@ -414,11 +426,12 @@
     			})
     		})
     	})
-    </script>
-    -->
+    </script> -->
     
-    <!-- 비밀번호 유효성 검사 -->
+    
+    <!-- 비밀번호 유효성 검사 
     <script>
+    
     	function updatePwd(){
     		var newPwd = $("#newPwd").val();
     		var newPwdCheck = $("newPwdCheck").val();
@@ -426,6 +439,16 @@
     		if(newPwd == newPwdCheck) { // 두 번호 일치할 때
     			
     			if( $("#confirmPwd").val()=="ok"){
+	    			
+	    			var result = confirm("비밀번호를 변경 하시겠습니까?");
+                	
+                	if(result){
+                		
+                		
+                	} else {
+                		alert("취소되었습니다");
+                		return false;
+                	}
 	    			
 	    			
 	    		} else {
@@ -444,7 +467,8 @@
     			return false;
     		}
     	}
-    </script>
+    
+    </script>-->
     
     
     <!-- 회원탈퇴 버튼 클릭시 띄울 Modal -->
