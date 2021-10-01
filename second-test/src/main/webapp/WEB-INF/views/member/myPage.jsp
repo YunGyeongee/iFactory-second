@@ -393,9 +393,14 @@
     		
     		if(newPwd != newPwdCheckPwd) {
     			alert("비밀번호가 일치 하지 않습니다.");
-    			return false;
     		} else {
-    			window.location.href = "updatePwd.me";
+    			//window.location.href = "updatePwd.me";
+    			$.ajax({
+    				url : "updatePwd.me",
+    				method : "get"
+    			}).done(function(){
+    				console.log("악");
+    			});
     		}
     		
     	}

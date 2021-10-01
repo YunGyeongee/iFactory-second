@@ -94,7 +94,7 @@
   	</update>
   	
   	<!-- 비밀번호 변경 -->
-  	<update id="updatePwd" parameterType="string">
+  	<update id="updatePwd" parameterType="String">
   		update 
   		       member
   		   set

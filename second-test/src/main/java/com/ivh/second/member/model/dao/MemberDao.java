@@ -1,14 +1,15 @@
 package com.ivh.second.member.model.dao;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ivh.second.member.model.vo.Member;
 
 @Repository
+@Transactional
 public class MemberDao {
 	
 	public Member loginMember(SqlSessionTemplate sqlSession, Member m) {

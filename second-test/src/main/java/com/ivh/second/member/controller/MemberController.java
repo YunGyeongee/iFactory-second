@@ -267,7 +267,8 @@ public class MemberController {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		m.setMemberPwd(newPwd);
 		
-//		System.out.println(newPwd);
+		System.out.println(newPwd);
+		System.out.println(m);
 		
 		
 		int result = mService.updatePwd(m);
