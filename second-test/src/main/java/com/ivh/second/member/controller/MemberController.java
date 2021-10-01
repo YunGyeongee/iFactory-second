@@ -140,13 +140,15 @@ public class MemberController {
 		*/
 	
 	// 비밀번호 변경
-	@RequestMapping("updatePwd.me")
+	@RequestMapping("updatePwd")
 	public String updatePwd(String newPwd, Member m, HttpSession session, Model model) {
 		
 		// 비밀번호 변경용 서비스 호출
 		int result = mService.updatePwd(m);
-		System.out.println(m);
+		m.setMemberPwd(newPwd);
 		
+		System.out.println(newPwd);
+	
 		if(result > 0) { // 정보 수정 성공
 			session.setAttribute("loginUser", mService.loginMember(m));
 			session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
@@ -159,12 +161,12 @@ public class MemberController {
 	
 	// 기존 비밀번호 확인 --> 9/30 ajax로 바꿔야됨
 	@RequestMapping("pwdConfirm.me")
-	public String pwdConfirm(String memberPwd, HttpServletRequest request, HttpSession session, Model model) {
+	public String pwdConfirm(String memberPwd, Member m, HttpServletRequest request, HttpSession session, Model model) {
 		
 //		String memberPwd = request.getParameter("memberPwd");
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		if(memberPwd.equals(loginUser.getMemberPwd())) {
+		if(m.getMemberPwd().equals(loginUser.getMemberPwd())) {
 			session.setAttribute("alertMsg", "비밀번호 확인 성공");
 			return "redirect:/";
 		} else {
@@ -174,7 +176,7 @@ public class MemberController {
 		
 	}
 	
-	// 비밀번호 변경 시 새비밀번호 확인
+	// 비밀번호 변경 시 기존비밀번호 확인
 	@ResponseBody
 	@RequestMapping("pwd.me")
 	public String pwd(String checkPwd, HttpSession session) {
