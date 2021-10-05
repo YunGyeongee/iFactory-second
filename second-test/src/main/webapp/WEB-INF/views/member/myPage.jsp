@@ -253,7 +253,7 @@
 		                 	<c:choose>
 			                	<c:when test="${ empty loginUser.memberProfile }">
 			                		<div class="profile-box" align="center">
-			                        	<img src="../../../resources/memberProfile/profile2.jpg" class="rounded-circle" id="preview"> 
+			                        	<img src="../../../resources/memberProfile/profile_basic.jpg" class="rounded-circle" id="preview"> 
 			                		</div>
 			                	</c:when>
 			                	<c:otherwise>
@@ -263,17 +263,13 @@
 			                	</c:otherwise>
 			                </c:choose> 
 			                <br>
-	                 		<div>
-		                 		<button class="btn btn-primary" type="submit" id="edit" onclick="postFormSubmit();">편집</button>
-			                	<button class="btn btn-danger" type="reset" id="delete" onclick="">삭제</button>
-			                	<input type="hidden" id="deleteProfile" name="deleteProfile">
-			                	
-			                	<form id="postForm" method="post" action="">
-			                		<input type="hidden" name="mId" value="${ m.memberId }">
-			                		<input type="hidden" name="upfile" value="${ m.memberProfile }">
-			                	</form>
-			                	
-	                 		</div>
+	                 		<div class="fileEdit">
+                            	<label id="edit">편집</label>
+                                <label id="delete">삭제</label>
+                                
+                                <input type="file" name="file" id="file" accept="image/*" style="display: none;">
+                            	<input type="hidden" id="deleteProfile" name="deleteProfile">
+                            </div>
 	                 		
                     		<input type="text" class="firstinput" id="memberName" name="memberName" value="${ loginUser.memberName }" readonly>    
 	                        <input type="email" class="firstinput" style="margin-top: 10px;" id="memberId" name="memberId" value="${ loginUser.memberId }" readonly>
@@ -308,11 +304,6 @@
     
     <!-- 프로필 사진 미리보기 -->
     <script>
-    	function postFormSubmit(){
-   			$("#postForm").attr("action", "updateProfile.me").submit();
-    	}
-    
-    
     	function loadImg(inputFile) {
     		// inputFile : 현재 변화가 생긴 input type="file" 요소 객체
     		
