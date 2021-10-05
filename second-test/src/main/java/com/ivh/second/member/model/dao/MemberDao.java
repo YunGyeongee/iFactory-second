@@ -19,8 +19,8 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.insertMember", m);
 	}
 
-	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.update("memberMapper.updateMember", m);
+	public int updateProfile(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateProfile", m);
 	}
 
 //	public Member deleteModal(SqlSessionTemplate sqlSession, int memberId) {

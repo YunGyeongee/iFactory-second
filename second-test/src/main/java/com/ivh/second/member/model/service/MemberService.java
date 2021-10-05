@@ -13,7 +13,7 @@ public interface MemberService {
 	int insertMember(Member m);
 	
 	// 3. 프로필사진 변경 서비스
-	int updateMember(Member m); 
+	int updateProfile(Member m); 
 	
 	// 4. 회원 탈퇴용 서비스
 //	Member deleteModal(int memberId);

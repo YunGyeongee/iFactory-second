@@ -249,8 +249,7 @@
                  	<form class="login-sub-container-form" id="updateForm" method="post" action="update.me" enctype="multipart/form-data"> 
 	                 	
 	                 	<div class="form-group" align="center">
-	                 		<input type="file" name="upfile" id="upfile" accept="image/*" style="display: none;">
-                 	
+	                 		<input type="file" name="upfile" id="upfile" accept="image/*" onchange="loadImg();" style="display: none;">
 		                 	<c:choose>
 			                	<c:when test="${ empty loginUser.memberProfile }">
 			                		<div class="profile-box" align="center">
@@ -263,24 +262,19 @@
 			                		</div>
 			                	</c:otherwise>
 			                </c:choose> 
-			                
-	                 		<br><br>
-	                 		<button type="submit" id="edit">편집</button>
-		                	<button type="reset" id="delete">삭제</button>
-	                 	<!-- 
-	                 	<c:choose>
-		                	<c:when test="${ empty loginUser.memberProfile }">
-		                		<div class="profile-box" align="center">
-		                        	<img src="../../../resources/uploadFiles/memberProfile/profile_basic.jpg" class="rounded-circle" id="preview"> 
-		                		</div>
-		                	</c:when>
-		                	<c:otherwise>
-		                		<div class="profile-box" align="center">
-		                			<input type="file" name="file" id="upfile" accept="image/*" style="display:none;"><img src="${ loginUser.memberProfile }" class="rounded-circle" id="preview">
-		                		</div>
-		                	</c:otherwise>
-		                </c:choose>
-	                	-->
+			                <br>
+	                 		<div>
+		                 		<button class="btn btn-primary" type="submit" id="edit" onclick="postFormSubmit();">편집</button>
+			                	<button class="btn btn-danger" type="reset" id="delete" onclick="">삭제</button>
+			                	<input type="hidden" id="deleteProfile" name="deleteProfile">
+			                	
+			                	<form id="postForm" method="post" action="">
+			                		<input type="hidden" name="mId" value="${ m.memberId }">
+			                		<input type="hidden" name="upfile" value="${ m.memberProfile }">
+			                	</form>
+			                	
+	                 		</div>
+	                 		
                     		<input type="text" class="firstinput" id="memberName" name="memberName" value="${ loginUser.memberName }" readonly>    
 	                        <input type="email" class="firstinput" style="margin-top: 10px;" id="memberId" name="memberId" value="${ loginUser.memberId }" readonly>
 	                        <input type="password" placeholder="Password" class="firstinput" style="margin-top: 10px;" id="memberPwd" name="memberPwd" >
@@ -314,6 +308,29 @@
     
     <!-- 프로필 사진 미리보기 -->
     <script>
+    	function postFormSubmit(){
+   			$("#postForm").attr("action", "updateProfile.me").submit();
+    	}
+    
+    
+    	function loadImg(inputFile) {
+    		// inputFile : 현재 변화가 생긴 input type="file" 요소 객체
+    		
+    		//console.log(inpuFile.files.langth);
+    		if(inputFile.files.length == 1) {
+    			var reader = new FileReader();
+        		reader.readAsDataURL(inputFile.files[0]);
+        		reader.onload = function(e) {
+    				$("#preview").attr("src", e.target.result);
+    			}
+    		} else {
+    			$("preview")
+    		}	
+    	
+    	
+    	}
+    
+    
 	    function handleFileSelect(event) {
 		  	var input = this;
 				if (input.files && input.files.length) {
@@ -329,6 +346,13 @@
 		$("#upfile").change(handleFileSelect);
 		$("#preview").click( function() {
 			$("#upfile").click();
+		});
+		
+		$('#upfile').change(handleFileSelect);
+		$('.fileEdit').on('click', '#delete', function () {
+		    $("#preview").removeAttr("src").attr("src", "resources/uploadFiles/memberProfile/profile_basic.jpg"); // db의 기본프로필파일
+		    $("#upfile").val(""); //파일밸류값 삭제
+		    $("#deleteProfile").val("delete"); // 기본이미지로 변경을위해 밸류값줘서 넘긴다
 		});
     	
     </script>

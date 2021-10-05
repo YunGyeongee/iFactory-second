@@ -212,6 +212,13 @@
 			<version>2.8.5</version>
 		</dependency>
 		
+		<!-- thumbnail -->
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		    <version>0.4.13</version>
+		</dependency>
+		
 	</dependencies>
 	
     <build>

@@ -4,21 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.ivh.second.member.model.service.MemberService;
 import com.ivh.second.member.model.vo.Member;
 
@@ -88,74 +84,67 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
-//	@RequestMapping("update.me")
-//	public String updateMember(Member m, MultipartFile upfile, HttpSession session, Model model, String deleteProfile) {
-//		
-////		System.out.println(m);
-//		
-////		Member loginUser = (Member)session.getAttribute("loginUser");
-////		System.out.println(m.getMemberProfile());
-//		
-//		// 기본이미지 경로일 경우 파일 삭제x
-//		if(!upfile.getOriginalFilename().equals("")) { // 넘어오는 값이 있을 경우
-////			if(!loginUser.getMemberProfile().contentEquals("resources/uploadFiles/memberProfile/profile_basic.jsp")) { // 기본파일 경로명이 아닐 땐 파일 삭제
-////				new File(session.getServletContext().getRealPath(loginUser.getMemberProfile())).delete();
-////			}
-//			
-//			// 새로운 파일 업로드
-//			String changeName = saveFile(session, upfile);
-//			m.setMemberProfile("resources/uploadFiles/memberProfile/" + changeName);
-//		}
-//		
-//		// 기존파일을 삭제하고 기본이미지로 변경
-//		if(deleteProfile.equals("delete")) { 
-//			
-//			if(!m.getMemberProfile().equals("resources/uploadFiles/memberProfile/profile_basic.jpg"))   { // 기본파일경로명이 아닐때는 그 파일 삭제
-//				
-//				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
-//			} 
-//			
-//			m.setMemberProfile("resources/uploadFiles/memberProfile/profile_basic.jpg");
-//		
-//		}
-//		int result = mService.insertMember(m);
-//		
-//		if(result > 0) {
-//			session.setAttribute("alertMsg", "성공적으로 정보 변경 되었습니다.");
-//			return "redirect:myPage.me";
-//		} else {
-//			model.addAttribute("errorMsg", "정보 변경 실패");
-//			return "common/errorPage";
-//		}
-//		
-//	}
-	
-	@RequestMapping("update.me")
-	public void updateProfile(Member m, MultipartFile upfile) {
-//		System.out.println(m);
+	@RequestMapping("updateProfile.me")
+	public String updateProfile(Member m, MultipartFile upfile, HttpSession session, Model model, String deleteProfile) {
+//		System.out.println(m);,
 //		System.out.println(upfile.getOriginalFilename());
+		
+		// 전달된 파일이 있을 경우 => 파일명 수정 후 업로드 => 원본명, 서버에 업로드 된 경로를 m에 담을 것
+		if(!upfile.getOriginalFilename().equals("")) {
+			
+			if(!m.getMemberProfile().equals("resources/uploadFiles/memberProfile/profile_basic.jpg")) { // 기본 파일 경로명이 아닐 때 그 파일 삭제
+				
+				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
+			}
+			
+			String changeName = saveFile(session, upfile);
+			m.setMemberProfile("resources/uploadFiles/memberProfile/" + changeName);
+//			System.out.println(m);
+			
+		}
+		
+		if(deleteProfile.equals("delete")) { // 기존파일을 삭제하고 기본이미지로 변경
+			
+			if(!m.getMemberProfile().equals("resources/member_profile/profile_basic.jpg"))   { // 기본 파일 경로명이 아닐 때 그 파일 삭제
+				
+				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
+			} 
+			
+			m.setMemberProfile("resources/member_profile/profile_basic.jpg");
+		
+		}
+		
+		int result = mService.updateProfile(m);
+		
+		if(result > 0) { // 수정 성공
+			session.setAttribute("alertMsg", "성공적으로 수정 되었습니다.");
+			return "redirect:myPage.me";
+		} else { // 수정 실패
+			model.addAttribute("errorMsg", "정보 수정 실패");
+			return "common/errorPage";
+		}
 	}
 	
-//	// 첨부파일 
-//	private String saveFile(HttpSession session, MultipartFile upfile) {
-//		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
-//		String originName = upfile.getOriginalFilename();
-//		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-//		int ranNum = (int)(Math.random() * 9000000 + 10000);
-//		String ext = originName.substring(originName.lastIndexOf("."));
-//		
-//		String changeName = currentTime + ranNum + ext;
-//		
-//		try {
-//			upfile.transferTo(new File(savePath + changeName));
-//		} catch (IllegalStateException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return changeName;
-//	}
+	// 첨부파일 
+	private String saveFile(HttpSession session, MultipartFile upfile) {
+		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/memberProfile/");
+		String originName = upfile.getOriginalFilename();
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		int ranNum = (int)(Math.random() * 9000000 + 10000);
+		String ext = originName.substring(originName.lastIndexOf("."));
+		
+		String changeName = currentTime + ranNum + ext;
+		
+		try {
+			upfile.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return changeName;
+	}
 	
 	/*
 	// 비밀번호 변경

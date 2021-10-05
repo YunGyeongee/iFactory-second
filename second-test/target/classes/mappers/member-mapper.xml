@@ -60,11 +60,11 @@
   	</insert>
   	
   	<!-- 프로필사진 수정용 -->
-  	<update id="updateMember" parameterType="Member">
+  	<update id="updateProfile" parameterType="Member">
   		update
   		       member
   		   set member_profile = #{memberProfile}
-  		 where member_ id = #{memberId}
+  		 where member_id = #{memberId}
   	</update>
   	
   	<!-- 아이디 중복체크 -->
