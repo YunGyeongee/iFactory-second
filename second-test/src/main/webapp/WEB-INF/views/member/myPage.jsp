@@ -246,6 +246,7 @@
         <div class="login-container">
             <div class="login-sub-container">
                  <div class="login-sub-container-input">
+                 <!-- 
                  	<c:choose>
 	                	<c:when test="${ empty loginUser.memberProfile }">
 	                		<div class="profile-box" align="center">
@@ -265,7 +266,7 @@
 	                	<input type="file" name="file" id="file" accept="image/*" style="display:none;">
 	                	<input type="hidden" id="deleteProfile" name="deleteProfile">
 	                </div>
-	                
+	                 -->
                     <form class="login-sub-container-form" id="updateForm" method="post" action="update.me" enctype="multipart/form-data">
 
                     	<div class="form-group" align="center">
@@ -275,13 +276,14 @@
 	                        <input type="password" placeholder="Repeat Password" class="firstinput" style="margin-top: 10px;" >
 	                        <input type="text" placeholder="Phone Number" class="firstinput" style="margin-top: 10px;" id="memberPhone" name="memberPhone" value="${ loginUser.memberPhone }">
                     	</div>
-                    	
+                    	<!-- 
                     	<div class="buttonArea" align="center">
                     		<input type="hidden" name="memberProfile" value="${ loginUser.memberProfile }">
                     		<input type="hidden" name="memberId" value="${ loginUser.memberId }">
                     		
                     		<button type="submit" class="btn btn-light" id="editBtn"></button>
                     	</div>
+                    	 -->
                     </form>
                   
                 </div> 
@@ -371,7 +373,6 @@
 	    					<!-- <tr>기존 비밀번호 : <input type="password" id="checkPwd"></tr> <br><br> -->
 	    					<tr>새 비밀번호 : <input type="password" id="newPwd" name="newPwd"></tr> <br><br>
 	    					<tr>새 비밀번호 확인 : <input type="password" id="newPwdCheck" name="newPwdCheck"></tr> <br><br>
-	    					<tr><input type="hidden" id="memberId" name="member_id"></tr> <br><br>
 	    				</table>
 	    			</div>
 	    			
@@ -379,7 +380,6 @@
 	    				<input type="hidden" name="memberId" value="${ loginUser.memberId }" >
 	    				<input type="hidden" name="memberPwd" value="${ loginUser.memberPwd }" >
 	    				<button type="submit" class="btn btn-danger" id="changeBtn" onclick="updatePwd();">Change</button>
-	    				<input type="hidden" name="confirmPwd">
 	    			</div>
 	    		</div>
 	    	</div>
@@ -394,13 +394,7 @@
     		if(newPwd != newPwdCheckPwd) {
     			alert("비밀번호가 일치 하지 않습니다.");
     		} else {
-    			//window.location.href = "updatePwd.me";
-    			$.ajax({
-    				url : "updatePwd.me",
-    				method : "get"
-    			}).done(function(){
-    				console.log("악");
-    			});
+    			window.location.href = "updatePwd.me";
     		}
     		
     	}
@@ -498,6 +492,7 @@
 	                    <div class="deleteMo">
 	                                                      비밀번호 : 
 	                        <input type="password" name="memberPwd" required>
+	                        <input type="hidden" name="memberId" value="${ loginUser.memberId }">
 	                        <button type="submit" class="btn btn-danger">탈퇴하기</button>
 	                    </div>
 	                </div>
@@ -506,6 +501,7 @@
 	    </div>
     </form>
     
+    <!-- 
     <script>
 	    function ajaxInfo(){
 			var $memberId = $(event.target).parent().siblings(".mId").text();
@@ -522,6 +518,7 @@
 		    });
 		}
     </script>
+     -->
 
 </body>
 </html>

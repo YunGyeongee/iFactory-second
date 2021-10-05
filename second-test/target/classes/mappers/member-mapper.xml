@@ -4,7 +4,7 @@
  	<resultMap type="Member" id="memberResultSet">
  		<result property="memberNo" column="member_no"  /> 
  		<result property="memberName" column="member_name" />
- 		<result property="memberId" column="memnber_id" />
+ 		<result property="memberId" column="member_id" />
  		<result property="memberPwd" column="member_pwd" />
  		<result property="memberPhone" column="member_phone" />
  		<result property="memberProfile" column="member_profile" />
@@ -74,16 +74,16 @@
   		 where member_id = #{memberId}
   	</select>
 
-  	<!-- 탈퇴하기 클릭시 모달 -->
+  	<!-- 탈퇴하기 클릭시 모달 
   	<select id="deleteModal" parameterType="_int" resultMap="memberResultSet">
 		select 
 		       member_id,
 		       member_name
 		  from member
 		 where member_id = #{memberId}  	
-  	</select>
+  	</select> -->
   	
-  	<!-- 회원탈퇴용 -->
+  	<!-- 회원탈퇴용 
   	<update id="deleteMember" parameterType="hashMap">
   		update
   			   member
@@ -91,14 +91,24 @@
   		       member_status = 'N',
   		       modify_date = now()
   		 where member_id = #{memberId}
-  	</update>
+  	</update> -->
   	
   	<!-- 비밀번호 변경 -->
-  	<update id="updatePwd" parameterType="String">
+  	<update id="updatePwd" parameterType="Member">
   		update 
   		       member
   		   set
   		       member_pwd = #{memberPwd}
+  		 where member_id = #{memberId}
+  	</update>
+  	
+  	<!-- 회원탈퇴용 -->
+  	<update id="deleteMember" parameterType="string">
+  		update
+  			   member
+  		   set
+  		       member_status = 'N',
+  		       modify_date = now()
   		 where member_id = #{memberId}
   	</update>
   	

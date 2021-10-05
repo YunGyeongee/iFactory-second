@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ivh.second.member.model.vo.Member;
 
 @Repository
-@Transactional
 public class MemberDao {
 	
 	public Member loginMember(SqlSessionTemplate sqlSession, Member m) {
@@ -24,13 +23,13 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updateMember", m);
 	}
 
-	public Member deleteModal(SqlSessionTemplate sqlSession, int memberId) {
-		return sqlSession.selectOne("memberMapper.deleteModal", memberId);
-	}
-	
-	public int deleteMember(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
-		return sqlSession.update("memberMapper.deleteMember", map);
-	}
+//	public Member deleteModal(SqlSessionTemplate sqlSession, int memberId) {
+//		return sqlSession.selectOne("memberMapper.deleteModal", memberId);
+//	}
+//	
+//	public int deleteMember(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+//		return sqlSession.update("memberMapper.deleteMember", map);
+//	}
 
 	public int idCheck(SqlSessionTemplate sqlSession, String memberId) {
 		return sqlSession.selectOne("memberMapper.idCheck", memberId);
@@ -38,6 +37,10 @@ public class MemberDao {
 	
 	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updatePwd", m);
+	}
+	
+	public int deleteMember(SqlSessionTemplate sqlSession, String memberId) {
+		return sqlSession.update("memberMapper.deleteMember", memberId);
 	}
 
 	

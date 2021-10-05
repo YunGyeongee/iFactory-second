@@ -16,8 +16,9 @@ public interface MemberService {
 	int updateMember(Member m); 
 	
 	// 4. 회원 탈퇴용 서비스
-	Member deleteModal(int memberId);
-	int deleteMember(HashMap<String, Object> map);
+//	Member deleteModal(int memberId);
+//	int deleteMember(HashMap<String, Object> map);
+	int deleteMember(String memberId);
 	
 	// 5. 아이디 중복체크용 서비스
 	int idCheck(String memberId);
