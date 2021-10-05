@@ -169,7 +169,7 @@
     	margin-left: 20px;
     }
     */
-    
+
     .login-sub-container-sns-text-container {
         width: 90%;
         height: 100px;
@@ -246,44 +246,54 @@
         <div class="login-container">
             <div class="login-sub-container">
                  <div class="login-sub-container-input">
-                 <!-- 
-                 	<c:choose>
-	                	<c:when test="${ empty loginUser.memberProfile }">
-	                		<div class="profile-box" align="center">
-	                        	<img src="../../../resources/memberProfile/profile2.jpg" class="rounded-circle" id="preview"> 
-	                		</div>
-	                	</c:when>
-	                	<c:otherwise>
-	                		<div class="profile-box" align="center">
-	                			<img src="${ loginUser.memberProfile }" class="rounded-circle" id="preview">
-	                		</div>
-	                	</c:otherwise>
-	                </c:choose>
-	                <div class="fileEdit" align="center">
-	                	<label id="edit">편집</label>
-	                	<label id="delete">삭제</label>
-	                	
-	                	<input type="file" name="file" id="file" accept="image/*" style="display:none;">
-	                	<input type="hidden" id="deleteProfile" name="deleteProfile">
-	                </div>
-	                 -->
-                    <form class="login-sub-container-form" id="updateForm" method="post" action="update.me" enctype="multipart/form-data">
-
-                    	<div class="form-group" align="center">
+                 	<form class="login-sub-container-form" id="updateForm" method="post" action="update.me" enctype="multipart/form-data"> 
+	                 	
+	                 	<div class="form-group" align="center">
+	                 		<input type="file" name="upfile" id="upfile" accept="image/*" style="display: none;">
+                 	
+		                 	<c:choose>
+			                	<c:when test="${ empty loginUser.memberProfile }">
+			                		<div class="profile-box" align="center">
+			                        	<img src="../../../resources/memberProfile/profile2.jpg" class="rounded-circle" id="preview"> 
+			                		</div>
+			                	</c:when>
+			                	<c:otherwise>
+			                		<div class="profile-box" align="center">
+			                			<img src="${ loginUser.memberProfile }" class="rounded-circle" id="preview">
+			                		</div>
+			                	</c:otherwise>
+			                </c:choose> 
+			                
+	                 		<br><br>
+	                 		<button type="submit" id="edit">편집</button>
+		                	<button type="reset" id="delete">삭제</button>
+	                 	<!-- 
+	                 	<c:choose>
+		                	<c:when test="${ empty loginUser.memberProfile }">
+		                		<div class="profile-box" align="center">
+		                        	<img src="../../../resources/uploadFiles/memberProfile/profile_basic.jpg" class="rounded-circle" id="preview"> 
+		                		</div>
+		                	</c:when>
+		                	<c:otherwise>
+		                		<div class="profile-box" align="center">
+		                			<input type="file" name="file" id="upfile" accept="image/*" style="display:none;"><img src="${ loginUser.memberProfile }" class="rounded-circle" id="preview">
+		                		</div>
+		                	</c:otherwise>
+		                </c:choose>
+	                	-->
                     		<input type="text" class="firstinput" id="memberName" name="memberName" value="${ loginUser.memberName }" readonly>    
 	                        <input type="email" class="firstinput" style="margin-top: 10px;" id="memberId" name="memberId" value="${ loginUser.memberId }" readonly>
 	                        <input type="password" placeholder="Password" class="firstinput" style="margin-top: 10px;" id="memberPwd" name="memberPwd" >
 	                        <input type="password" placeholder="Repeat Password" class="firstinput" style="margin-top: 10px;" >
 	                        <input type="text" placeholder="Phone Number" class="firstinput" style="margin-top: 10px;" id="memberPhone" name="memberPhone" value="${ loginUser.memberPhone }">
                     	</div>
-                    	<!-- 
+                    	 
                     	<div class="buttonArea" align="center">
                     		<input type="hidden" name="memberProfile" value="${ loginUser.memberProfile }">
-                    		<input type="hidden" name="memberId" value="${ loginUser.memberId }">
                     		
                     		<button type="submit" class="btn btn-light" id="editBtn"></button>
                     	</div>
-                    	 -->
+                    	
                     </form>
                   
                 </div> 
@@ -315,17 +325,10 @@
 			        reader.readAsDataURL(input.files[0]);
 			    }
 		}
-    	
-	    $('#file').change(handleFileSelect);
-		$('.fileEdit').on('click', '#delete', function () {
-		    $("#preview").removeAttr("src").attr("src", "resources/uploadFiles/memberProfile/profile_basic.jpg"); // 기본이미지
-		    $("#file").val(""); //파일밸류값 삭제
-		    $("#deleteProfile").val("delete"); // 기본이미지로 변경
-		});
 		
-		
-		$('#edit').click(function() {
-		  $("#file").click();
+		$("#upfile").change(handleFileSelect);
+		$("#preview").click( function() {
+			$("#upfile").click();
 		});
     	
     </script>
@@ -394,7 +397,7 @@
     		if(newPwd != newPwdCheckPwd) {
     			alert("비밀번호가 일치 하지 않습니다.");
     		} else {
-    			window.location.href = "updatePwd.me";
+    			window.location.href = "myPage.me";
     		}
     		
     	}

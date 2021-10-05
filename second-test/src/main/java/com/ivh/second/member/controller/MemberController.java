@@ -88,55 +88,74 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
+//	@RequestMapping("update.me")
+//	public String updateMember(Member m, MultipartFile upfile, HttpSession session, Model model, String deleteProfile) {
+//		
+////		System.out.println(m);
+//		
+////		Member loginUser = (Member)session.getAttribute("loginUser");
+////		System.out.println(m.getMemberProfile());
+//		
+//		// 기본이미지 경로일 경우 파일 삭제x
+//		if(!upfile.getOriginalFilename().equals("")) { // 넘어오는 값이 있을 경우
+////			if(!loginUser.getMemberProfile().contentEquals("resources/uploadFiles/memberProfile/profile_basic.jsp")) { // 기본파일 경로명이 아닐 땐 파일 삭제
+////				new File(session.getServletContext().getRealPath(loginUser.getMemberProfile())).delete();
+////			}
+//			
+//			// 새로운 파일 업로드
+//			String changeName = saveFile(session, upfile);
+//			m.setMemberProfile("resources/uploadFiles/memberProfile/" + changeName);
+//		}
+//		
+//		// 기존파일을 삭제하고 기본이미지로 변경
+//		if(deleteProfile.equals("delete")) { 
+//			
+//			if(!m.getMemberProfile().equals("resources/uploadFiles/memberProfile/profile_basic.jpg"))   { // 기본파일경로명이 아닐때는 그 파일 삭제
+//				
+//				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
+//			} 
+//			
+//			m.setMemberProfile("resources/uploadFiles/memberProfile/profile_basic.jpg");
+//		
+//		}
+//		int result = mService.insertMember(m);
+//		
+//		if(result > 0) {
+//			session.setAttribute("alertMsg", "성공적으로 정보 변경 되었습니다.");
+//			return "redirect:myPage.me";
+//		} else {
+//			model.addAttribute("errorMsg", "정보 변경 실패");
+//			return "common/errorPage";
+//		}
+//		
+//	}
+	
 	@RequestMapping("update.me")
-	public String updateMember(Member m, MultipartFile file, HttpSession session, Model model, String deleteProfile) {
-		
-		// 기본이미지 경로일 경우 파일 삭제x
-		if(!file.getOriginalFilename().equals("")) { // 넘어오는 값이 있을 경우
-			if(!m.getMemberProfile().contentEquals("resources/uploadFiles/memberProfile/profile_basic.jsp")) { // 기본파일 경로명이 아닐 땐 파일 삭제
-				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
-			}
-			
-			// 새로운 파일 업로드
-			String changeName = saveFile(session, file);
-			m.setMemberProfile("resources/uploadFiles/memberProfile/" + changeName);
-		}
-		
-		// 기존파일을 삭제하고 기본이미지로 변경
-		if(deleteProfile.equals("delete")) { 
-			
-			if(!m.getMemberProfile().equals("resources/uploadFiles/memberProfile/profile_basic.jpg"))   { // 기본파일경로명이 아닐때는 그 파일 삭제
-				
-				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
-			} 
-			
-			m.setMemberProfile("resources/uploadFiles/memberProfile/profile_basic.jpg");
-		
-		}
-		return deleteProfile;
-		
+	public void updateProfile(Member m, MultipartFile upfile) {
+//		System.out.println(m);
+//		System.out.println(upfile.getOriginalFilename());
 	}
 	
-	// 첨부파일 
-	private String saveFile(HttpSession session, MultipartFile file) {
-		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
-		String originName = file.getOriginalFilename();
-		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		int ranNum = (int)(Math.random() * 9000000 + 10000);
-		String ext = originName.substring(originName.lastIndexOf("."));
-		
-		String changeName = currentTime + ranNum + ext;
-		
-		try {
-			file.transferTo(new File(savePath + changeName));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return changeName;
-	}
+//	// 첨부파일 
+//	private String saveFile(HttpSession session, MultipartFile upfile) {
+//		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
+//		String originName = upfile.getOriginalFilename();
+//		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+//		int ranNum = (int)(Math.random() * 9000000 + 10000);
+//		String ext = originName.substring(originName.lastIndexOf("."));
+//		
+//		String changeName = currentTime + ranNum + ext;
+//		
+//		try {
+//			upfile.transferTo(new File(savePath + changeName));
+//		} catch (IllegalStateException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return changeName;
+//	}
 	
 	/*
 	// 비밀번호 변경
@@ -268,16 +287,7 @@ public class MemberController {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		m.setMemberPwd(newPwd);
 		
-//		System.out.println(newPwd);
-//		System.out.println(m);
-		
-		
 		int result = mService.updatePwd(m);
-		
-//		System.out.println(m);
-//		Member [memberNo=0, memberName=null, memberId=, memberPwd=pass10, memberPhone=null, memberProfile=null, enrollDate=null, modifyDate=null, memberStatus=null]
-		
-//		System.out.println(result);
 		
 		if(result > 0) { // 정보 수정 성공
 			session.setAttribute("loginUser", mService.updatePwd(m));
