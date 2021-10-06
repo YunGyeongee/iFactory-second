@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,6 +156,16 @@
         background-color: #006599;
         border: 1px solid #006599;
     }
+    
+    .edit-button{
+    	width: 80px;
+    	margin : auto;
+    	border-radius: 25px;
+    	color: white;
+        background-color: #666666;
+        border: 1px solid #666666;
+    }
+    
     .login-container a{
         text-decoration: none;
     }
@@ -246,42 +257,38 @@
         <div class="login-container">
             <div class="login-sub-container">
                  <div class="login-sub-container-input">
-                 	<form class="login-sub-container-form" id="updateForm" method="post" action="update.me" enctype="multipart/form-data"> 
-	                 	
+                 	<form class="login-sub-container-form" id="updateForm" method="post" action="updateProfile.me" enctype="multipart/form-data"> 
 	                 	<div class="form-group" align="center">
-	                 		<input type="file" name="upfile" id="upfile" accept="image/*" onchange="loadImg();" style="display: none;">
-		                 	<c:choose>
-			                	<c:when test="${ empty loginUser.memberProfile }">
-			                		<div class="profile-box" align="center">
-			                        	<img src="../../../resources/memberProfile/profile_basic.jpg" class="rounded-circle" id="preview"> 
-			                		</div>
-			                	</c:when>
-			                	<c:otherwise>
-			                		<div class="profile-box" align="center">
-			                			<img src="${ loginUser.memberProfile }" class="rounded-circle" id="preview">
-			                		</div>
-			                	</c:otherwise>
-			                </c:choose> 
+	                 		<c:choose>
+				            	<c:when test="${empty loginUser.memberProfile}">    
+						            <div class="profile-box">
+                                       	<img src="https://i.imgur.com/pO4OGIl.jpg" class="rounded-circle" id="preview" >
+                                   	</div>
+					           	</c:when>
+					           	<c:otherwise>
+					           	 	<div class="profile-box">
+                                         <img src="${loginUser.memberProfile}" class="rounded-circle" id="preview" > 
+                                    </div> 
+					           	</c:otherwise> 
+				            </c:choose>
 			                <br>
 	                 		<div class="fileEdit">
-                            	<label id="edit">편집</label>
-                                <label id="delete">삭제</label>
+	                 			<input type="hidden" name="memberProfile" value="${loginUser.memberProfile}">  
+                            	<input type="hidden" name="memberId" value="${loginUser.memberId}">
+                            	
+                                <button class="edit-button" type="reset" id="delete">Reset</button>
+                                <button class="edit-button" type="submit" id="edit">Edit</button>
                                 
-                                <input type="file" name="file" id="file" accept="image/*" style="display: none;">
+                                <input type="file" name="upfile" id="upfile" accept="image/*" style="display: none;">
                             	<input type="hidden" id="deleteProfile" name="deleteProfile">
                             </div>
 	                 		
-                    		<input type="text" class="firstinput" id="memberName" name="memberName" value="${ loginUser.memberName }" readonly>    
-	                        <input type="email" class="firstinput" style="margin-top: 10px;" id="memberId" name="memberId" value="${ loginUser.memberId }" readonly>
+                    		<input type="text" class="firstinput" id="memberName" name="memberName" value="${loginUser.memberName}" readonly>    
+	                        <input type="email" class="firstinput" style="margin-top: 10px;" id="memberId" name="memberId" value="${loginUser.memberId}" readonly>
 	                        <input type="password" placeholder="Password" class="firstinput" style="margin-top: 10px;" id="memberPwd" name="memberPwd" >
 	                        <input type="password" placeholder="Repeat Password" class="firstinput" style="margin-top: 10px;" >
-	                        <input type="text" placeholder="Phone Number" class="firstinput" style="margin-top: 10px;" id="memberPhone" name="memberPhone" value="${ loginUser.memberPhone }">
-                    	</div>
-                    	 
-                    	<div class="buttonArea" align="center">
-                    		<input type="hidden" name="memberProfile" value="${ loginUser.memberProfile }">
-                    		
-                    		<button type="submit" class="btn btn-light" id="editBtn"></button>
+	                        <input type="text" placeholder="Phone Number" class="firstinput" style="margin-top: 10px;" id="memberPhone" name="memberPhone" value="${loginUser.memberPhone}">
+                    	
                     	</div>
                     	
                     </form>
@@ -304,24 +311,6 @@
     
     <!-- 프로필 사진 미리보기 -->
     <script>
-    	function loadImg(inputFile) {
-    		// inputFile : 현재 변화가 생긴 input type="file" 요소 객체
-    		
-    		//console.log(inpuFile.files.langth);
-    		if(inputFile.files.length == 1) {
-    			var reader = new FileReader();
-        		reader.readAsDataURL(inputFile.files[0]);
-        		reader.onload = function(e) {
-    				$("#preview").attr("src", e.target.result);
-    			}
-    		} else {
-    			$("preview")
-    		}	
-    	
-    	
-    	}
-    
-    
 	    function handleFileSelect(event) {
 		  	var input = this;
 				if (input.files && input.files.length) {
@@ -334,16 +323,16 @@
 			    }
 		}
 		
+		$('#upfile').change(handleFileSelect);
+		$('.fileEdit').on('click', '#delete', function () {
+		    $("#preview").removeAttr("src").attr("src", "https://i.imgur.com/pO4OGIl.jpg"); // 기본프로필파일
+		    $("#upfile").val(""); //파일밸류값 삭제
+		    $("#deleteProfile").val("delete"); // 기본이미지로 변경을위해 밸류값줘서 넘긴다
+		});
+		
 		$("#upfile").change(handleFileSelect);
 		$("#preview").click( function() {
 			$("#upfile").click();
-		});
-		
-		$('#upfile').change(handleFileSelect);
-		$('.fileEdit').on('click', '#delete', function () {
-		    $("#preview").removeAttr("src").attr("src", "resources/uploadFiles/memberProfile/profile_basic.jpg"); // db의 기본프로필파일
-		    $("#upfile").val(""); //파일밸류값 삭제
-		    $("#deleteProfile").val("delete"); // 기본이미지로 변경을위해 밸류값줘서 넘긴다
 		});
     	
     </script>
@@ -395,8 +384,8 @@
 	    			</div>
 	    			
 	    			<div class="modal-footer">
-	    				<input type="hidden" name="memberId" value="${ loginUser.memberId }" >
-	    				<input type="hidden" name="memberPwd" value="${ loginUser.memberPwd }" >
+	    				<input type="hidden" name="memberId" value="${loginUser.memberId}" >
+	    				<input type="hidden" name="memberPwd" value="${loginUser.memberPwd}" >
 	    				<button type="submit" class="btn btn-danger" id="changeBtn" onclick="updatePwd();">Change</button>
 	    			</div>
 	    		</div>
@@ -510,7 +499,7 @@
 	                    <div class="deleteMo">
 	                                                      비밀번호 : 
 	                        <input type="password" name="memberPwd" required>
-	                        <input type="hidden" name="memberId" value="${ loginUser.memberId }">
+	                        <!-- <input type="hidden" name="memberId" value="${ loginUser.memberId }"> -->
 	                        <button type="submit" class="btn btn-danger">탈퇴하기</button>
 	                    </div>
 	                </div>

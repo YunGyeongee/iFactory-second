@@ -80,7 +80,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("myPage.me")
-	public String myPage() {
+	public String myPage(Model model, HttpSession session) {
+		
+//		Member loginUser = (Member)session.getAttribute("loginUser");
+//		model.addAttribute("loginUser", loginUser);		
 		return "member/myPage";
 	}
 	
@@ -92,7 +95,7 @@ public class MemberController {
 		// 전달된 파일이 있을 경우 => 파일명 수정 후 업로드 => 원본명, 서버에 업로드 된 경로를 m에 담을 것
 		if(!upfile.getOriginalFilename().equals("")) {
 			
-			if(!m.getMemberProfile().equals("resources/uploadFiles/memberProfile/profile_basic.jpg")) { // 기본 파일 경로명이 아닐 때 그 파일 삭제
+			if(!m.getMemberProfile().equals("https://i.imgur.com/pO4OGIl.jpg")) { // 기본 파일 경로명이 아닐 때 그 파일 삭제
 				
 				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
 			}
@@ -105,12 +108,12 @@ public class MemberController {
 		
 		if(deleteProfile.equals("delete")) { // 기존파일을 삭제하고 기본이미지로 변경
 			
-			if(!m.getMemberProfile().equals("resources/member_profile/profile_basic.jpg"))   { // 기본 파일 경로명이 아닐 때 그 파일 삭제
+			if(!m.getMemberProfile().equals("https://i.imgur.com/pO4OGIl.jpg"))   { // 기본 파일 경로명이 아닐 때 그 파일 삭제
 				
 				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
 			} 
 			
-			m.setMemberProfile("resources/member_profile/profile_basic.jpg");
+			m.setMemberProfile("https://i.imgur.com/pO4OGIl.jpg");
 		
 		}
 		
@@ -118,6 +121,7 @@ public class MemberController {
 		
 		if(result > 0) { // 수정 성공
 			session.setAttribute("alertMsg", "성공적으로 수정 되었습니다.");
+			model.addAttribute("loginUser", m);
 			return "redirect:myPage.me";
 		} else { // 수정 실패
 			model.addAttribute("errorMsg", "정보 수정 실패");
@@ -271,15 +275,18 @@ public class MemberController {
 	
 	
 	@RequestMapping("updatePwd.me")
-	public String changePwd(String newPwd, Member m, HttpSession session, Model model) {
+	public String updatePwd(String newPwd, Member m, HttpSession session, Model model) {
 		
-		Member loginUser = (Member)session.getAttribute("loginUser");
+//		Member loginUser = (Member)session.getAttribute("loginUser");
 		m.setMemberPwd(newPwd);
 		
 		int result = mService.updatePwd(m);
 		
+//		System.out.println(loginUser);'
+		System.out.println(result);
+		
 		if(result > 0) { // 정보 수정 성공
-			session.setAttribute("loginUser", mService.updatePwd(m));
+			session.setAttribute("m", mService.updatePwd(m));
 			session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
 			return "redirect:myPage.me";
 		} else { // 정보 수정 실패
