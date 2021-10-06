@@ -14,12 +14,17 @@ public class MemberDao {
 	public Member loginMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}
-
+	
 	public int insertMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.insert("memberMapper.insertMember", m);
 	}
 
+//	public String selectMember(SqlSessionTemplate sqlSession, String memberId, String memberProfile) {
+//		return sqlSession.selectList("memberMapper.selectMember", memberId, memberProfile);
+//	}
+	
 	public int updateProfile(SqlSessionTemplate sqlSession, Member m) {
+//		System.out.println(m);
 		return sqlSession.update("memberMapper.updateProfile", m);
 	}
 

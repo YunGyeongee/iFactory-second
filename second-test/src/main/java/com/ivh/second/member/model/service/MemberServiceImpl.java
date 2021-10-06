@@ -24,14 +24,20 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginMember(Member m) {
 		return mDao.loginMember(sqlSession, m);
 	}
-
+	
 	@Override
 	public int insertMember(Member m) {
 		return mDao.insertMember(sqlSession, m);
 	}
+	
+//	@Override
+//	public String selectMember(String memberId, String memberProfile) {
+//		return mDao.selectMember(sqlSession, memberId, memberProfile);
+//	}
 
 	@Override
 	public int updateProfile(Member m) {
+//		System.out.println(m);
 		return mDao.updateProfile(sqlSession, m);
 	}
 

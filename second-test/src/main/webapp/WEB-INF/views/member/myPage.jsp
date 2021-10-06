@@ -250,7 +250,7 @@
                 <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
             <div class="ivh-container-img-container">
                 <div class="img-box">
-                    <img src="../../../resources/images/logo_2.png">
+                    <a href="https://imgur.com/qkf5uvv"><img src="https://i.imgur.com/qkf5uvv.png" title="source: imgur.com" /></a>
                 </div>
             </div>
         </div>
@@ -258,6 +258,8 @@
             <div class="login-sub-container">
                  <div class="login-sub-container-input">
                  	<form class="login-sub-container-form" id="updateForm" method="post" action="updateProfile.me" enctype="multipart/form-data"> 
+	                 	<input type="hidden" name="memberProfile" value="${m.memberProfile}">  
+                        <input type="hidden" name="memberId" value="${m.memberId}">
 	                 	<div class="form-group" align="center">
 	                 		<c:choose>
 				            	<c:when test="${empty loginUser.memberProfile}">    
@@ -273,9 +275,7 @@
 				            </c:choose>
 			                <br>
 	                 		<div class="fileEdit">
-	                 			<input type="hidden" name="memberProfile" value="${loginUser.memberProfile}">  
-                            	<input type="hidden" name="memberId" value="${loginUser.memberId}">
-                            	
+	                 			
                                 <button class="edit-button" type="reset" id="delete">Reset</button>
                                 <button class="edit-button" type="submit" id="edit">Edit</button>
                                 

@@ -223,7 +223,7 @@
 			</div>
 			<div class="ivh-container-img-container">
 				<div class="img-box">
-					<img src="../../../resources/images/logo_2.png" alt="">
+					<a href="https://imgur.com/qkf5uvv"><img src="https://i.imgur.com/qkf5uvv.png" title="source: imgur.com" /></a>
 				</div>
 			</div>
 		</div>

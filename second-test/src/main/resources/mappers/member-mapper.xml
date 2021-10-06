@@ -31,6 +31,16 @@
   		   and member_status = 'Y'
   	</select>
   	
+  	<!-- 확인용 
+  	<select id="selectMember" parameterType="string">
+  		select 
+  		       member_id,
+  		       member_profile
+  		  from member
+  		 where member_id = #{memberId}
+  		   and member_status = 'Y'
+  	</select> -->
+  	
   	
   	<!-- 회원가입용 -->
   	<insert id="insertMember" parameterType="Member">
@@ -63,7 +73,9 @@
   	<update id="updateProfile" parameterType="Member">
   		update
   		       member
-  		   set member_profile = #{memberProfile}
+  		   set member_name = #{memberName},
+  		       member_phone = #{memberPhone},
+  		       member_profile = #{memberProfile}
   		 where member_id = #{memberId}
   	</update>
   	

@@ -237,7 +237,7 @@
                 <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
             <div class="ivh-container-img-container">
                 <div class="img-box">
-                    <img src="../../../resources/images/logo_2.png" alt="">
+                    <a href="https://imgur.com/qkf5uvv"><img src="https://i.imgur.com/qkf5uvv.png" title="source: imgur.com" /></a>
                 </div>
             </div>
         </div>
@@ -254,7 +254,7 @@
                         <div class="twitter-box"><i class="fab fa-twitter"></i></div>                
                     </div>
                     <div class="login-sub-container-account-box">
-                        <p>Have an account? Log in</a></p>
+                        <p><a href="javascript:window.history.back();">Have an account? Log in</a></p>
                         <span class="account-box-border"></span>
                     </div>
                 </div>
