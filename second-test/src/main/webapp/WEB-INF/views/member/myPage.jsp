@@ -250,7 +250,7 @@
                 <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
             <div class="ivh-container-img-container">
                 <div class="img-box">
-                    <a href=""><img src="https://i.imgur.com/qkf5uvv.png" title="source: imgur.com" /></a>
+                    <a href="https://imgur.com/qkf5uvv"><img src="https://i.imgur.com/qkf5uvv.png" title="source: imgur.com" /></a>
                 </div>
             </div>
         </div>
@@ -258,7 +258,8 @@
             <div class="login-sub-container">
                  <div class="login-sub-container-input">
                  	<form class="login-sub-container-form" id="updateForm" method="post" action="updateProfile.me" enctype="multipart/form-data"> 
-	                 	
+	                 	<input type="hidden" name="memberProfile" value="${loginUser.memberProfile}">  
+                       	<input type="hidden" name="memberId" value="${loginUser.memberId}">
 	                 	<div class="form-group" align="center">
 	                 		<c:choose>
 				            	<c:when test="${empty loginUser.memberProfile}">    
@@ -274,9 +275,6 @@
 				            </c:choose>
 			                <br>
 	                 		<div class="fileEdit">
-	                 		
-	                 			<input type="hidden" name="memberProfile" value="${m.memberProfile}">  
-                        		<input type="hidden" name="memberId" value="${m.memberId}"> 
 	                 			
                                 <button class="edit-button" type="reset" id="delete">Reset</button>
                                 <button class="edit-button" type="submit" id="edit">Edit</button>
@@ -285,11 +283,12 @@
                             	<input type="hidden" id="deleteProfile" name="deleteProfile">
                             </div>
 	                 		
-                    		<input type="text" class="firstinput" id="memberName" name="memberName" value="${loginUser.memberName}" >    
+                    		<input type="text" class="firstinput" id="memberName" name="memberName" value="${loginUser.memberName}" readonly>    
 	                        <input type="email" class="firstinput" style="margin-top: 10px;" id="memberId" name="memberId" value="${loginUser.memberId}" readonly>
-	                        <input type="password" placeholder="Password" class="firstinput" style="margin-top: 10px;" id="memberPwd" name="memberPwd" >
-	                        <input type="password" placeholder="Repeat Password" class="firstinput" style="margin-top: 10px;" >
+	                        <input type="Password" placeholder="Password" class="firstinput" style="margin-top: 10px;" id="memberPwd" name="memberPwd" value="${ loginUser.memberPwd }">
+	                        <input type="Password" placeholder="Repeat Password" class="firstinput" style="margin-top: 10px;" value="${ loginUser.memberPwd }">
 	                        <input type="text" placeholder="Phone Number" class="firstinput" style="margin-top: 10px;" id="memberPhone" name="memberPhone" value="${loginUser.memberPhone}">
+                    	
                     	</div>
                     	
                     </form>
