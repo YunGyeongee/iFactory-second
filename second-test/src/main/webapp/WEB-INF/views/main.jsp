@@ -431,23 +431,21 @@
     .profile-photo-container {
         width: 100%;
         height: 200px;
-        color: white;
     }
+    
     .profile-photo-container p {
         text-align: center;
         margin-top: 15px;
+        color: white;
     }
+   
     .profile-photo-container img {
-
         width: 100px;
         display: block;
         height: 100px;
-        border-radius: 50px;
         margin: auto;
         margin-top: 80px;
-        border: 1px solid #eee;
-    }
-
+    } 
 
     .sidebar-buttons {
         margin:auto;
@@ -455,7 +453,6 @@
         height: 150px;
         display: flex;
         flex-flow: column;
-
     }
 
     .btn-custom {
@@ -927,7 +924,7 @@
     <div class="navbar-container">                                
         <!--top navbar -->
         <div class="logo-container">
-            <img src="../../resources/images/logo.png">
+            <a href=""><img src="https://i.imgur.com/gS37Yzi.png" title="source: imgur.com" /></a>
         </div>
         <div class="search-date-container">
             <input class="search-box" type="text" placeholder="SEARCH">
@@ -949,7 +946,9 @@
             <!--side bar (inside of main container) -->
             <div style="height: 90%; border-right: 3px solid #243964; margin-top: 50px;">                    
                 <div class="profile-photo-container">
-                    <img src="../../resources/images/profile.jpg">
+                    <div class="profile-box">
+                          <img src="https://i.imgur.com/pO4OGIl.jpg" class="rounded-circle" id="preview" > 
+                     </div> 
                     <p>사용자님</p>
                 </div>
                 <div class="sidebar-buttons">
