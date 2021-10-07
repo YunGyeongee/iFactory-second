@@ -37,7 +37,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int updateProfile(Member m) {
-//		System.out.println(m);
 		return mDao.updateProfile(sqlSession, m);
 	}
 

@@ -84,72 +84,29 @@ public class MemberController {
 	
 	@RequestMapping("myPage.me")
 	public String myPage(Model model, HttpSession session) {
-		
-//		Member loginUser = (Member)session.getAttribute("loginUser");
-//		model.addAttribute("loginUser", loginUser);		
 		return "member/myPage";
 	}
 	
-//	@RequestMapping("updateMember")
-//	public String updateMember(String mId, Model model) {
-//		String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
-//		model.addAttribute("loginUser", mService.loginMember(memberId));
-//		return "redirect:updateProfile.me";
-//	}
-	
-//	@RequestMapping("updateProfile.me")
-//	public String updateProfile(HttpServletRequest request, @RequestParam("memberProfile") MultipartFile upfile, Model model, HttpSession session) throws IOException {
-//		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/memberProfile/");
-//		String originName = upfile.getOriginalFilename();
-//		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-//		int ranNum = (int)(Math.random() * 9000000 + 10000);
-//		String ext = originName.substring(originName.lastIndexOf("."));
-//		
-//		String changeName = currentTime + ranNum + ext;
-//		
-//		String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
-//		Member m = mService.loginMember(memberId);
-//		
-//		try {
-//			if (m.getMemberProfile() != null) { // 이미 프로필 사진이 있을 경우
-//				File file = new File(savePath + m.getMemberProfile()).delete(); // 기존 파일 삭제
-//			}
-//			upfile.transferTo(new File(savePath) + upfile.getOriginalFilename()); // 경로에 업로드
-//		} catch (IllegalStateException e) {
-//			e.printStackTrace();
-//		} 
-//		
-//		mService.loginMember(memberId, upfile.getOriginalFilename());
-//		return 
-//	}
-	
-	
 	@RequestMapping("updateProfile.me")
 	public String updateProfile(Member m, MultipartFile upfile, HttpSession session, Model model, String deleteProfile) {
-//		System.out.println(m);,
+//		System.out.println(m);
 //		System.out.println(upfile.getOriginalFilename());
 		
-		// 전달된 파일이 있을 경우 => 파일명 수정 후 업로드 => 원본명, 서버에 업로드 된 경로를 m에 담을 것
-		
-		if(!upfile.getOriginalFilename().equals("")) {
-			if(!m.getMemberProfile().equals("https://i.imgur.com/pO4OGIl.jpg")) { // 기본 파일 경로명이 아닐 때 그 파일 삭제
-				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
-			}
+		if(upfile.getOriginalFilename() != null && upfile.getOriginalFilename() != "") { // 새로운 파일이 등록됐을 경우
+			
+			// 기존 파일 삭제
+			new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
+			
+			// 새로 첨부한 파일 등록
 			String changeName = saveFile(session, upfile);
 			m.setMemberProfile("resources/uploadFiles/memberProfile/" + changeName);
-//			System.out.println(m);
-			
-		}
-		
-		if(deleteProfile.equals("delete")) { // 기존파일을 삭제하고 기본이미지로 변경
-			if(!m.getMemberProfile().equals("https://i.imgur.com/pO4OGIl.jpg"))   { // 기본 파일 경로명이 아닐 때 그 파일 삭제
-				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
-			} 
+		} else { // 새로운 파일이 없을 경우 -> 프로필 기본사진으로 설정
 			m.setMemberProfile("https://i.imgur.com/pO4OGIl.jpg");
-		
 		}
+		
 		int result = mService.updateProfile(m);
 		System.out.println(m);
+		System.out.println(result);
 		
 		if(result > 0) { // 수정 성공
 			session.setAttribute("alertMsg", "성공적으로 수정 되었습니다.");
@@ -158,6 +115,36 @@ public class MemberController {
 			model.addAttribute("errorMsg", "정보 수정 실패");
 			return "common/errorPage";
 		}
+		
+//		// 전달된 파일이 있을 경우 => 파일명 수정 후 업로드 => 원본명, 서버에 업로드 된 경로를 m에 담을 것
+//		if(!upfile.getOriginalFilename().equals("")) {
+//			if(!m.getMemberProfile().equals("https://i.imgur.com/pO4OGIl.jpg")) { // 기본 파일 경로명이 아닐 때 그 파일 삭제
+//				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
+//			}
+//			String changeName = saveFile(session, upfile);
+//			m.setMemberProfile("resources/uploadFiles/memberProfile/" + changeName);
+//			
+//		}
+//		
+//		if(deleteProfile.equals("delete")) { // 기존파일을 삭제하고 기본이미지로 변경
+//			if(!m.getMemberProfile().equals("https://i.imgur.com/pO4OGIl.jpg"))   { // 기본 파일 경로명이 아닐 때 그 파일 삭제
+//				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
+//			} 
+//			m.setMemberProfile("https://i.imgur.com/pO4OGIl.jpg");
+//		
+//		}
+//		
+//		String changeName = saveFile(session, upfile);
+//		m.setMemberProfile("resources/uploadFiles/memberProfile/" + changeName);
+//		int result = mService.updateProfile(m);
+//		
+//		if(result > 0) { // 수정 성공
+//			session.setAttribute("alertMsg", "성공적으로 수정 되었습니다.");
+//			return "redirect:myPage.me";
+//		} else { // 수정 실패
+//			model.addAttribute("errorMsg", "정보 수정 실패");
+//			return "common/errorPage";
+//		}
 		
 	}
 	
