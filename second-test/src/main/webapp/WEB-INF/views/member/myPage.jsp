@@ -259,7 +259,6 @@
                  <div class="login-sub-container-input">
                  	<form class="login-sub-container-form" id="updateForm" method="post" action="updateProfile.me" enctype="multipart/form-data"> 
 	                 	<input type="hidden" name="memberProfile" value="${loginUser.memberProfile}">  
-                       	<input type="hidden" name="memberId" value="${loginUser.memberId}">
 	                 	<div class="form-group" align="center">
 	                 		<c:choose>
 				            	<c:when test="${empty loginUser.memberProfile}">    
