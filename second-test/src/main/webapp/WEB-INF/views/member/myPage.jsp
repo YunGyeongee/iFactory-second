@@ -212,17 +212,18 @@
     }
     .delete-account-container{
         text-align: right;
+        margin-right:50px;
+        
     }
     .delete-account-button{
         width: 80px;
         height: 30px;
         font-size: 10px;
         margin: auto;
-        margin-top: 40px;
         border-radius: 20px;
-        color: #006599;
-        background-color: white;
-        border: 2px solid #006599;
+        color: white;
+        background-color: #666666;
+        border: 1px solid #666666;
     }
 </style>
 <body>
@@ -295,7 +296,7 @@
                 </div> 
               
                 <div class="delete-account-container">
-                    <button type="button" class="delete-account-button" data-toggle="modal" data-target="#deleteForm" onclick="ajaxInfo();">회원탈퇴</button> 
+                    <button type="button" class="delete-account-button" data-toggle="modal" data-target="#deleteForm" onclick="ajaxInfo();">Delete Account</button> 
                 </div> 
                
                             
@@ -498,7 +499,7 @@
 	                    <div class="deleteMo">
 	                                                      비밀번호 : 
 	                        <input type="password" name="memberPwd" required>
-	                        <!-- <input type="hidden" name="memberId" value="${ loginUser.memberId }"> -->
+	                        <input type="hidden" name="memberId" value="${ loginUser.memberId }">
 	                        <button type="submit" class="btn btn-danger">탈퇴하기</button>
 	                    </div>
 	                </div>
