@@ -28,28 +28,25 @@
 	a {
 	    color: inherit;
 	}
-	
 	.main-container {
 	    display: flex;
 	    width: 100vw;
 	    height: 100vh;
 	    overflow: hidden;
 	}
-	
 	.ivh-container {
 	    width: 30%;
 	    height: 100%;
-	    background-color: #daebf3;
+	    background-color: #1b2944;
 	    display: flex;
 	    flex-flow: column;
+	    color: #fff;
 	}
-	
 	.login-container {
 	    width: 70%;
 	    height: 100%;
-	    background-color: white;
+	    background-color: #0c172b;
 	}
-	
 	.ivh-container-title-cotainer {
 	    width: 100%;
 	    height: 80%;
@@ -63,7 +60,7 @@
 	.ivh-container-title-cotainer h1{
 	    margin-top: 200px;
 	    font-weight: 700;
-	    font-size: 70px;
+	    font-size: 75px;
 	}
 	
 	.ivh-container-img-container {
@@ -73,156 +70,167 @@
 	.ivh-container-img-container img {
 	    width: 100%;
 	}
-	
 	.img-box {
 	    width: 120px;
 	    height: 40px;
 	    margin: auto;
+	    margin-top: 90px;
 	}
-	
 	.login-sub-container {
 	    width: 40%;
 	    height: 65%;
-	    background-color:white;
+	    background-color:#0c172b;
 	    margin: auto;
-	    margin-top: 150px;
+	    margin-top: 170px;
+	    color: #fff;
 	}
-	
 	.login-sub-container-line {
-	    display: flex;
+	display: flex;
 	    width: 100%;
 	    height: 20px;
 	    text-align: center;
-	    color:#b4b4b4;
+	   color:#fff;
 	}
-	
 	.login-sub-container-sns {
 	    width: 100%;
 	    height: 100px;
 	    display: flex;
 	    justify-content: center;    
-	    margin-bottom: 20px;
+	    margin-bottom: 30px;
 	}
-	
 	.login-sub-container-title {
 	    width: 100%;
 	    margin-left: 40px;
+	    color: #fff;
+	    margin-bottom: 10px;
 	}
-	
-	.login-sub-container-title p{
+	.login-sub-container-title p {
+	    color: white;
 	    margin: 0;
-	    color:#b4b4b4;
 	}
 	
 	.login-line {
 	    margin-top: 10px;
 	    width: 150px;
 	    height: 1px;
-	    border: 1px solid #ddeff7;
-	    color: #eee;
+	    border: 1px solid #253863;
+	    color: #253863;
 	}
-	
 	.login-sub-container-input {
 	    display: flex;
 	    flex-flow: column;
+	    margin-top: 10px;
 	}
-	
 	.login-sub-container-form {
 	    display: flex;
 	    flex-flow: column;
 	}
 	
-	
 	.firstinput {
-	    background-color: #daebf3;
+	    background-color: #253863;
 	    width: 450px;
 	    margin: auto;
-	    border-radius: 20px;
+	    border-radius: 40px;
 	    margin-top: 25px;
-	    height: 45px;
-	    text-align: center;
-	    border: 1px solid #daebf3;
-	    
+	    height: 55px;    
+	    border: 1px solid #253863;
+	    padding-left: 15px;
+	}
+	::placeholder {
+	    color: #fff;
 	}
 	
 	.forgot-signup-box {
 	    display: flex;
 	    justify-content: space-around;
-	    color: #006599;
+	    color: #eee;
+	    margin-top: 30px;
 	}
 	.forgot-signup-box p{
 	    margin-top: 25px;
 	}
-	
 	.forgot-signup:hover {
 	    text-decoration: underline;
 	    cursor: pointer;
 	    color: dodgerblue;
 	}
 	
-	
 	.signin-button {
-	    width: 150px;
-	    height: 45px;
+	    width: 200px;
+	    height: 50px;
 	    margin: auto;
 	    margin-top: 40px;
 	    border-radius: 25px;
-	    color: white;
-	    background-color: #006599;
-	    border: 1px solid #006599;
-	    
+	    color: #1b2944;
+	    font-weight: 600;
+	    background-color: #fff;
+	    border: 1px solid #fff;
+	    font-size: 25px;
 	}
-	.login-container a{
+	login-container a{
 	    text-decoration: none;
 	}
 	
-	.google-box {
-	    margin-top: 30px;
+	.goolge-box {
+	   margin-top: 30px;
 	    width: 50px;
 	    height: 50px;
 	    border-radius: 50px;
-	    background-color: #aed8ec;
+	    background-color: #253863;
 	    text-align: center;
 	    font-size: 32px;
 	    color: white;
 	    margin-right: 40px;
 	}
-	
 	.facebook-box {
 	    margin-top: 30px;
 	    width: 50px;
 	    height: 50px;
 	    border-radius: 50px;
-	    background-color: #aed8ec;
+	    background-color: #253863;
 	    text-align: center;
 	    font-size: 32px;
 	    color: white;
 	    margin-right: 40px;
 	}
-	
 	.twitter-box {
 	    margin-top: 30px;
 	    width: 50px;
 	    height: 50px;
 	    border-radius: 50px;
-	    background-color: #aed8ec;
+	    background-color: #253863;
 	    text-align: center;
 	    font-size: 32px;
 	    color: white;
+	}
+	
+	.checkbox-box {
+	    text-align: left;
+	    margin-top: 10px;
+	    color: #eee;
+	}
+	.checkbox-box span {
+	    color: #eee;
 	}
 
 </style>
 </head>
 <body>
 	<div class="main-container">
-		<div class="ivh-container">
-		    <div class="ivh-container-title-cotainer">
-				<h1>HELLO</h1>
-				<p style="margin-top: 50px;">Enter Your personal details</p>
-				<p>and start journey with us</p>
-			</div>
-			<div class="ivh-container-img-container">
-				<div class="img-box">
+        <div class="ivh-container">
+            <div class="ivh-container-title-cotainer">
+            <br/><br/><h1>HELLO</h1><br/><br/>
+            <p style="margin-top: 50px;">Welcome to mPlus intelligent 
+            <br/>
+            smart factory system</p>
+            <br/>
+            <p>You can check the PHM and production quality <br/>
+                of mPlus battery production system. <br/>
+           
+            If you do not have an ID, contact the administrator</p>
+            </div>
+            <div class="ivh-container-img-container">
+	            <div class="img-box">
 					<a href="https://imgur.com/qkf5uvv"><img src="https://i.imgur.com/qkf5uvv.png" title="source: imgur.com" /></a>
 				</div>
 			</div>
@@ -230,22 +238,22 @@
 		<div class="login-container">
 			<div class="login-sub-container">
 			    <div class="login-sub-container-title">
-					<h2>Login</h2>
-					<p>Log in with your data that you entered</p>
-					<p>during your registration</p>    
-				</div>
-				<div class="login-sub-container-sns">
-					<div class="google-box"><i class="fab fa-google"></i></div>
-					<div class="facebook-box"><i class="fab fa-facebook-f"></i></div>
-					<div class="twitter-box"><i class="fab fa-twitter"></i></div>
-				</div>
-				<div class="login-sub-container-line">
-					<div style="margin: auto; display: flex;">
-						<span class="login-line" style="margin-right: 25px;"></span>
-							<p style="font-size: 12px;">or do it via E-mail</p>
-						<span class="login-line" style="margin-left: 25px;"></span>
-					</div>
-				 </div>
+                    <h2>Login</h2>
+                    <p style="margin-top: 15px;">Log in with your data that you entered</p>
+                    <p>during your registration</p>    
+                </div>
+                <div class="login-sub-container-sns">
+                    <div class="goolge-box"><i class="fab fa-google"></i></div>
+                    <div class="facebook-box"><i class="fab fa-facebook-f"></i></div>
+                    <div class="twitter-box"><i class="fab fa-twitter"></i></div>
+                </div>
+                <div class="login-sub-container-line">
+                    <div style="margin: auto; display: flex;">
+                        <span class="login-line" style="margin-right: 25px;"></span>
+                        <p style="font-size: 12px;">or do it via E-mail</p>
+                        <span class="login-line" style="margin-left: 25px;"></span>
+                    </div>
+                </div>
 				 <div class="login-sub-container-input">
 					<form class="login-sub-container-form" action="login.me" method="post">
 						<input type="text" placeholder="Email" class="firstinput" id="memberId" name="memberId">    
