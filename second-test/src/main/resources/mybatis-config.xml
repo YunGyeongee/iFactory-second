@@ -8,12 +8,12 @@
 	
 	<typeAliases>
 		<typeAlias alias="Member" type="com.ivh.second.member.model.vo.Member"/>
-		<!-- <typeAlias alias="Sensor" type="com.ivh.second.sensor.model.vo.Sensor"/>  -->
+		<typeAlias alias="Sensor" type="com.ivh.second.sensor.model.vo.Sensor"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml" />
-		<!-- <mapper resource="/mappers/sensor-mapper.xml" />  -->
+		<mapper resource="/mappers/sensor-mapper.xml" />
 	</mappers>
 
 

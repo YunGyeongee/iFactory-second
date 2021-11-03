@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ivh.second.sensor.model.service.SensorService;
 import com.ivh.second.sensor.model.vo.Sensor;
@@ -15,12 +17,32 @@ public class SensorController {
 	@Autowired
 	private SensorService sService;
 	
-	
-	@RequestMapping("time.sor")
-	public void timeSensor(Sensor s, HttpSession session) {
+	@ResponseBody
+	@RequestMapping("main.ss")
+	public ModelAndView selectSensor1(Sensor s, HttpSession session, ModelAndView mv) {
 		
-		Sensor usedSensor = sService.timeSensor(s);
-		System.out.println(s);
+		Sensor UsedSensor = sService.selectSensor1(s);
+		System.out.println(UsedSensor);
+		
+		if(UsedSensor == null) { // 조회 실패
+			mv.addObject("errorMsg", "조회 실패");
+			mv.setViewName("common/errorPage");
+		} else { // 조회 성공
+			session.setAttribute("UsedSensor", UsedSensor);
+//			mv.setViewName("main");
+		}
+		
+		return mv;
+		
 	}
+	
+//	@ResponseBody
+//	@RequestMapping(value="time.sor", produces="application/json; charset=utf-8")
+//	public String ajaxSelectSensor() {
+//		
+//		HashMap<String, Object> map = sService.ajaxSelectSensor();
+//		
+//		return new Gson().toJson(map);
+//	}
 
 }

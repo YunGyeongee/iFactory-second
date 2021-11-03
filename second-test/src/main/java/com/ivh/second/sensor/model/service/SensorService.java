@@ -1,13 +1,13 @@
 package com.ivh.second.sensor.model.service;
 
+import java.util.List;
+
 import com.ivh.second.sensor.model.vo.Sensor;
 
 public interface SensorService {
 	
-	// 1. 시간별 조회
-	Sensor timeSensor(Sensor s);
+//	HashMap<String, Object> ajaxSelectSensor();
 	
-	// 2. 각 센서별 조회
-	Sensor selectSensor(Sensor s);
+	Sensor selectSensor1(Sensor s);
 
 }

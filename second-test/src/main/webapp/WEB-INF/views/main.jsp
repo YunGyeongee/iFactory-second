@@ -1457,8 +1457,9 @@
             <div style="height: 90%; border-right: 3px solid #243964; margin-top: 50px;">                    
                 <div class="profile-photo-container">
                     <div class="profile-box"><img src="https://i.imgur.com/pO4OGIl.jpg" class="rounded-circle" id="preview"></div> 
-                    <p>사용자님</p>
-                </div>
+	                    <input type="hidden" name="memberName">
+	                    <p>${ loginUser.memberName }님</p>
+                	</div>
                 <div class="sidebar-buttons">
                     <button class="btn-custom sidebar-btn-1">Custom View</button>
                     <button class="btn-contact sidebar-btn-2">Contact Us</button>
@@ -1568,12 +1569,98 @@
                         <div class="dashboard-container-half2-temperature-box">
                             <div class="temperature-box">
                                 <div class="icon-box-1"><i class="fas fa-temperature-low"></i></div>
-                                <h5>TEMPERATURE
-                                </h5>
+                                <h5><a href="main.ss">TEMPERATURE</a></h5>
                             </div>
                             <div class="temperature-box-2">
-                                <span class="temperature-data" style="font-weight: 600">25</span> <span style="font-size: 20px;">℃</span>
+                            	<input type="hidden" name="loadcell1">
+		                        <span class="temperature-data" style="font-weight: 600">${ UsedSensor.getLoadcell1 }</span><span style="font-size: 20px;">℃</span>
                             </div>
+                            
+                            
+                            <script>
+                            	$.ajax({
+                            		type : "GET",
+                            		url : "main.ss",
+                            		contentType : "application/x-www-form-urlencoded; charset=utf-8",
+                            		success : function(sensor) {
+                            			
+                            		}, error {
+                            			console.log("ajax 통신 실패");
+                            		}
+
+                            	})
+                            </script>
+                            
+                            <!-- 
+                            <script>
+                            	$(function(){
+                            		$.ajax({
+                            			url:"main.ss",
+                            			success : function(list){
+                            				
+                            				var value1 = "";
+                            				var value2 = "";
+                            				var value3 = "";
+                            				var value4 = "";
+                            				var value5 = "";
+                            				
+                            				$.each(list.slist1, function(i, s){
+                            					value1 += '<div class="number1" id="number1">'
+                            					       +		'<input type="hidden" class="sno" vlaue=' + sensorNo + '>'
+                            					       +        '<input type="hidden" class="time" vlaue=' + time + '>'
+                            					       +			loadcell1
+                            					       +  '</div>'
+                            					     
+                            				}) 
+                            				
+                            				$.each(list.slist2, function(i, s){
+                            					value1 += '<div class="number2" id="number2">'
+                            					       +		'<input type="hidden" class="sno" vlaue=' + sensorNo + '>'
+                            					       +        '<input type="hidden" class="time" vlaue=' + time + '>'
+                            					       +			loadcell2
+                            					       +  '</div>'
+                            					     
+                            				}) 
+                            				
+                            				$.each(list.slist3, function(i, s){
+                            					value1 += '<div class="number3" id="number3">'
+                            					       +		'<input type="hidden" class="sno" vlaue=' + sensorNo + '>'
+                            					       +        '<input type="hidden" class="time" vlaue=' + time + '>'
+                            					       +			loadcell3
+                            					       +  '</div>'
+                            					     
+                            				}) 
+                            				
+                            				$.each(list.slist4, function(i, s){
+                            					value1 += '<div class="number4" id="number4">'
+                            					       +		'<input type="hidden" class="sno" vlaue=' + sensorNo + '>'
+                            					       +        '<input type="hidden" class="time" vlaue=' + time + '>'
+                            					       +			loadcell4
+                            					       +  '</div>'
+                            					     
+                            				}) 
+                            				
+                            				$.each(list.slist5, function(i, s){
+                            					value1 += '<div class="number5" id="number5">'
+                            					       +		'<input type="hidden" class="sno" vlaue=' + sensorNo + '>'
+                            					       +        '<input type="hidden" class="time" vlaue=' + time + '>'
+                            					       +			loadcell5
+                            					       +  '</div>'
+                            					     
+                            				}) 
+                            				
+                            				$(".temperature-data").html(value1);
+                            				
+                            			}, error : function(){
+                            				console.log("ajax 통신 실패")
+                            			}
+                            		})
+                            	}) 
+                            	
+                            </script>
+                             -->
+                            
+                            
                         </div>
                         <div class="dashboard-container-half2-humidity-box">
                             <div class="humidity-box">
@@ -2026,9 +2113,7 @@
 	        
 	    }
 	    
-	
-	
-	
+		/*
 	   let ctx = document.getElementById('myChart').getContext('2d');
 	   let myChart = new Chart(ctx, {
 	       type: 'line',
@@ -2042,6 +2127,32 @@
 	               borderWidth: 3,
 	               fill:false,
 	//               color: 'rgba(37, 56, 99, 1)',
+	               color:'rgb(255,255,255)',
+	               lineTension: 0.5,
+	               
+	           }]
+	       },
+	       options: { maintainAspectRatio: false,
+	           scales: {
+	               y: {
+	                   beginAtZero: true
+	               }
+	           }
+	       }
+	   });
+	   */
+	   
+	   let ctx = document.getElementById('myChart').getContext('2d');
+	   let myChart = new Chart(ctx, {
+	       type: 'line',
+	       data: {
+	           labels: [ 0, 1, 2, 3, 4, 5],
+	           datasets: [{
+	               label: 'S 1',
+	               data: [15, 5, 15, 20, 50, 25],            
+	               borderColor: 'rgb(255,255,255)',
+	               borderWidth: 3,
+	               fill:false,
 	               color:'rgb(255,255,255)',
 	               lineTension: 0.5,
 	               
@@ -2083,25 +2194,6 @@
 	           }
 	       }
 	   });
-	   
-	   
-	   function draw(){
-		   
-		    var ctx = document.getElementById('myCanvas').getContext("2d");
-		 
-		    //원 그리기
-		          
-		           
-		    //원호 그리기
-		    ctx.beginPath();
-		    ctx.arc(140, 140, 92, (Math.PI/180)*145 ,(Math.PI/180) *35,false);            
-		    ctx.lineWidth = 12;
-		    ctx.lineCap = 'round';
-		    ctx.strokeStyle = "gray"
-		            
-		    ctx.stroke(); //테두리
-		            
-		}
 	   
     </script>
    
