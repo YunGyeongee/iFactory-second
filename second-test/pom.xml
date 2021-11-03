@@ -218,6 +218,8 @@
 		    <artifactId>thumbnailator</artifactId>
 		    <version>0.4.13</version>
 		</dependency>
+	
+
 		
 	</dependencies>
 	

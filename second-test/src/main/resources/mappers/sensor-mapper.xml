@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >\
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="sensorMapper">
 	<resultMap type="Sensor" id="sensorResultSet">
 		<result property="sersorNo" column="sensor_no" />
@@ -12,7 +12,7 @@
 	</resultMap>
 
 	<!-- 시간별 조회 -->
-	<select id="timeSensor" parameterType="Sensor" resultMap="sensorResultSet">
+	<select id="timeSensor" parameterType="Sensor" resultType="_int">
 		select
 		       sensor_no,
 		       time,
@@ -22,8 +22,8 @@
 		       loadcell_4,
 		       loadcell_5
 		  from sensor
-		 where time >= 0
-		   and time < 11
+<![CDATA[where time >= 0
+		   and time <= 5]]>
 	</select>
 
 

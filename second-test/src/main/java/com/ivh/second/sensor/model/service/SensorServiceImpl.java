@@ -10,7 +10,6 @@ import com.ivh.second.sensor.model.vo.Sensor;
 @Service
 public class SensorServiceImpl implements SensorService {
 	
-	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Autowired
