@@ -5,12 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
 @RequiredArgsConstructor
+@ToString
 public class Sensor {
 	
 	private int sersorNo;
