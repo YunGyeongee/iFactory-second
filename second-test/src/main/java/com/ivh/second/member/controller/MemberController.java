@@ -5,21 +5,20 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ivh.second.member.model.service.MemberService;
 import com.ivh.second.member.model.vo.Member;
+import com.ivh.second.sensor.model.service.SensorService;
+import com.ivh.second.sensor.model.vo.Sensor;
 
 @Controller
 public class MemberController {
@@ -27,22 +26,31 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	
+	@Autowired
+	private SensorService sService;
+	
 	/* 비밀번호 암호화 작업
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	*/
 	
 	@RequestMapping("login.me")
-	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
+	public ModelAndView loginMember(Member m, Sensor s, HttpSession session, ModelAndView mv) {
 		
 		Member loginUser = mService.loginMember(m);
 //		System.out.println(m);
+		Sensor UsedSensor = sService.selectSensor1(s);
+		System.out.println(s);
 		
 		if(loginUser == null) { // 로그인 실패
 			mv.addObject("errorMsg", "로그인 실패");
 			mv.setViewName("common/errorPage");
-		} else { // 로그인 성공 ==> 메인jsp로 경로 바꿔줘야함 ==> 9/29 로그인시에만 볼 수 있게 해야함
+		} else if(UsedSensor == null){ // 로그인 성공 ==> 센서값 띄우기 
+			mv.addObject("errorMsg", "조회 실패");
+			mv.setViewName("common/errorPage");
+		} else {	
 			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("UsedSensor", UsedSensor);
 			mv.setViewName("main");
 		}
 		

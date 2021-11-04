@@ -10,7 +10,7 @@ import lombok.ToString;
 
 public class Sensor {
 	
-	private int sersorNo;
+	private int sensorNo;
 	private String time;
 	private String loadcell1;
 	private String loadcell2;
@@ -20,10 +20,10 @@ public class Sensor {
 
 	public Sensor() {}
 
-	public Sensor(int sersorNo, String time, String loadcell1, String loadcell2, String loadcell3, String loadcell4,
+	public Sensor(int sensorNo, String time, String loadcell1, String loadcell2, String loadcell3, String loadcell4,
 			String loadcell5) {
 		super();
-		this.sersorNo = sersorNo;
+		this.sensorNo = sensorNo;
 		this.time = time;
 		this.loadcell1 = loadcell1;
 		this.loadcell2 = loadcell2;
@@ -32,12 +32,12 @@ public class Sensor {
 		this.loadcell5 = loadcell5;
 	}
 
-	public int getSersorNo() {
-		return sersorNo;
+	public int getSensorNo() {
+		return sensorNo;
 	}
 
-	public void setSersorNo(int sersorNo) {
-		this.sersorNo = sersorNo;
+	public void setSensorNo(int sensorNo) {
+		this.sensorNo = sensorNo;
 	}
 
 	public String getTime() {
@@ -90,10 +90,12 @@ public class Sensor {
 
 	@Override
 	public String toString() {
-		return "Sensor [sersorNo=" + sersorNo + ", time=" + time + ", loadcell1=" + loadcell1 + ", loadcell2="
+		return "Sensor [sensorNo=" + sensorNo + ", time=" + time + ", loadcell1=" + loadcell1 + ", loadcell2="
 				+ loadcell2 + ", loadcell3=" + loadcell3 + ", loadcell4=" + loadcell4 + ", loadcell5=" + loadcell5
 				+ "]";
 	}
+
+	
 
 	
 	

@@ -24,28 +24,5 @@ public class SensorServiceImpl implements SensorService {
 		return sDao.selectSensor1(sqlSession, s);
 	}
 	
-	
-	
-//	@Override
-//	public HashMap<String, Object> ajaxSelectSensor() {
-//		
-//		ArrayList<Sensor> sList1 = sDao.selectSensor1(sqlSession);
-//		ArrayList<Sensor> sList2 = sDao.selectSensor2(sqlSession);
-//		ArrayList<Sensor> sList3 = sDao.selectSensor3(sqlSession);
-//		ArrayList<Sensor> sList4 = sDao.selectSensor4(sqlSession);
-//		ArrayList<Sensor> sList5 = sDao.selectSensor5(sqlSession);
-//		
-//		HashMap<String, Object> map = new HashMap<>();
-//		map.put("sList1", sList1);
-//		map.put("sList2", sList2);
-//		map.put("sList3", sList3);
-//		map.put("sList4", sList4);
-//		map.put("sList5", sList5);
-//		
-//		return map;
-//		
-//		
-//	}
-	
 
 }

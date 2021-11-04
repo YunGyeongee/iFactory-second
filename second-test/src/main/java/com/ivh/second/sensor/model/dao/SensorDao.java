@@ -13,7 +13,7 @@ import com.ivh.second.sensor.model.vo.Sensor;
 public class SensorDao {
 
 	public Sensor selectSensor1(SqlSessionTemplate sqlSession, Sensor s) {
-		System.out.println(s);
+//		System.out.println(s);
 		return sqlSession.selectOne("sensorMapper.selectSensor1", s);
 	}
 	

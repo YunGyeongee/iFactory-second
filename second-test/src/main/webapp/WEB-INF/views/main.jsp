@@ -1572,94 +1572,11 @@
                                 <h5><a href="main.ss">TEMPERATURE</a></h5>
                             </div>
                             <div class="temperature-box-2">
-                            	<input type="hidden" name="loadcell1">
-		                        <span class="temperature-data" style="font-weight: 600">${ UsedSensor.getLoadcell1 }</span><span style="font-size: 20px;">℃</span>
+                            	<input type="hidden" name="sensorNo" value="${ UsedSensor.sensorNo }">
+                            	<input type="hidden" name="time" value="${ UsedSensor.time }">
+		                        <span class="temperature-data" style="font-weight: 600">${ UsedSensor.loadcell1 }</span>
+		                        <span style="font-size: 20px;">℃</span>
                             </div>
-                            
-                            
-                            <script>
-                            	$.ajax({
-                            		type : "GET",
-                            		url : "main.ss",
-                            		contentType : "application/x-www-form-urlencoded; charset=utf-8",
-                            		success : function(sensor) {
-                            			
-                            		}, error {
-                            			console.log("ajax 통신 실패");
-                            		}
-
-                            	})
-                            </script>
-                            
-                            <!-- 
-                            <script>
-                            	$(function(){
-                            		$.ajax({
-                            			url:"main.ss",
-                            			success : function(list){
-                            				
-                            				var value1 = "";
-                            				var value2 = "";
-                            				var value3 = "";
-                            				var value4 = "";
-                            				var value5 = "";
-                            				
-                            				$.each(list.slist1, function(i, s){
-                            					value1 += '<div class="number1" id="number1">'
-                            					       +		'<input type="hidden" class="sno" vlaue=' + sensorNo + '>'
-                            					       +        '<input type="hidden" class="time" vlaue=' + time + '>'
-                            					       +			loadcell1
-                            					       +  '</div>'
-                            					     
-                            				}) 
-                            				
-                            				$.each(list.slist2, function(i, s){
-                            					value1 += '<div class="number2" id="number2">'
-                            					       +		'<input type="hidden" class="sno" vlaue=' + sensorNo + '>'
-                            					       +        '<input type="hidden" class="time" vlaue=' + time + '>'
-                            					       +			loadcell2
-                            					       +  '</div>'
-                            					     
-                            				}) 
-                            				
-                            				$.each(list.slist3, function(i, s){
-                            					value1 += '<div class="number3" id="number3">'
-                            					       +		'<input type="hidden" class="sno" vlaue=' + sensorNo + '>'
-                            					       +        '<input type="hidden" class="time" vlaue=' + time + '>'
-                            					       +			loadcell3
-                            					       +  '</div>'
-                            					     
-                            				}) 
-                            				
-                            				$.each(list.slist4, function(i, s){
-                            					value1 += '<div class="number4" id="number4">'
-                            					       +		'<input type="hidden" class="sno" vlaue=' + sensorNo + '>'
-                            					       +        '<input type="hidden" class="time" vlaue=' + time + '>'
-                            					       +			loadcell4
-                            					       +  '</div>'
-                            					     
-                            				}) 
-                            				
-                            				$.each(list.slist5, function(i, s){
-                            					value1 += '<div class="number5" id="number5">'
-                            					       +		'<input type="hidden" class="sno" vlaue=' + sensorNo + '>'
-                            					       +        '<input type="hidden" class="time" vlaue=' + time + '>'
-                            					       +			loadcell5
-                            					       +  '</div>'
-                            					     
-                            				}) 
-                            				
-                            				$(".temperature-data").html(value1);
-                            				
-                            			}, error : function(){
-                            				console.log("ajax 통신 실패")
-                            			}
-                            		})
-                            	}) 
-                            	
-                            </script>
-                             -->
-                            
                             
                         </div>
                         <div class="dashboard-container-half2-humidity-box">
