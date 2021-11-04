@@ -1524,7 +1524,7 @@
                 <div class="dashboard-container-half1-animation-container">
                     <h4>Smart Dashboard</h4>
 
-                    <video class="machine-video" autoplay="autoplay" muted="muted">
+                    <video id="vid" class="machine-video" autoplay="autoplay" muted="muted">
                         <source src="resources/video/machine.mp4" type="video/mp4">
                     </video>
                 </div>
@@ -1569,13 +1569,12 @@
                         <div class="dashboard-container-half2-temperature-box">
                             <div class="temperature-box">
                                 <div class="icon-box-1"><i class="fas fa-temperature-low"></i></div>
-                                <h5><a href="main.ss">TEMPERATURE</a></h5>
+                                <h5>TEMPERATURE</h5>
                             </div>
                             <div class="temperature-box-2">
                             	<input type="hidden" name="sensorNo" value="${ UsedSensor.sensorNo }">
                             	<input type="hidden" name="time" value="${ UsedSensor.time }">
-		                        <span class="temperature-data" style="font-weight: 600">${ UsedSensor.loadcell1 }</span>
-		                        <span style="font-size: 20px;">℃</span>
+		                        <span class="temperature-data" style="font-weight: 600">${ UsedSensor.loadcell1 }</span> <span style="font-size: 20px;">℃</span>
                             </div>
                             
                         </div>
@@ -1753,6 +1752,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script>
+		document.getElementById('vid').play();
+    
 	    $('.btn-custom').click(function () {
 	        if ($('.btn-custom').hasClass("sidebar-btn-click")) {
 	            $('.btn-custom').removeClass('sidebar-btn-click');
@@ -1771,8 +1772,6 @@
 	
 	    })
 	
-	
-	
 	    $('.dashboard-container-half1-smartsensors-container-box').click(function () {
 	        $('.black-background').fadeIn();
 	        if ($('.sensor-hide-subpage').hasClass("showcss")) {
@@ -1782,7 +1781,6 @@
 	        }
 	    })
 	
-	
 	    $('.icon_1').click(function () {
 	        $('.black-background').fadeOut();
 	        if ($('.sensor-hide-subpage').hasClass("showcss")) {
@@ -1791,7 +1789,6 @@
 	            $('.sensor-hide-subpage').addClass('showcss');
 	        }
 	    })
-	
 	
 	    $('.dashboard-container-half2-quality-box').click(function () {
 	        $('.black-background').fadeIn();
@@ -1803,6 +1800,7 @@
 	        }
 	
 	    })
+	    
 	    $('.icon_2').click(function () {
 	        $('.black-background').fadeOut();
 	        if ($('.camera-hide-subpage').hasClass("showcss2")) {
@@ -1811,8 +1809,6 @@
 	            $('.camera-hide-subpage').addClass('showcss2');
 	        }
 	    })
-	
-	
 	
 	
 	    function randNum() {
@@ -1831,15 +1827,11 @@
 	        return a;
 	        console.log(a)
 	    }
-	   function randNum4() {
+	    function randNum4() {
 	        let a = Math.floor(Math.random() * 100);
 	        return a;
 	        console.log(a)
 	    }
-	
-	
-	
-	
 	
 	
 	    $('.refresh').click(function () {
@@ -1851,8 +1843,8 @@
 	            let rand4 = randNum4();
 	            
 	            console.log(rand, rand2, rand3, rand4)
-	            $('.circle-data_1').html(`${rand} %`) 
-	            $('.critical-box-change-data').html(`${rand} %`) 
+	            $('.circle-data_1').html('${rand} %') 
+	            $('.critical-box-change-data').html('${rand} %') 
 	            if (0 < rand && rand < 50) {
 	                $('.device-status-1').html('BAD')
 	                $('.device-status-1').css("color", "rgb(236,65,65)")
@@ -1863,7 +1855,6 @@
 	                $('.device-status-1').css("color", "rgb(248,195,81)")
 	                $('.innerCircle_1').css("stroke", "rgb(248,195,81)")
 	                $('.alert-color-box_1').css("background-color", "rgb(248,195,81)")
-	
 	            } else if (75 <= rand && rand <= 100) {
 	                $('.device-status-1').html('GOOD')
 	                $('.device-status-1').css("color", "rgb(133,217,111)")
@@ -1871,8 +1862,8 @@
 	                $('.alert-color-box_1').css("background-color", "rgb(133,217,111)")
 	            }
 	            
-	            $('.circle-data_2').html(`${rand2} %`)
-	            $('.critical-box-change-data-2').html(`${rand2} %`) 
+	            $('.circle-data_2').html('${rand2} %')
+	            $('.critical-box-change-data-2').html('${rand2} %') 
 	            if (0 < rand2 && rand2 < 50) {
 	                $('.device-status-2').html('BAD')
 	                $('.device-status-2').css("color", "rgb(236,65,65)")
@@ -1883,15 +1874,15 @@
 	                $('.device-status-2').css("color", "rgb(248,195,81)")
 	                $('.innerCircle_2').css("stroke", "rgb(248,195,81)")
 	                $('.alert-color-box_2').css("background-color", "rgb(248,195,81)")
-	                
 	            } else if (75 <= rand2 && rand2 <= 100) {
 	                $('.device-status-2').html('GOOD')
 	                $('.device-status-2').css("color", "rgb(133,217,111)")
 	                $('.innerCircle_2').css("stroke", "rgb(133,217,111)")
 	                $('.alert-color-box_2').css("background-color", "rgb(133,217,111)")
 	            }
-	          $('.circle-data_3').html(`${rand3} %`)
-	            $('.critical-box-change-data-3').html(`${rand3} %`) 
+	            
+	            $('.circle-data_3').html('${rand3} %')
+	            $('.critical-box-change-data-3').html('${rand3} %') 
 	            if (0 < rand3 && rand3 < 50) {
 	                $('.device-status-3').html('BAD')
 	                $('.device-status-3').css("color", "rgb(236,65,65)")
@@ -1908,8 +1899,9 @@
 	                $('.innerCircle_3').css("stroke", "rgb(133,217,111)")
 	                $('.alert-color-box_3').css("background-color", "rgb(133,217,111)")
 	            }
-	             $('.circle-data_4').html(`${rand4} %`)
-	            $('.critical-box-change-data-4').html(`${rand4} %`) 
+	            
+	            $('.circle-data_4').html('${rand4} %')
+	            $('.critical-box-change-data-4').html('${rand4} %') 
 	            if (0 < rand4 && rand4 < 50) {
 	                $('.device-status-4').html('BAD')
 	                $('.device-status-4').css("color", "rgb(236,65,65)")
@@ -1926,49 +1918,48 @@
 	                $('.innerCircle_4').css("stroke", "rgb(133,217,111)")
 	                $('.alert-color-box_4').css("background-color", "rgb(133,217,111)")
 	            }
+	            
 	            $.keyframe.define([{
 	                name: 'line_1',
 	                from: {
 	                    'stroke-dashoffset': 576
-	                },
-	                to: {
-	                    'stroke-dashoffset': 576 - (576 * (rand / 100))
-	                }
-	            }, {
-	                name: 'line_2',
-	                from: {
-	                    'stroke-dashoffset': 576
-	                },
-	                to: {
-	                    'stroke-dashoffset': 576 - (576 * (rand2 / 100))
-	                }
-	            },{
-	                name: 'line_3',
-	                from: {
-	                    'stroke-dashoffset': 576
-	                },
-	                to: {
-	                    'stroke-dashoffset': 576 - (576 * (rand3 / 100))
-	                }
-	            },{
-	                name: 'line_4',
-	                from: {
-	                    'stroke-dashoffset': 576
-	                },
-	                to: {
-	                    'stroke-dashoffset': 576 - (576 * (rand4 / 100))
-	                }
-	            }
-	                              ])
+			            },
+			                to: {
+			                    'stroke-dashoffset': 576 - (576 * (rand / 100))
+			                }
+			            }, {
+			                name: 'line_2',
+			                from: {
+			                    'stroke-dashoffset': 576
+			                },
+			                to: {
+			                    'stroke-dashoffset': 576 - (576 * (rand2 / 100))
+			                }
+			            },{
+			                name: 'line_3',
+			                from: {
+			                    'stroke-dashoffset': 576
+			                },
+			                to: {
+			                    'stroke-dashoffset': 576 - (576 * (rand3 / 100))
+			                }
+			            },{
+			                name: 'line_4',
+			                from: {
+			                    'stroke-dashoffset': 576
+			                },
+			                to: {
+			                    'stroke-dashoffset': 576 - (576 * (rand4 / 100))
+			                }
+			            }
+	                 ])
 	
-	
-	        }, 1000)
+	         }, 1000)
 	
 	    })
 	
 	
 	    $('.refresh_2').click(function () {
-	        //     $('.innerCircle_1').css("stroke", "yellow")
 	        setInterval(function () {
 	
 	            let rand = randNum();
@@ -1993,7 +1984,6 @@
 	                    'stroke-dashoffset': 576 - (414 * (rand2 / 100))
 	                }
 	            }])
-	
 	
 	        }, 1000)
 	
@@ -2029,35 +2019,6 @@
 	        
 	        
 	    }
-	    
-		/*
-	   let ctx = document.getElementById('myChart').getContext('2d');
-	   let myChart = new Chart(ctx, {
-	       type: 'line',
-	       data: {
-	           labels: [ 0, 1, 2, 3, 4, 5],
-	           datasets: [{
-	               label: 'S 1',
-	               data: [15, 5, 15, 20, 50, 25],            
-	//               borderColor: 'rgba(37, 56, 99, 1)',
-	               borderColor: 'rgb(255,255,255)',
-	               borderWidth: 3,
-	               fill:false,
-	//               color: 'rgba(37, 56, 99, 1)',
-	               color:'rgb(255,255,255)',
-	               lineTension: 0.5,
-	               
-	           }]
-	       },
-	       options: { maintainAspectRatio: false,
-	           scales: {
-	               y: {
-	                   beginAtZero: true
-	               }
-	           }
-	       }
-	   });
-	   */
 	   
 	   let ctx = document.getElementById('myChart').getContext('2d');
 	   let myChart = new Chart(ctx, {
