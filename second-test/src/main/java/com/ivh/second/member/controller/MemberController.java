@@ -40,7 +40,7 @@ public class MemberController {
 		Member loginUser = mService.loginMember(m);
 //		System.out.println(m);
 		Sensor UsedSensor = sService.selectSensor1(s);
-		System.out.println(s);
+//		System.out.println(UsedSensor);
 		
 		if(loginUser == null) { // 로그인 실패
 			mv.addObject("errorMsg", "로그인 실패");

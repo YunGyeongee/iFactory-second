@@ -1524,8 +1524,8 @@
                 <div class="dashboard-container-half1-animation-container">
                     <h4>Smart Dashboard</h4>
 
-                    <video class="machine-video" autoplay loop controls muted>
-                        <source src="video/machine.mp4" type="video/mp4">
+                    <video class="machine-video" autoplay="autoplay" muted="muted">
+                        <source src="resources/video/machine.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="dashboard-container-half1-footer-container">
@@ -1586,7 +1586,7 @@
                                 </h5>
                             </div>
                             <div class="humidity-box-2">
-                                <span class="humidiy-data" style="font-weight: 600">30</span> <span style="font-size: 20px;">%</span>
+                                <span class="humidiy-data" style="font-weight: 600">${ UsedSensor.loadcell2 }</span> <span style="font-size: 20px;">%</span>
                             </div>
                         </div>
                     </div>
@@ -1598,7 +1598,7 @@
                                 </h5>
                             </div>
                             <div class="fire-box-2">
-                                <span class="particular-data" style="font-weight: 600">25</span> <span style="font-size: 20px;">㎍/m³</span>
+                                <span class="particular-data" style="font-weight: 600">${ UsedSensor.loadcell3 }</span> <span style="font-size: 20px;">㎍/m³</span>
                             </div>
                         </div>
                         <div class="dashboard-container-half2-electricity-box">
@@ -1608,7 +1608,7 @@
                                 </h5>
                             </div>
                             <div class="electricity-box-2">
-                                <span class="electricity-data" style="font-weight: 600">360</span> <span style="font-size: 20px;">kWh</span>
+                                <span class="electricity-data" style="font-weight: 600">${ UsedSensor.loadcell4 }</span> <span style="font-size: 20px;">kWh</span>
                             </div>
                         </div>
                     </div>

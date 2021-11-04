@@ -22,8 +22,8 @@ public class SensorController {
 	public ModelAndView selectSensor1(Sensor s, HttpSession session, ModelAndView mv) {
 		
 		Sensor UsedSensor = sService.selectSensor1(s);
-		System.out.println(s);
-		System.out.println(UsedSensor);
+//		System.out.println(s);
+//		System.out.println(UsedSensor);
 		
 		if(UsedSensor == null) {
 			mv.addObject("errorMsg", "조회 실패");
