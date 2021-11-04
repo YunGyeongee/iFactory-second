@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/main.css">
     <script src="https://kit.fontawesome.com/96fb24df34.js" crossorigin="anonymous"></script>
 
 <title>Smart Factory</title>
@@ -1474,6 +1472,8 @@
                         <div class="dashboard-container-half1-smartsensors-container-box">
                             <h4 style="margin: 5px 0px 0px 15px;">DEVICE 1 <span class="device-icon-1"><i class="fas fa-exclamation-circle"></i></span></h4>
                             <div class="circle-container-1">
+								<input type="hidden" name="sensorNo" value="${ UsedSensor.sensorNo }">
+                            	<input type="hidden" name="time" value="${ UsedSensor.time }">
                                 <h2 class="circle-data_1">0</h2>
                                 <h3 class="device-status-1">status</h3>
                                 <svg>
@@ -1572,9 +1572,8 @@
                                 <h5>TEMPERATURE</h5>
                             </div>
                             <div class="temperature-box-2">
-                            	<input type="hidden" name="sensorNo" value="${ UsedSensor.sensorNo }">
-                            	<input type="hidden" name="time" value="${ UsedSensor.time }">
-		                        <span class="temperature-data" style="font-weight: 600">${ UsedSensor.loadcell1 }</span> <span style="font-size: 20px;">℃</span>
+                            	
+		                        <span class="temperature-data" style="font-weight: 600"></span>${ UsedSensor.loadcell1 } <span style="font-size: 20px;">℃</span>
                             </div>
                             
                         </div>
@@ -1585,7 +1584,7 @@
                                 </h5>
                             </div>
                             <div class="humidity-box-2">
-                                <span class="humidiy-data" style="font-weight: 600">${ UsedSensor.loadcell2 }</span> <span style="font-size: 20px;">%</span>
+                                <span class="humidiy-data" style="font-weight: 600"></span> ${ UsedSensor.loadcell2 }<span style="font-size: 20px;">%</span>
                             </div>
                         </div>
                     </div>
@@ -1597,7 +1596,7 @@
                                 </h5>
                             </div>
                             <div class="fire-box-2">
-                                <span class="particular-data" style="font-weight: 600">${ UsedSensor.loadcell3 }</span> <span style="font-size: 20px;">㎍/m³</span>
+                                <span class="particular-data" style="font-weight: 600"></span>${ UsedSensor.loadcell3 } <span style="font-size: 20px;">㎍/m³</span>
                             </div>
                         </div>
                         <div class="dashboard-container-half2-electricity-box">
@@ -1607,7 +1606,7 @@
                                 </h5>
                             </div>
                             <div class="electricity-box-2">
-                                <span class="electricity-data" style="font-weight: 600">${ UsedSensor.loadcell4 }</span> <span style="font-size: 20px;">kWh</span>
+                                <span class="electricity-data" style="font-weight: 600"></span>${ UsedSensor.loadcell4 } <span style="font-size: 20px;">kWh</span>
                             </div>
                         </div>
                     </div>
@@ -1671,7 +1670,7 @@
                 <div class="sensor-hide-subpage-big-container">
                     <div class="sensor-hide-subpage-small-container-1">
                         <div class="sensor-hide-subpage-small-container-1-box">
-                            <img style="border-radius: 10px;" src="img/img-11.jpg" alt="#">
+                            <img style="border-radius: 10px;" src="resources/images/img-11.jpg" alt="#">
                         </div>
                     </div>
                     <div class="sensor-hide-subpage-small-container-2">
@@ -1721,7 +1720,7 @@
                 <div class="camera-hide-subpage-big-container">
                     <div class="camera-hide-subpage-small-container-1">
                         <div class="camera-hide-subpage-small-container-1-box">
-                            <img style="border-radius: 10px;" src="img/img-11.jpg" alt="#">
+                            <img style="border-radius: 10px;" src="resources/images/img-11.jpg" alt="#">
                         </div>
                     </div>
                     <div class="camera-hide-subpage-small-container-2">
@@ -1747,7 +1746,7 @@
 
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="js/jquery.keyframes.js"></script>
+    <script src='http://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
@@ -1812,54 +1811,54 @@
 	
 	
 	    function randNum() {
-	        let a = Math.floor(Math.random() * 100);
+	        var a = Math.floor(Math.random() * 100);
 	        return a;
 	        console.log(a)
 	    }
 	
 	    function randNum2() {
-	        let a = Math.floor(Math.random() * 100);
+	        var a = Math.floor(Math.random() * 100);
 	        return a;
 	        console.log(a)
 	    }
 	    function randNum3() {
-	        let a = Math.floor(Math.random() * 100);
+	        var a = Math.floor(Math.random() * 100);
 	        return a;
 	        console.log(a)
 	    }
 	    function randNum4() {
-	        let a = Math.floor(Math.random() * 100);
+	        var a = Math.floor(Math.random() * 100);
 	        return a;
 	        console.log(a)
 	    }
-	
-	
+	    
 	    $('.refresh').click(function () {
 	        setInterval(function () {
+	        	
+	        	var rand = randNum();
+	            var rand2 = randNum2();
+	            var rand3 = randNum3();
+	            var rand4 = randNum4();
+	            console.log(rand, rand2, rand3, rand4);
 	
-	            let rand = randNum();
-	            let rand2 = randNum2();
-	            let rand3 = randNum3();
-	            let rand4 = randNum4();
 	            
-	            console.log(rand, rand2, rand3, rand4)
-	            $('.circle-data_1').html('${rand} %') 
-	            $('.critical-box-change-data').html('${rand} %') 
+	            $('.circle-data_1').html('${rand} %');
+	            $('.critical-box-change-data').html('${rand} %'); 
 	            if (0 < rand && rand < 50) {
-	                $('.device-status-1').html('BAD')
-	                $('.device-status-1').css("color", "rgb(236,65,65)")
-	                $('.innerCircle_1').css("stroke", "rgb(236,65,65)")
-	                $('.alert-color-box_1').css("background-color", "rgb(236,65,65)")
+	                $('.device-status-1').html('BAD');
+	                $('.device-status-1').css("color", "rgb(236,65,65)");
+	                $('.innerCircle_1').css("stroke", "rgb(236,65,65)");
+	                $('.alert-color-box_1').css("background-color", "rgb(236,65,65)");
 	            } else if (50 <= rand && rand < 75) {
-	                $('.device-status-1').html('NORMAL')
-	                $('.device-status-1').css("color", "rgb(248,195,81)")
-	                $('.innerCircle_1').css("stroke", "rgb(248,195,81)")
-	                $('.alert-color-box_1').css("background-color", "rgb(248,195,81)")
+	                $('.device-status-1').html('NORMAL');
+	                $('.device-status-1').css("color", "rgb(248,195,81)");
+	                $('.innerCircle_1').css("stroke", "rgb(248,195,81)");
+	                $('.alert-color-box_1').css("background-color", "rgb(248,195,81)");
 	            } else if (75 <= rand && rand <= 100) {
-	                $('.device-status-1').html('GOOD')
-	                $('.device-status-1').css("color", "rgb(133,217,111)")
-	                $('.innerCircle_1').css("stroke", "rgb(133,217,111)")
-	                $('.alert-color-box_1').css("background-color", "rgb(133,217,111)")
+	                $('.device-status-1').html('GOOD');
+	                $('.device-status-1').css("color", "rgb(133,217,111)");
+	                $('.innerCircle_1').css("stroke", "rgb(133,217,111)");
+	                $('.alert-color-box_1').css("background-color", "rgb(133,217,111)");
 	            }
 	            
 	            $('.circle-data_2').html('${rand2} %')
@@ -1919,40 +1918,42 @@
 	                $('.alert-color-box_4').css("background-color", "rgb(133,217,111)")
 	            }
 	            
-	            $.keyframe.define([{
-	                name: 'line_1',
-	                from: {
-	                    'stroke-dashoffset': 576
-			            },
-			                to: {
-			                    'stroke-dashoffset': 576 - (576 * (rand / 100))
-			                }
-			            }, {
-			                name: 'line_2',
-			                from: {
-			                    'stroke-dashoffset': 576
-			                },
-			                to: {
-			                    'stroke-dashoffset': 576 - (576 * (rand2 / 100))
-			                }
-			            },{
-			                name: 'line_3',
-			                from: {
-			                    'stroke-dashoffset': 576
-			                },
-			                to: {
-			                    'stroke-dashoffset': 576 - (576 * (rand3 / 100))
-			                }
-			            },{
-			                name: 'line_4',
-			                from: {
-			                    'stroke-dashoffset': 576
-			                },
-			                to: {
-			                    'stroke-dashoffset': 576 - (576 * (rand4 / 100))
-			                }
-			            }
-	                 ])
+	            $.keyframe.define([
+		            		{
+				                name: 'line_1',
+				                from: {
+				                    'stroke-dashoffset': 576
+				            },
+				                to: {
+				                    'stroke-dashoffset': 576 - (576 * (rand / 100))
+				                }
+				            }, {
+				                name: 'line_2',
+				                from: {
+				                    'stroke-dashoffset': 576
+				            },
+				                to: {
+				                    'stroke-dashoffset': 576 - (576 * (rand2 / 100))
+				                }
+				            },{
+				                name: 'line_3',
+				                from: {
+				                    'stroke-dashoffset': 576
+				            },
+				                to: {
+				                    'stroke-dashoffset': 576 - (576 * (rand3 / 100))
+				                }
+				            },{
+				                name: 'line_4',
+				                from: {
+				                    'stroke-dashoffset': 576
+				            },
+				                to: {
+				                    'stroke-dashoffset': 576 - (576 * (rand4 / 100))
+				                }
+				            }
+			            
+	        			])
 	
 	         }, 1000)
 	
