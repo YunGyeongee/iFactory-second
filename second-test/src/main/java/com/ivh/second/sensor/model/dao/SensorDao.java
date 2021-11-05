@@ -2,8 +2,7 @@ package com.ivh.second.sensor.model.dao;
 
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,6 +17,8 @@ public class SensorDao {
 	}
 
 	public ArrayList<Sensor> selectList(SqlSessionTemplate sqlSession, Sensor s) {
+		
+		// 1. while문
 		return (ArrayList)sqlSession.selectList("sensorMapper.selectList", s);
 	}
 	

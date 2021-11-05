@@ -1569,10 +1569,9 @@
                         <div class="dashboard-container-half2-temperature-box">
                             <div class="temperature-box">
                                 <div class="icon-box-1"><i class="fas fa-temperature-low"></i></div>
-                                <h5><a href="main.test">TEMPERATURE</a></h5>
+                                <h5><a class="ajaxSensor">TEMPERATURE</a></h5>
                             </div>
                             <div class="temperature-box-2">
-                            	
 		                        <span class="temperature-data" style="font-weight: 600"></span>24<span style="font-size: 20px;">℃</span>
                             </div>
                             
@@ -1749,6 +1748,8 @@
     <script src='http://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    
     
     <script>
 		document.getElementById('vid').play();
@@ -1990,8 +1991,27 @@
 	        }, 1000)
 	
 	    })
-	
-	
+	    
+	    
+    	$('.ajaxSensor').click(function () {
+    		for(var i=0; i<100; i++) {
+    			(function(i){
+    				$.ajax({
+    		    		type:"GET",
+    		    		url:"main.test",
+    		    		dataType: "json",
+    		    		success:function(json){
+    		    			console.log("ajax 통신 성공");
+    		    		}, error:function(){
+    		    			console.log("ajax 통신 실패");
+    		    		}
+    		    	})
+    			})(i);
+    		}
+	    	
+	    })
+	    	
+		
 	
 	    function draw() {
 	
