@@ -25,7 +25,7 @@
 		    by rand() limit 1
 	</select>
 	
-	<!-- DAO1. while  -->
+	 
 	<select id="selectList" resultType="Sensor">
 		select
 		       sensor_no as sensorNo,
@@ -39,6 +39,22 @@
 		 order
 		    by rand() limit 1
 	</select>
-
+	
+	 
+	<!--
+	<select id="selectList" resultMap="sensorResultSet" parameterType="HashMap">
+		select
+		       sensor_no as sensorNo,
+			   time,
+		       loadcell_1 as loadcell1,
+		       loadcell_2 as loadcell2,
+		       loadcell_3 as loadcell3,
+		       loadcell_4 as loadcell4,
+		       loadcell_5 as loadcell5
+		  from sensor
+		 order
+		    by rand() limit 1
+	</select>
+	  -->
 
 </mapper>

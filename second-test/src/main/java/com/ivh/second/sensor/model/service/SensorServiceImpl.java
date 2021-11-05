@@ -30,4 +30,9 @@ public class SensorServiceImpl implements SensorService {
 		return sDao.selectList(sqlSession, s);
 	}
 
+	@Override
+	public HashMap<String, Object> selectList() {
+		return sDao.selectList(sqlSession);
+	}
+
 }

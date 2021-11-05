@@ -1994,7 +1994,7 @@
 	    
 	    
     	$('.ajaxSensor').click(function () {
-    		for(var i=0; i<100; i++) {
+    		for(var i=0; i<10; i++) {
     			(function(i){
     				$.ajax({
     		    		type:"GET",
@@ -2008,7 +2008,6 @@
     		    	})
     			})(i);
     		}
-	    	
 	    })
 	    	
 		

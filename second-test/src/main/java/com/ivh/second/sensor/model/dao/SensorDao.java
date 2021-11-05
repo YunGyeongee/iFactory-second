@@ -17,9 +17,11 @@ public class SensorDao {
 	}
 
 	public ArrayList<Sensor> selectList(SqlSessionTemplate sqlSession, Sensor s) {
-		
-		// 1. while문
 		return (ArrayList)sqlSession.selectList("sensorMapper.selectList", s);
+	}
+	
+	public HashMap<String, Object> selectList(SqlSessionTemplate sqlSession) {
+		return (HashMap<String, Object>) sqlSession.selectList("sensorMapper.selectList");
 	}
 	
 
