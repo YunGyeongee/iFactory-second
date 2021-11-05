@@ -3,6 +3,7 @@ package com.ivh.second.sensor.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class SensorServiceImpl implements SensorService {
 	public Sensor selectSensor1(Sensor s) {
 		return sDao.selectSensor1(sqlSession, s);
 	}
-	
+
+	@Override
+	public ArrayList<Sensor> selectList() {
+		return sDao.selectList(sqlSession);
+	}
 
 }

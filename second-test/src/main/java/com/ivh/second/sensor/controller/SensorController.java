@@ -1,11 +1,12 @@
 package com.ivh.second.sensor.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ivh.second.sensor.model.service.SensorService;
@@ -22,8 +23,6 @@ public class SensorController {
 	public ModelAndView selectSensor1(Sensor s, HttpSession session, ModelAndView mv) {
 		
 		Sensor UsedSensor = sService.selectSensor1(s);
-//		System.out.println(s);
-//		System.out.println(UsedSensor);
 		
 		if(UsedSensor == null) {
 			mv.addObject("errorMsg", "조회 실패");
@@ -35,7 +34,19 @@ public class SensorController {
 		
 		return mv;
 		
+	}
+	
+	
+	@RequestMapping("main.test")
+	public ModelAndView selectListOne(Sensor s, ModelAndView mv) {
 		
+		ArrayList<Sensor> sList = sService.selectList();
+		
+		mv.addObject("sList", sList)
+		  .addObject("s", s)
+		  .setViewName("common/errorPage");
+		
+		return mv;
 	}
 
 }

@@ -1569,11 +1569,11 @@
                         <div class="dashboard-container-half2-temperature-box">
                             <div class="temperature-box">
                                 <div class="icon-box-1"><i class="fas fa-temperature-low"></i></div>
-                                <h5>TEMPERATURE</h5>
+                                <h5><a href="main.test">TEMPERATURE</a></h5>
                             </div>
                             <div class="temperature-box-2">
                             	
-		                        <span class="temperature-data" style="font-weight: 600"></span>${ UsedSensor.loadcell1 } <span style="font-size: 20px;">℃</span>
+		                        <span class="temperature-data" style="font-weight: 600"></span>24<span style="font-size: 20px;">℃</span>
                             </div>
                             
                         </div>
@@ -1584,7 +1584,7 @@
                                 </h5>
                             </div>
                             <div class="humidity-box-2">
-                                <span class="humidiy-data" style="font-weight: 600"></span> ${ UsedSensor.loadcell2 }<span style="font-size: 20px;">%</span>
+                                <span class="humidiy-data" style="font-weight: 600"></span>11<span style="font-size: 20px;">%</span>
                             </div>
                         </div>
                     </div>
@@ -1596,7 +1596,7 @@
                                 </h5>
                             </div>
                             <div class="fire-box-2">
-                                <span class="particular-data" style="font-weight: 600"></span>${ UsedSensor.loadcell3 } <span style="font-size: 20px;">㎍/m³</span>
+                                <span class="particular-data" style="font-weight: 600"></span>3 <span style="font-size: 20px;">㎍/m³</span>
                             </div>
                         </div>
                         <div class="dashboard-container-half2-electricity-box">
@@ -1606,7 +1606,7 @@
                                 </h5>
                             </div>
                             <div class="electricity-box-2">
-                                <span class="electricity-data" style="font-weight: 600"></span>${ UsedSensor.loadcell4 } <span style="font-size: 20px;">kWh</span>
+                                <span class="electricity-data" style="font-weight: 600"></span>2 <span style="font-size: 20px;">kWh</span>
                             </div>
                         </div>
                     </div>
@@ -1809,7 +1809,7 @@
 	        }
 	    })
 	
-	
+		
 	    function randNum() {
 	        var a = Math.floor(Math.random() * 100);
 	        return a;
@@ -1832,18 +1832,19 @@
 	        console.log(a)
 	    }
 	    
+	    
 	    $('.refresh').click(function () {
 	        setInterval(function () {
 	        	
-	        	var rand = randNum();
-	            var rand2 = randNum2();
-	            var rand3 = randNum3();
-	            var rand4 = randNum4();
+	        	let rand = randNum();
+	            let rand2 = randNum2();
+	            let rand3 = randNum3();
+	            let rand4 = randNum4();
 	            console.log(rand, rand2, rand3, rand4);
 	
 	            
-	            $('.circle-data_1').html('${rand} %');
-	            $('.critical-box-change-data').html('${rand} %'); 
+	            $('.circle-data_1').html(`${ UsedSensor.loadcell1 } %`);
+	            $('.critical-box-change-data').html(`${ UsedSensor.loadcell1 } %`); 
 	            if (0 < rand && rand < 50) {
 	                $('.device-status-1').html('BAD');
 	                $('.device-status-1').css("color", "rgb(236,65,65)");
@@ -1861,8 +1862,8 @@
 	                $('.alert-color-box_1').css("background-color", "rgb(133,217,111)");
 	            }
 	            
-	            $('.circle-data_2').html('${rand2} %')
-	            $('.critical-box-change-data-2').html('${rand2} %') 
+	            $('.circle-data_2').html(`${ UsedSensor.loadcell2 } %`)
+	            $('.critical-box-change-data-2').html(`${ UsedSensor.loadcell2 } %`) 
 	            if (0 < rand2 && rand2 < 50) {
 	                $('.device-status-2').html('BAD')
 	                $('.device-status-2').css("color", "rgb(236,65,65)")
@@ -1880,8 +1881,8 @@
 	                $('.alert-color-box_2').css("background-color", "rgb(133,217,111)")
 	            }
 	            
-	            $('.circle-data_3').html('${rand3} %')
-	            $('.critical-box-change-data-3').html('${rand3} %') 
+	            $('.circle-data_3').html(`${ UsedSensor.loadcell3 } %`)
+	            $('.critical-box-change-data-3').html(`${ UsedSensor.loadcell3 } %`) 
 	            if (0 < rand3 && rand3 < 50) {
 	                $('.device-status-3').html('BAD')
 	                $('.device-status-3').css("color", "rgb(236,65,65)")
@@ -1899,8 +1900,8 @@
 	                $('.alert-color-box_3').css("background-color", "rgb(133,217,111)")
 	            }
 	            
-	            $('.circle-data_4').html('${rand4} %')
-	            $('.critical-box-change-data-4').html('${rand4} %') 
+	            $('.circle-data_4').html(`${ UsedSensor.loadcell4 } %`)
+	            $('.critical-box-change-data-4').html(`${ UsedSensor.loadcell4 } %`) 
 	            if (0 < rand4 && rand4 < 50) {
 	                $('.device-status-4').html('BAD')
 	                $('.device-status-4').css("color", "rgb(236,65,65)")
@@ -1965,8 +1966,8 @@
 	
 	            let rand = randNum();
 	            let rand2 = randNum2();
-	            $('.current-quality').html(`${rand} %`)
-	            $('.current-quality2').html(`${rand2} %`)
+	            $('.current-quality').html(`${ UsedSensor.loadcell1 } %`)
+	            $('.current-quality2').html(`${ UsedSensor.loadcell2 } %`)
 	
 	            $.keyframe.define([{
 	                name: 'line_5',
