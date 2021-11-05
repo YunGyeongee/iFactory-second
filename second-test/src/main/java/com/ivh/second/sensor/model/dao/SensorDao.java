@@ -17,8 +17,8 @@ public class SensorDao {
 		return sqlSession.selectOne("sensorMapper.selectSensor1", s);
 	}
 
-	public ArrayList<Sensor> selectList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("sensorMapper.selectList");
+	public ArrayList<Sensor> selectList(SqlSessionTemplate sqlSession, Sensor s) {
+		return (ArrayList)sqlSession.selectList("sensorMapper.selectList", s);
 	}
 	
 

@@ -26,8 +26,8 @@ public class SensorServiceImpl implements SensorService {
 	}
 
 	@Override
-	public ArrayList<Sensor> selectList() {
-		return sDao.selectList(sqlSession);
+	public ArrayList<Sensor> selectList(Sensor s) {
+		return sDao.selectList(sqlSession, s);
 	}
 
 }

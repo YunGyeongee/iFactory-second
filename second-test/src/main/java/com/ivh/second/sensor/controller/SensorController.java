@@ -40,7 +40,8 @@ public class SensorController {
 	@RequestMapping("main.test")
 	public ModelAndView selectListOne(Sensor s, ModelAndView mv) {
 		
-		ArrayList<Sensor> sList = sService.selectList();
+		ArrayList<Sensor> sList = sService.selectList(s);
+		System.out.println(sList);
 		
 		mv.addObject("sList", sList)
 		  .addObject("s", s)
