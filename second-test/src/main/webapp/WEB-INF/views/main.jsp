@@ -1997,7 +1997,7 @@
     		for(var i=0; i<10; i++) {
     			(function(i){
     				$.ajax({
-    		    		type:"GET",
+    		    		type:"POST",
     		    		url:"main.test",
     		    		dataType: "json",
     		    		success:function(json){
