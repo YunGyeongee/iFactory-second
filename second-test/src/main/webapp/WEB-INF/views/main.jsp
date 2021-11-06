@@ -1967,7 +1967,7 @@
 	
 	            let rand = randNum();
 	            let rand2 = randNum2();
-	            $('.current-quality').html(`${ UsedSensor.loadcell1 } %`)
+	            $('.current-quality').html(` %`)
 	            $('.current-quality2').html(`${ UsedSensor.loadcell2 } %`)
 	
 	            $.keyframe.define([{
@@ -1992,7 +1992,32 @@
 	
 	    })
 	    
+	    var timerID;
+	    $(document).ready(function(){
+	    	$('.ajaxSensor').on('click', function(e){
+	    		e.preventDefault();
+	    		updateData();
+	    	});
+	    })
 	    
+	    function updateData(){
+	    
+	    			$.ajax({
+	    	    		url:"main.test",
+	    	    		type:"post",
+	    	    		cache:false,
+	    	    		success:function(data){
+	    	    			$('.temperature-data').html(data);
+	    	    		}, error:function(){
+	    	    			console.log("ajax 통신 실패");
+	    	    		}
+	    	    	});
+	    	
+	    	
+	    	timerID = setTimeout("updateData()", 2000);
+	    }
+	    
+	    /*
     	$('.ajaxSensor').click(function () {
     		for(var i=0; i<10; i++) {
     			(function(i){
@@ -2009,6 +2034,7 @@
     			})(i);
     		}
 	    })
+	    */
 	    	
 		
 	
