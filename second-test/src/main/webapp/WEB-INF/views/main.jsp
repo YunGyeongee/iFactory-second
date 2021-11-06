@@ -1572,7 +1572,7 @@
                                 <h5><a class="ajaxSensor">TEMPERATURE</a></h5>
                             </div>
                             <div class="temperature-box-2">
-		                        <span class="temperature-data" style="font-weight: 600">24</span><span style="font-size: 20px;">℃</span>
+		                        <span class="temperature-data" style="font-weight: 600">${UsedSensor.loadcell1}</span><span style="font-size: 20px;">℃</span>
                             </div>
                             
                         </div>
@@ -2003,13 +2003,21 @@
 	    function updateData(){
 			$.ajax({
    	    		url:"main.test",
+   	    		dataType: "xml",
    	    		type:"post",
    	    		cache:false,
    	    		data : {},
    	    		success:function(response){
-   	    				let loadcell = `${UsedSensor.loadcell1}`;
+   	    			$(response).find('loadcell1').each(function(){
+   	    				var loadcell = $(this).find('loadcell1').text();
    	    				$('.temperature-data').empty();
    	   	    			$('.temperature-data').html(loadcell);
+   	    			})
+   	    				// let loadcell = `${UsedSensor.loadcell1}`; => 변수에 담는 순간 그 특정 숫자만 담아지는거니까 당연히 화면이 안바뀜
+   	    				// $('.temperature-data').empty();
+   	   	    			// $('.temperature-data').html(`${UsedSensor.loadcell1}`);
+   	   	    			
+   	   	    			// 특정 div만 새로고침하는 script ==> $('.icon-box-1').load(window.location.href + '.icon-box-1'); 
    	    		}, error:function(){
    	    			console.log("ajax 통신 실패");
    	    		}
@@ -2017,7 +2025,7 @@
 	    	timerID = setTimeout("updateData()", 2000);
 	    }
 	    
-	   
+	    
 	    function draw() {
 	
 	        var ctx = document.getElementById('myCanvas').getContext("2d");
