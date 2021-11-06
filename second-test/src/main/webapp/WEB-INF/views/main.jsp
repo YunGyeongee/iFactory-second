@@ -1572,7 +1572,7 @@
                                 <h5><a class="ajaxSensor">TEMPERATURE</a></h5>
                             </div>
                             <div class="temperature-box-2">
-		                        <span class="temperature-data" style="font-weight: 600"></span>24<span style="font-size: 20px;">℃</span>
+		                        <span class="temperature-data" style="font-weight: 600">24</span><span style="font-size: 20px;">℃</span>
                             </div>
                             
                         </div>
@@ -1583,7 +1583,7 @@
                                 </h5>
                             </div>
                             <div class="humidity-box-2">
-                                <span class="humidiy-data" style="font-weight: 600"></span>11<span style="font-size: 20px;">%</span>
+                                <span class="humidiy-data" style="font-weight: 600">11</span><span style="font-size: 20px;">%</span>
                             </div>
                         </div>
                     </div>
@@ -1595,7 +1595,7 @@
                                 </h5>
                             </div>
                             <div class="fire-box-2">
-                                <span class="particular-data" style="font-weight: 600"></span>3 <span style="font-size: 20px;">㎍/m³</span>
+                                <span class="particular-data" style="font-weight: 600">3</span> <span style="font-size: 20px;">㎍/m³</span>
                             </div>
                         </div>
                         <div class="dashboard-container-half2-electricity-box">
@@ -1605,7 +1605,7 @@
                                 </h5>
                             </div>
                             <div class="electricity-box-2">
-                                <span class="electricity-data" style="font-weight: 600"></span>2 <span style="font-size: 20px;">kWh</span>
+                                <span class="electricity-data" style="font-weight: 600">2</span> <span style="font-size: 20px;">kWh</span>
                             </div>
                         </div>
                     </div>
@@ -1967,8 +1967,8 @@
 	
 	            let rand = randNum();
 	            let rand2 = randNum2();
-	            $('.current-quality').html(` %`)
-	            $('.current-quality2').html(`${ UsedSensor.loadcell2 } %`)
+	            $('.current-quality').html(`${ UsedSensor.loadcell4 } %`)
+	            $('.current-quality2').html(`${ UsedSensor.loadcell5 } %`)
 	
 	            $.keyframe.define([{
 	                name: 'line_5',
@@ -2001,43 +2001,23 @@
 	    })
 	    
 	    function updateData(){
-	    
-	    			$.ajax({
-	    	    		url:"main.test",
-	    	    		type:"post",
-	    	    		cache:false,
-	    	    		success:function(data){
-	    	    			$('.temperature-data').html(data);
-	    	    		}, error:function(){
-	    	    			console.log("ajax 통신 실패");
-	    	    		}
-	    	    	});
-	    	
-	    	
+			$.ajax({
+   	    		url:"main.test",
+   	    		type:"post",
+   	    		cache:false,
+   	    		data : {},
+   	    		success:function(response){
+   	    				let loadcell = `${UsedSensor.loadcell1}`;
+   	    				$('.temperature-data').empty();
+   	   	    			$('.temperature-data').html(loadcell);
+   	    		}, error:function(){
+   	    			console.log("ajax 통신 실패");
+   	    		}
+   	    	});
 	    	timerID = setTimeout("updateData()", 2000);
 	    }
 	    
-	    /*
-    	$('.ajaxSensor').click(function () {
-    		for(var i=0; i<10; i++) {
-    			(function(i){
-    				$.ajax({
-    		    		type:"POST",
-    		    		url:"main.test",
-    		    		dataType: "json",
-    		    		success:function(json){
-    		    			console.log("ajax 통신 성공");
-    		    		}, error:function(){
-    		    			console.log("ajax 통신 실패");
-    		    		}
-    		    	})
-    			})(i);
-    		}
-	    })
-	    */
-	    	
-		
-	
+	   
 	    function draw() {
 	
 	        var ctx = document.getElementById('myCanvas').getContext("2d");
