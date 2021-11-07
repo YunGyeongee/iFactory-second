@@ -2008,14 +2008,14 @@
    	    		cache:false,
    	    		data : {},
    	    		success:function(response){
-   	    			$(response).find('loadcell1').each(function(){
-   	    				var loadcell = $(this).find('loadcell1').text();
+   	    			//$(response).find('loadcell1').each(function(){
+   	    				//var loadcell = $(this).find('loadcell1').text();
+   	    				//$('.temperature-data').empty();
+   	   	    			//$('.temperature-data').html(loadcell);
+   	    			//})
+   	    				let loadcell = $('.temperature-data').html(`${UsedSensor.loadcell1}`); // => 변수에 담는 순간 그 특정 숫자만 담아지는거니까 당연히 화면이 안바뀜
    	    				$('.temperature-data').empty();
    	   	    			$('.temperature-data').html(loadcell);
-   	    			})
-   	    				// let loadcell = `${UsedSensor.loadcell1}`; => 변수에 담는 순간 그 특정 숫자만 담아지는거니까 당연히 화면이 안바뀜
-   	    				// $('.temperature-data').empty();
-   	   	    			// $('.temperature-data').html(`${UsedSensor.loadcell1}`);
    	   	    			
    	   	    			// 특정 div만 새로고침하는 script ==> $('.icon-box-1').load(window.location.href + '.icon-box-1'); 
    	    		}, error:function(){
