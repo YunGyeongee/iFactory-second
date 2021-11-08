@@ -36,6 +36,8 @@
 		       loadcell_4 as loadcell4,
 		       loadcell_5 as loadcell5
 		  from sensor
+		 order
+		    by rand() limit 1
 	</select>
 	
 	 

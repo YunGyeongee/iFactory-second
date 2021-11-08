@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,7 +39,7 @@ public class SensorController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value="main.test", method=RequestMethod.POST)
+	@RequestMapping("main.test")
 	public ModelAndView selectListOne(Sensor s, ModelAndView mv) {
 		
 		ArrayList<Sensor> sList = sService.selectList(s);

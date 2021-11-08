@@ -1993,41 +1993,34 @@
 	    })
 	    
 	    var timerID;
+	    
     	$('.ajaxSensor').on('click', function(e){
     		e.preventDefault();
     		updateData();
     	});
 	    
 	    function updateData(){
-	    	
 			$.ajax({
    	    		url:"main.test",
    	    		dataType: "text",
    	    		type:"post",
    	    		cache:false,
    	    		data : {},
-   	    		success:function(){
+   	    		success:function(response){
    	    			console.log("통신 성공");
-   	    			$('.temperature-data').empty();
    	    			
-   	    			let loadcell = $('.temperature-data').html(`${UsedSensor.loadcell1}`); // => 변수에 담는 순간 그 특정 숫자만 담아지는거니까 당연히 화면이 안바뀜
-   	   	    		$('.temperature-data').html(loadcell);
-   	   	    		
-   	    			/*
-   	    			$(response).find('loadcell').each(function(){
+   	    			$(response).find('loadcell1').each(function(){
    	    				var loadcell = $(this).find('loadcell1').text();
    	    				$('.temperature-data').empty();
    	   	    			$('.temperature-data').html(loadcell);
    	    			})
-   	    			*/
-   	    				
    	   	    			
-   	   	    		// 특정 div만 새로고침하는 script ==> $('.icon-box-1').load(window.location.href + '.icon-box-1'); 
    	    		}, error:function(request, error){
    	    			console.log("ajax 통신 실패");
    	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
    	    		}
    	    	});
+			
 	    	timerID = setTimeout("updateData()", 2000);
 	    }
 	    
