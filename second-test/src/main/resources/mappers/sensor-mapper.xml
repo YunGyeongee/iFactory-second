@@ -37,7 +37,7 @@
 		       loadcell_5 as loadcell5
 		  from sensor
 		 order
-		    by rand() limit 1
+		    by sensor_no = 1
 	</select>
 	
 	 

@@ -1998,32 +1998,31 @@
 	    })
 	    
 	    var timerID;
-	    
-    	$('.ajaxSensor').on('click', function(e){
+
+	    $('.ajaxSensor').on('click', function(e){
     		e.preventDefault();
-    		updateData();
+   			updateData();
     	});
 	    
 	    function updateData(){
-			$.ajax({
-   	    		url:"main.test",
-   	    		dataType: "text",
-   	    		type:"post",
-   	    		cache:false,
-   	    		async: false,
-   	    		data : { },
-   	    		success:function(){
-					
-    				$('.temperature-data').empty();
-   	    			$('.temperature-data').html(`${ UsedSensor.loadcell1 }`);
+   			$.ajax({
+      	    		url:"main.test",
+      	    		dataType: "text",
+      	    		type:"post",
+      	    		cache:false,
+      	    		data : { },
+      	    		success:function(){
+   					
+       				$('.temperature-data').empty();
+      	    			$('.temperature-data').html(`${ UsedSensor.loadcell1 }`);
 
-   	    		}, error:function(request, error){
-   	    			console.log("ajax 통신 실패");
-   	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-   	    		}
-   	    	});
-			
-	    	timerID = setTimeout("updateData()", 2000);
+      	    		}, error:function(request, error){
+      	    			console.log("ajax 통신 실패");
+      	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+      	    		}
+      	    	});
+   			
+   	    	timerID = setTimeout("updateData()", 2000);
 	    }
 	    
 	    
