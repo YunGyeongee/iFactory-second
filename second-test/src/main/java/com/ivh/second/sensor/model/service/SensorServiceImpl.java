@@ -1,5 +1,6 @@
 package com.ivh.second.sensor.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,9 +25,10 @@ public class SensorServiceImpl implements SensorService {
 	}
 
 	@Override
-	public List<String> selectList() {
-		return sDao.selectList(sqlSession);
+	public ArrayList<Sensor> selectList(Sensor s) {
+		return sDao.selectList(sqlSession, s);
 	}
+
 
 
 }

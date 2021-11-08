@@ -1,16 +1,17 @@
 package com.ivh.second.sensor.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ivh.second.sensor.model.service.SensorService;
+import com.ivh.second.sensor.model.vo.Sensor;
 
 @RestController
 public class SensorController {
@@ -18,7 +19,7 @@ public class SensorController {
 	@Autowired
 	private SensorService sService;
 	
-	/*
+	
 	@RequestMapping("main.ss")
 	public ModelAndView selectSensor1(Sensor s, HttpSession session, ModelAndView mv) {
 		
@@ -35,24 +36,22 @@ public class SensorController {
 		return mv;
 		
 	}
-	*/
 	
 	
 	@ResponseBody
 	@RequestMapping("main.test")
-	public String selectListOne(Model model) {
+	public ModelAndView selectList(Sensor s, ModelAndView mv) {
 		
-		HashMap<String, Object> map = new HashMap<String, Object>(); // HashMap 인스턴스화
-		List<String> list = new ArrayList<>();						 // List 인스턴스화
-
-		list = sService.selectList();
-		map.put("mapList", list);
+		ArrayList<Sensor> sList = sService.selectList(s);
+		System.out.println(sList);
 		
-		System.out.println(list);
-		model.addAttribute("mapList", list);
+		mv.addObject("sList", sList)
+		  .addObject("s", s)
+		  .setViewName("common/errorPage");
 		
-		return "common/errorPage";
+		return mv;
 	}
+	
 	
 
 }

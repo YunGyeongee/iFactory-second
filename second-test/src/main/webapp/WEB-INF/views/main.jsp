@@ -1577,7 +1577,7 @@
                                 <h5><a class="ajaxSensor">TEMPERATURE</a></h5>
                             </div>
 	                            <div class="temperature-box-2">
-			                        <span class="temperature-data" style="font-weight: 600">${ mapList.loadcell1 }</span><span style="font-size: 20px;">℃</span>
+			                        <span class="temperature-data" style="font-weight: 600">${ UsedSensor.loadcell1 }</span><span style="font-size: 20px;">℃</span>
 	                            </div>
                         </div>
                         <div class="dashboard-container-half2-humidity-box">
@@ -2005,24 +2005,25 @@
     	});
 	    
 	    function updateData(){
-   			$.ajax({
+	    	setInterval(function(){
+	    		$.ajax({
       	    		url:"main.test",
-      	    		success:function(data){
+      	    		success:function(response){
    						console.log("통신 성공");
-      	    		/*
-      	    		var html = "";
-      	    		html += data['loadcell_1'];
-       				$('.temperature-data').empty();
-      	    		$('.temperature-data').append(html);
-					
-      	    		console.log(html);
-      	    		*/
-      	    		
+      	    			
+   						$(response).find('response.loadecell1').each(function(){
+   							var loadcell = $(this).find('response.loadcell1').text();
+   							$('.temperature-data').empty();
+   	   	   	    			$('.temperature-data').html(loadcell);
+   						});
+   						
       	    		}, error:function(request, error){
       	    			console.log("ajax 통신 실패");
       	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
       	    		}
       	    	});
+  			}, 2000);
+   			
    			
    	    	//timerID = setTimeout("updateData()", 2000);
 	    }

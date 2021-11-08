@@ -1,6 +1,7 @@
 package com.ivh.second.sensor.model.dao;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,8 +16,8 @@ public class SensorDao {
 		return sqlSession.selectOne("sensorMapper.selectSensor1", s);
 	}
 
-	public List<String> selectList(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("sensorMapper.selectList");
+	public ArrayList<Sensor> selectList(SqlSessionTemplate sqlSession, Sensor s) {
+		return (ArrayList)sqlSession.selectList("sensorMapper.selectList", s);
 	}
 	
 

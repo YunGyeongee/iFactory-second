@@ -26,7 +26,7 @@
 	</select>
 	
 	 
-	<select id="selectList" resultType="hashmap">
+	<select id="selectList" resultType="Sensor">
 		select
 		       sensor_no as sensorNo,
 			   time,
