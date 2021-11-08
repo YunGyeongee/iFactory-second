@@ -1572,7 +1572,7 @@
                                 <h5><a class="ajaxSensor">TEMPERATURE</a></h5>
                             </div>
                             <div class="temperature-box-2">
-		                        <span class="temperature-data" style="font-weight: 600">${UsedSensor.loadcell1}</span><span style="font-size: 20px;">℃</span>
+		                        <span class="temperature-data" style="font-weight: 600"></span><span style="font-size: 20px;">℃</span>
                             </div>
                             
                         </div>
@@ -2001,7 +2001,6 @@
 	    })
 	    
 	    function updateData(){
-	    	var loadcell = $(this).find('loadcell1').text();
 	    	
 			$.ajax({
    	    		url:"main.test",
@@ -2010,11 +2009,12 @@
    	    		cache:false,
    	    		data : {},
    	    		success:function(response){
-   	    			$(response).find('loadcell').each(function(){
-   	    				
-   	    				$('.temperature-data').empty();
-   	   	    			$('.temperature-data').html(loadcell);
-   	    			})
+   	    			console.log(response);
+   	    			//$(response).find('loadcell').each(function(){
+   	    				//var loadcell = $(this).find('loadcell1').text();
+   	    				//$('.temperature-data').empty();
+   	   	    			//$('.temperature-data').html(loadcell);
+   	    			//})
    	    				//let loadcell = $('.temperature-data').html(`${UsedSensor.loadcell1}`); // => 변수에 담는 순간 그 특정 숫자만 담아지는거니까 당연히 화면이 안바뀜
    	    				//$('.temperature-data').empty();
    	   	    			//$('.temperature-data').html(loadcell);
