@@ -1993,23 +1993,26 @@
 	    })
 	    
 	    var timerID;
-	    $(document).ready(function(){
-	    	$('.ajaxSensor').on('click', function(e){
-	    		e.preventDefault();
-	    		updateData();
-	    	});
-	    })
+    	$('.ajaxSensor').on('click', function(e){
+    		e.preventDefault();
+    		
+    		let loadcell = $('.temperature-data').html(`${UsedSensor.loadcell1}`);
+    		$('.temperature-data').empty();
+    		$('.temperature-data').html(loadcell);
+    		
+    		updateData();
+    	});
 	    
 	    function updateData(){
 	    	
 			$.ajax({
    	    		url:"main.test",
-   	    		dataType: "xml",
+   	    		dataType: "text",
    	    		type:"post",
    	    		cache:false,
    	    		data : {},
-   	    		success:function(response){
-   	    			console.log(response);
+   	    		success:function(){
+   	    			console.log("통신 성공");
    	    			//$(response).find('loadcell').each(function(){
    	    				//var loadcell = $(this).find('loadcell1').text();
    	    				//$('.temperature-data').empty();
@@ -2020,8 +2023,9 @@
    	   	    			//$('.temperature-data').html(loadcell);
    	   	    			
    	   	    			// 특정 div만 새로고침하는 script ==> $('.icon-box-1').load(window.location.href + '.icon-box-1'); 
-   	    		}, error:function(){
+   	    		}, error:function(request, error){
    	    			console.log("ajax 통신 실패");
+   	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
    	    		}
    	    	});
 	    	timerID = setTimeout("updateData()", 2000);
