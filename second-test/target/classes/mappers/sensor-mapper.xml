@@ -26,7 +26,7 @@
 	</select>
 	
 	 
-	<select id="selectList" resultType="Sensor">
+	<select id="selectList" resultType="hashmap">
 		select
 		       sensor_no as sensorNo,
 			   time,
@@ -36,8 +36,6 @@
 		       loadcell_4 as loadcell4,
 		       loadcell_5 as loadcell5
 		  from sensor
-		 order
-		    by sensor_no = 1
 	</select>
 	
 	 

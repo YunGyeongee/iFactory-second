@@ -1576,10 +1576,9 @@
                                 <div class="icon-box-1"><i class="fas fa-temperature-low"></i></div>
                                 <h5><a class="ajaxSensor">TEMPERATURE</a></h5>
                             </div>
-                            <div class="temperature-box-2">
-		                        <span class="temperature-data" style="font-weight: 600">42</span><span style="font-size: 20px;">℃</span>
-                            </div>
-                            
+	                            <div class="temperature-box-2">
+			                        <span class="temperature-data" style="font-weight: 600">${ mapList.loadcell1 }</span><span style="font-size: 20px;">℃</span>
+	                            </div>
                         </div>
                         <div class="dashboard-container-half2-humidity-box">
                             <div class="humidity-box">
@@ -1997,6 +1996,7 @@
 	
 	    })
 	    
+	    
 	    var timerID;
 
 	    $('.ajaxSensor').on('click', function(e){
@@ -2007,22 +2007,24 @@
 	    function updateData(){
    			$.ajax({
       	    		url:"main.test",
-      	    		dataType: "text",
-      	    		type:"post",
-      	    		cache:false,
-      	    		data : { },
-      	    		success:function(){
-   					
+      	    		success:function(data){
+   						console.log("통신 성공");
+      	    		/*
+      	    		var html = "";
+      	    		html += data['loadcell_1'];
        				$('.temperature-data').empty();
-      	    			$('.temperature-data').html(`${ UsedSensor.loadcell1 }`);
-
+      	    		$('.temperature-data').append(html);
+					
+      	    		console.log(html);
+      	    		*/
+      	    		
       	    		}, error:function(request, error){
       	    			console.log("ajax 통신 실패");
       	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
       	    		}
       	    	});
    			
-   	    	timerID = setTimeout("updateData()", 2000);
+   	    	//timerID = setTimeout("updateData()", 2000);
 	    }
 	    
 	    
