@@ -53,15 +53,18 @@ public class SensorController {
 	}
 	
 	
+	
 	/*
 	@ResponseBody
 	@RequestMapping("main.test")
-	public String selectListOne() {
+	public String selectListOne(@PathVariable("loadcell1") String sensor) {
 		
-		HashMap<String, Object> map = sService.selectList();
-		return new Gson().toJson(map);
+		System.out.println(sensor);
+		return false;
+		
 	}
 	*/
+	
 
 }
 

@@ -1472,8 +1472,13 @@
                         <div class="dashboard-container-half1-smartsensors-container-box">
                             <h4 style="margin: 5px 0px 0px 15px;">DEVICE 1 <span class="device-icon-1"><i class="fas fa-exclamation-circle"></i></span></h4>
                             <div class="circle-container-1">
-								<input type="hidden" name="sensorNo" value="${ UsedSensor.sensorNo }">
-                            	<input type="hidden" name="time" value="${ UsedSensor.time }">
+								<input type="hidden" id="sensorNo" name="sensorNo" value="${ UsedSensor.sensorNo }">
+                            	<input type="hidden" id="time" name="time" value="${ UsedSensor.time }">
+                            	<input type="hidden" id="loadcell1" name="loadcell1" value="${ UsedSensor.loadcell1 }" >
+                            	<input type="hidden" id="loadcell2" name="loadcell2" value="${ UsedSensor.loadcell2 }" >
+                            	<input type="hidden" id="loadcell3" name="loadcell3" value="${ UsedSensor.loadcell3 }" >
+                            	<input type="hidden" id="loadcell4" name="loadcell4" value="${ UsedSensor.loadcell4 }" >
+                            	<input type="hidden" id="loadcell5" name="loadcell5" value="${ UsedSensor.loadcell5 }" >
                                 <h2 class="circle-data_1">0</h2>
                                 <h3 class="device-status-1">status</h3>
                                 <svg>
@@ -1572,7 +1577,7 @@
                                 <h5><a class="ajaxSensor">TEMPERATURE</a></h5>
                             </div>
                             <div class="temperature-box-2">
-		                        <span class="temperature-data" style="font-weight: 600">${ UsedSensor.loadcell1 }</span><span style="font-size: 20px;">℃</span>
+		                        <span class="temperature-data" style="font-weight: 600">42</span><span style="font-size: 20px;">℃</span>
                             </div>
                             
                         </div>
@@ -2005,16 +2010,13 @@
    	    		dataType: "text",
    	    		type:"post",
    	    		cache:false,
-   	    		data : {},
-   	    		success:function(response){
-   	    			console.log("통신 성공");
-   	    			
-   	    			$(response).find('loadcell1').each(function(){
-   	    				var loadcell = $(this).find('loadcell1').text();
-   	    				$('.temperature-data').empty();
-   	   	    			$('.temperature-data').html(loadcell);
-   	    			})
-   	   	    			
+   	    		async: false,
+   	    		data : { },
+   	    		success:function(){
+					
+    				$('.temperature-data').empty();
+   	    			$('.temperature-data').html(`${ UsedSensor.loadcell1 }`);
+
    	    		}, error:function(request, error){
    	    			console.log("ajax 통신 실패");
    	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
