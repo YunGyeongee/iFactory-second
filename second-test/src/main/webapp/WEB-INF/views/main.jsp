@@ -1572,7 +1572,7 @@
                                 <h5><a class="ajaxSensor">TEMPERATURE</a></h5>
                             </div>
                             <div class="temperature-box-2">
-		                        <span class="temperature-data" style="font-weight: 600"></span><span style="font-size: 20px;">℃</span>
+		                        <span class="temperature-data" style="font-weight: 600">${ UsedSensor.loadcell1 }</span><span style="font-size: 20px;">℃</span>
                             </div>
                             
                         </div>
@@ -1995,11 +1995,6 @@
 	    var timerID;
     	$('.ajaxSensor').on('click', function(e){
     		e.preventDefault();
-    		
-    		let loadcell = $('.temperature-data').html(`${UsedSensor.loadcell1}`);
-    		$('.temperature-data').empty();
-    		$('.temperature-data').html(loadcell);
-    		
     		updateData();
     	});
 	    
@@ -2013,16 +2008,21 @@
    	    		data : {},
    	    		success:function(){
    	    			console.log("통신 성공");
-   	    			//$(response).find('loadcell').each(function(){
-   	    				//var loadcell = $(this).find('loadcell1').text();
-   	    				//$('.temperature-data').empty();
-   	   	    			//$('.temperature-data').html(loadcell);
-   	    			//})
-   	    				//let loadcell = $('.temperature-data').html(`${UsedSensor.loadcell1}`); // => 변수에 담는 순간 그 특정 숫자만 담아지는거니까 당연히 화면이 안바뀜
-   	    				//$('.temperature-data').empty();
-   	   	    			//$('.temperature-data').html(loadcell);
+   	    			$('.temperature-data').empty();
+   	    			
+   	    			let loadcell = $('.temperature-data').html(`${UsedSensor.loadcell1}`); // => 변수에 담는 순간 그 특정 숫자만 담아지는거니까 당연히 화면이 안바뀜
+   	   	    		$('.temperature-data').html(loadcell);
+   	   	    		
+   	    			/*
+   	    			$(response).find('loadcell').each(function(){
+   	    				var loadcell = $(this).find('loadcell1').text();
+   	    				$('.temperature-data').empty();
+   	   	    			$('.temperature-data').html(loadcell);
+   	    			})
+   	    			*/
+   	    				
    	   	    			
-   	   	    			// 특정 div만 새로고침하는 script ==> $('.icon-box-1').load(window.location.href + '.icon-box-1'); 
+   	   	    		// 특정 div만 새로고침하는 script ==> $('.icon-box-1').load(window.location.href + '.icon-box-1'); 
    	    		}, error:function(request, error){
    	    			console.log("ajax 통신 실패");
    	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
