@@ -1,6 +1,7 @@
 package com.ivh.second.sensor.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,16 +41,16 @@ public class SensorController {
 	
 	@ResponseBody
 	@RequestMapping("main.test")
-	public ModelAndView selectList(Sensor s, ModelAndView mv) {
+	public List<Sensor> selectList(Sensor s) {
 		
 		ArrayList<Sensor> sList = sService.selectList(s);
 		System.out.println(sList);
 		
-		mv.addObject("sList", sList)
-		  .addObject("s", s)
-		  .setViewName("common/errorPage");
+//		mv.addObject("sList", sList)
+//		  .addObject("s", s)
+//		  .setViewName("common/errorPage");
 		
-		return mv;
+		return sList;
 	}
 	
 	

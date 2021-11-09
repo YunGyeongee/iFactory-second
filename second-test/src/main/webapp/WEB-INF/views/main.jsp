@@ -2005,25 +2005,26 @@
     	});
 	    
 	    function updateData(){
-	    	setInterval(function(){
-	    		$.ajax({
-      	    		url:"main.test",
-      	    		success:function(response){
-   						console.log("통신 성공");
-      	    			
-   						$(response).find('response.loadecell1').each(function(){
-   							var loadcell = $(this).find('response.loadcell1').text();
-   							$('.temperature-data').empty();
-   	   	   	    			$('.temperature-data').html(loadcell);
-   						});
-   						
-      	    		}, error:function(request, error){
-      	    			console.log("ajax 통신 실패");
-      	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-      	    		}
-      	    	});
-  			}, 2000);
-   			
+    		$.ajax({
+   	    		url:"main.test",
+   	    		dataType:"json",
+   	    		success:function(response){
+					console.log("통신 성공");
+  	    			
+					$(response).find('response.loadecell1').each(function(){
+						var loadcell = $(this).find('response.loadcell1').text();
+						$('.temperature-data').empty();
+   	   	    			$('.temperature-data').html(loadcell);
+					});
+					
+					console.log(response);
+						
+   	    		}, error:function(request, error){
+   	    			console.log("ajax 통신 실패");
+   	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+   	    		}
+   	    	});
+ 			
    			
    	    	//timerID = setTimeout("updateData()", 2000);
 	    }

@@ -36,6 +36,8 @@
 		       loadcell_4 as loadcell4,
 		       loadcell_5 as loadcell5
 		  from sensor
+		 where sensor_no > 0
+		   and sensor_no <![CDATA[<=]]> 10
 	</select>
 	
 	 
