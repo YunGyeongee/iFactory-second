@@ -29,11 +29,6 @@ public class MemberController {
 	@Autowired
 	private SensorService sService;
 	
-	/* 비밀번호 암호화 작업
-	@Autowired
-	private BCryptPasswordEncoder bcryptPasswordEncoder;
-	*/
-	
 	@RequestMapping("login.me")
 	public ModelAndView loginMember(Member m, Sensor s, HttpSession session, ModelAndView mv) {
 		
@@ -98,39 +93,6 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
-//	@RequestMapping("updateMember")
-//	public String updateMember(String mId, Model model) {
-//		String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
-//		model.addAttribute("loginUser", mService.loginMember(memberId));
-//		return "redirect:updateProfile.me";
-//	}
-	
-//	@RequestMapping("updateProfile.me")
-//	public String updateProfile(HttpServletRequest request, @RequestParam("memberProfile") MultipartFile upfile, Model model, HttpSession session) throws IOException {
-//		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/memberProfile/");
-//		String originName = upfile.getOriginalFilename();
-//		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-//		int ranNum = (int)(Math.random() * 9000000 + 10000);
-//		String ext = originName.substring(originName.lastIndexOf("."));
-//		
-//		String changeName = currentTime + ranNum + ext;
-//		
-//		String memberId = SecurityContextHolder.getContext().getAuthentication().getName();
-//		Member m = mService.loginMember(memberId);
-//		
-//		try {
-//			if (m.getMemberProfile() != null) { // 이미 프로필 사진이 있을 경우
-//				File file = new File(savePath + m.getMemberProfile()).delete(); // 기존 파일 삭제
-//			}
-//			upfile.transferTo(new File(savePath) + upfile.getOriginalFilename()); // 경로에 업로드
-//		} catch (IllegalStateException e) {
-//			e.printStackTrace();
-//		} 
-//		
-//		mService.loginMember(memberId, upfile.getOriginalFilename());
-//		return 
-//	}
-	
 	
 	@RequestMapping("updateProfile.me")
 	public String updateProfile(Member m, MultipartFile upfile, HttpSession session, Model model, String deleteProfile) {
@@ -189,116 +151,6 @@ public class MemberController {
 		
 		return changeName;
 	}
-	
-	/*
-	// 비밀번호 변경
-	@RequestMapping("updatePwd")
-	public String updatePwd(String newPwd, Member m, HttpSession session, Model model) {
-		
-		// 비밀번호 변경용 서비스 호출
-		int result = mService.updatePwd(m);
-		m.setMemberPwd(newPwd);
-		
-		System.out.println(newPwd);
-	
-		if(result > 0) { // 정보 수정 성공
-			session.setAttribute("loginUser", mService.loginMember(m));
-			session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
-			return "member/myPage";
-		} else { // 정보 수정 실패
-			model.addAttribute("errorMsg", "정보 수정 실패");
-			return "common/errorPage";
-		}
-	}
-	
-	// 기존 비밀번호 확인 --> 9/30 ajax로 바꿔야됨
-	@RequestMapping("pwdConfirm.me")
-	public String pwdConfirm(String memberPwd, Member m, HttpServletRequest request, HttpSession session, Model model) {
-		
-//		String memberPwd = request.getParameter("memberPwd");
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		
-		if(m.getMemberPwd().equals(loginUser.getMemberPwd())) {
-			session.setAttribute("alertMsg", "비밀번호 확인 성공");
-			return "redirect:/";
-		} else {
-			model.addAttribute("errorMsg", "비밀번호 확인 실패");
-			return "common/errorPage";
-		}
-		
-	}
-	
-	// 비밀번호 변경 시 기존비밀번호 확인
-	@ResponseBody
-	@RequestMapping("pwd.me")
-	public String pwd(String checkPwd, HttpSession session) {
-		
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		
-		if(checkPwd.equals(loginUser.getMemberPwd())) {
-			return "Y";
-		} else {
-			return "N";
-		}
-		
-	}
-	*/
-	
-
-//	@ResponseBody
-//	@RequestMapping(value="delete.mo", produces="pllication/json; charset=utf-8")
-//	public String ajaxDelete(int mId) {
-//		
-//		System.out.println(mId);
-//	
-//		Member m = mService.deleteModal(mId);
-//		
-//		return new Gson().toJson(m);
-//	}
-
-//	@RequestMapping("delete.me")
-//	public String deleteMember(@RequestParam(defaultValue="") String mStatus,
-//			                   @RequestParam(defaultValue="") String mName,
-//			                   HttpSession session, HttpServletRequest request) {
-//		
-//		HashMap<String, Object> map = new HashMap<String, Object>();
-//		map.put("mStatus", mStatus);
-//		map.put("mName", mName);
-//		
-//		// 이전 url 가져오기
-//		String referer = (String)request.getHeader("REFERER");
-//		
-//		int deleteMem = mService.deleteMember(map);
-//		
-//		if(deleteMem > 0) {
-//			session.setAttribute("alertMsg", "탈퇴되었습니다. 이용해주셔서 감사합니다.");
-//			return "redirect:" + referer;
-//		} else {
-//			session.setAttribute("alertMsg", "탈퇴 실패. 다시 시도해주세요.");
-//			return "common/errorPage";
-//		}
-//		
-//		
-//		if(checkPwd) { // 비밀번호 일치 => 본인 확인 완료
-//			int result = mService.deleteMember(loginUser.getMemberId());
-//			
-//			if(result > 0) {
-//				session.removeAttribute("loginUser");
-//				session.setAttribute("alertMsg", "회원 탈퇴 성공");
-//				return "member/loginForm";
-//			} else { // 에러페이지
-//				model.addAttribute("errorMsg", "회원 탈퇴 실패");
-//				return "common/errorPage";
-//			}
-//			
-//		} else {
-//			// 비밀번호 불일치 => 본인 확인 미완료
-//			session.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
-//			return "redirect:myPage.me";
-//		}
-//		
-//	}
-	
 	
 	@ResponseBody
 	@RequestMapping("idCheck.me")

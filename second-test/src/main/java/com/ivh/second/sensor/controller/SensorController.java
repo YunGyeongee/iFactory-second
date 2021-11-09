@@ -41,14 +41,14 @@ public class SensorController {
 	
 	@ResponseBody
 	@RequestMapping("main.test")
-	public List<Sensor> selectList(Sensor s) {
+	public List<Sensor> selectList(Sensor s, ModelAndView mv) {
 		
 		ArrayList<Sensor> sList = sService.selectList(s);
 		System.out.println(sList);
 		
-//		mv.addObject("sList", sList)
-//		  .addObject("s", s)
-//		  .setViewName("common/errorPage");
+		mv.addObject("sList", sList)
+		  .addObject("s", s)
+		  .setViewName("common/errorPage");
 		
 		return sList;
 	}

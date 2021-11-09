@@ -2004,6 +2004,9 @@
    			updateData();
     	});
 	    
+	    //변수 두개 선언하는 것보다 object로 만들어서 관리하는 게 편할 때도 있습니다.
+	    var saveResponse={list:null, size:0};
+	    
 	    function updateData(){
     		$.ajax({
    	    		url:"main.test",
@@ -2011,22 +2014,30 @@
    	    		success:function(response){
 					console.log("통신 성공");
   	    			
-					$(response).find('response.loadecell1').each(function(){
-						var loadcell = $(this).find('response.loadcell1').text();
-						$('.temperature-data').empty();
-   	   	    			$('.temperature-data').html(loadcell);
-					});
+					saveResponse.list=response;
+					saveResponse.size=response.length;
+					updateSensor();
 					
-					console.log(response);
-						
    	    		}, error:function(request, error){
    	    			console.log("ajax 통신 실패");
    	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
    	    		}
    	    	});
+    		
+    		function updateSensor(){
+    			var cnt=0;
+    			var interval=setInterval(function(){
+    				if(cnt++ < saveResponse.size-1){ // cnt는 size 만큼 숫자가 커지기 때문에, 이럴 경우 list가 비어있는 것을 선택하여 -1처리
+    					console.log("cnt="+cnt);
+    					console.log("saveResponse.list[cnt]=",saveResponse.list[cnt]);
+    					$('.temperature-data').html(saveResponse.list[cnt].loadcell1);	
+    				}else{
+    					clearInterval(interval);
+    					updateData();
+    				}
+    			}, 2000);
+    		}
  			
-   			
-   	    	//timerID = setTimeout("updateData()", 2000);
 	    }
 	    
 	    
