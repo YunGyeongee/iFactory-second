@@ -1849,12 +1849,7 @@
 	   	    		url:"main.test",
 	   	    		dataType:"json",
 	   	    		success:function(response){
-	  	    			
-	   	    			//$('.critical-box-change-data').empty();
-	   	    			//$('.critical-box-change-data-2').empty();
-	   	    			//$('.critical-box-change-data-3').empty();
-	   	    			//$('.critical-box-change-data-4').empty();
-	   	    			
+	  	    		
 						saveResponse.list=response;
 						saveResponse.size=response.length;
 						
@@ -1872,9 +1867,13 @@
 	    				if(cnt++ < saveResponse.size-1){
 	    					
 	    					$('.circle-data_1').html(saveResponse.list[cnt].time);	
+	    					$('.critical-box-change-data').html(saveResponse.list[cnt].time);
 	    					$('.circle-data_2').html(saveResponse.list[cnt].loadcell3);
+	    					$('.critical-box-change-data-2').html(saveResponse.list[cnt].loadcell3);
 	    					$('.circle-data_3').html(saveResponse.list[cnt].loadcell4);
+	    					$('.critical-box-change-data-3').html(saveResponse.list[cnt].loadcell4);
 	    					$('.circle-data_4').html(saveResponse.list[cnt].loadcell5);
+	    					$('.critical-box-change-data-4').html(saveResponse.list[cnt].loadcell5);
 	    				}else{
 	    					clearInterval(interval);
 	    					updateData();
