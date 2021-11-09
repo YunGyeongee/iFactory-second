@@ -20,7 +20,7 @@ public class SensorController {
 	@Autowired
 	private SensorService sService;
 	
-	
+	/*
 	@RequestMapping("main.ss")
 	public ModelAndView selectSensor1(Sensor s, HttpSession session, ModelAndView mv) {
 		
@@ -37,6 +37,7 @@ public class SensorController {
 		return mv;
 		
 	}
+	*/
 	
 	
 	@ResponseBody
