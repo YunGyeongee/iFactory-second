@@ -17,11 +17,12 @@ public class Sensor {
 	private String loadcell3;
 	private String loadcell4;
 	private String loadcell5;
+	private String sensorDate;
 
 	public Sensor() {}
 
 	public Sensor(int sensorNo, String time, String loadcell1, String loadcell2, String loadcell3, String loadcell4,
-			String loadcell5) {
+			String loadcell5, String sensorDate) {
 		super();
 		this.sensorNo = sensorNo;
 		this.time = time;
@@ -30,6 +31,7 @@ public class Sensor {
 		this.loadcell3 = loadcell3;
 		this.loadcell4 = loadcell4;
 		this.loadcell5 = loadcell5;
+		this.sensorDate = sensorDate;
 	}
 
 	public int getSensorNo() {
@@ -88,17 +90,19 @@ public class Sensor {
 		this.loadcell5 = loadcell5;
 	}
 
+	public String getSensorDate() {
+		return sensorDate;
+	}
+
+	public void setSensorDate(String sensorDate) {
+		this.sensorDate = sensorDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Sensor [sensorNo=" + sensorNo + ", time=" + time + ", loadcell1=" + loadcell1 + ", loadcell2="
 				+ loadcell2 + ", loadcell3=" + loadcell3 + ", loadcell4=" + loadcell4 + ", loadcell5=" + loadcell5
-				+ "]";
+				+ ", sensorDate=" + sensorDate + "]";
 	}
 
-	
-
-	
-	
-	
-	
 }

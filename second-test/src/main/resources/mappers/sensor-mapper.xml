@@ -9,6 +9,7 @@
 		<result property="loadcell3" column="loadcell_3" />
 		<result property="loadcell4" column="loadcell_4" />
 		<result property="loadcell5" column="loadcell_5" />
+		<result property="sensorDate" column="sensor_date" />
 	</resultMap>
 
 	<select id="selectSensor1" resultType="Sensor" parameterType="string">
@@ -19,7 +20,8 @@
 		       loadcell_2 as loadcell2,
 		       loadcell_3 as loadcell3,
 		       loadcell_4 as loadcell4,
-		       loadcell_5 as loadcell5
+		       loadcell_5 as loadcell5,
+		       sensor_date as sensorDate
 		  from sensor
 		 order
 		    by rand() limit 1
@@ -34,10 +36,11 @@
 		       loadcell_2 as loadcell2,
 		       loadcell_3 as loadcell3,
 		       loadcell_4 as loadcell4,
-		       loadcell_5 as loadcell5
+		       loadcell_5 as loadcell5,
+		       sensor_date as sensorDate
 		  from sensor
-		 where sensor_no > 0
-		   and sensor_no <![CDATA[<=]]> 100
+		 order
+		    by sensor_date desc
 	</select>
 	
 	 
