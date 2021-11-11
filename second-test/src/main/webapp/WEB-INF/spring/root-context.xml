@@ -6,9 +6,9 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean lazy-init="false" class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
 		<property value="com.mysql.jdbc.Driver" name="driverClassName"/>
-		<property value="jdbc:mysql://localhost:3306/sample" name="url"/>
+		<property value="jdbc:mysql://localhost:3306/devdb" name="url"/>
 		<property value="root" name="username"/>
-		<property value="12345678!" name="password"/>
+		<property value="ivh4713*" name="password"/>
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
