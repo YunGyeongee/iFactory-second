@@ -1837,19 +1837,22 @@
 	        console.log(a)
 	    }
 	    
-	    let div = document.getElementById("dashboard-container-half2-quality-speed-container");
+	    let div = document.getElementById("dashboard-container");
         let saveResponse = {list:null, size:0};
         setInterval(()=>{
-            updateData()},1000);
+            updateData()},5000);
     
         function updateData(){
     		$.ajax({
    	    		url:"main.test",
    	    		dataType:"json",
    	    		success:function(response){
+   	    			
+   	    			let cnt = 0;
   	    			
 					saveResponse.list=response;
 					saveResponse.size=response.length;
+					
 					updateSensor();
 					
    	    		}, error:function(request, error){
@@ -1876,7 +1879,6 @@
     					$('.current-quality2').html(saveResponse.list[cnt].loadcell2);
     				} else {
     					clearInterval(interval);
-    					updateData();
     				}
     			}, 1000);
     		}
