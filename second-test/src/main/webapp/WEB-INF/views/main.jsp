@@ -1841,12 +1841,10 @@
 	    $('.refresh').click(function () {
 	    	
 			updateData();
-	    	
-	    	var saveResponse={list:null, size:0};
-		    
-		    function updateData(){
+			let saveResponse={list:null, size:0};
+			function updateDate(){
 	    		$.ajax({
-	   	    		url:"main.test",
+	   	    		url:"main.in",
 	   	    		dataType:"json",
 	   	    		success:function(response){
 	  	    		
@@ -1880,9 +1878,8 @@
 	    				}
 	    			}, 1000);
 	    		}
-	 			
-		    }
-	    	
+	    	}
+		    
 	        setInterval(function () {
 	        	
 	        	let rand = randNum();
@@ -2003,7 +2000,7 @@
 	    $('.refresh_2').click(function () {
 	    	updateData();
 	    	
-	    	var saveResponse={list:null, size:0};
+	    	let saveResponse={list:null, size:0};
 		    
 		    function updateData(){
 	    		$.ajax({
