@@ -1548,7 +1548,7 @@
                     <div class="dashboard-container-half2-information-container-title-container">
                         <h4>INFORMATION <span class="refresh_2"><i class="fas fa-redo"></i></span></h4>
                     </div>
-                    <div class="dashboard-container-half2-quality-speed-container">
+                    <div class="dashboard-container-half2-quality-speed-container" id="dashboard-container-half2-quality-speed-container">
                         <div class="dashboard-container-half2-quality-box">
                             <h5 style="margin-left: 15px; margin-top: 10px;">PRODUCTION QUALITY</h5>
                             <div class="gauge-container-1">
@@ -1837,50 +1837,54 @@
 	        console.log(a)
 	    }
 	    
+	    let div = document.getElementById("dashboard-container-half2-quality-speed-container");
+        let saveResponse = {list:null, size:0};
+        setInterval(()=>{
+            updateData()},1000);
+    
+        function updateData(){
+    		$.ajax({
+   	    		url:"main.test",
+   	    		dataType:"json",
+   	    		success:function(response){
+  	    			
+					saveResponse.list=response;
+					saveResponse.size=response.length;
+					updateSensor();
+					
+   	    		}, error:function(request, error){
+   	    			console.log("ajax 통신 실패");
+   	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+   	    		}
+   	    	});
+    		
+    		function updateSensor(){
+    			var cnt=0;
+    			var interval=setInterval(function(){
+    				
+    				if(cnt++ < saveResponse.size-1){
+    					$('.circle-data_1').html(saveResponse.list[cnt].time);	
+    					$('.critical-box-change-data').html(saveResponse.list[cnt].time);
+    					$('.circle-data_2').html(saveResponse.list[cnt].loadcell3);
+    					$('.critical-box-change-data-2').html(saveResponse.list[cnt].loadcell3);
+    					$('.circle-data_3').html(saveResponse.list[cnt].loadcell4);
+    					$('.critical-box-change-data-3').html(saveResponse.list[cnt].loadcell4);
+    					$('.circle-data_4').html(saveResponse.list[cnt].loadcell5);
+    					$('.critical-box-change-data-4').html(saveResponse.list[cnt].loadcell5);
+    					
+    					$('.current-quality').html(saveResponse.list[cnt].loadcell1);	
+    					$('.current-quality2').html(saveResponse.list[cnt].loadcell2);
+    				} else {
+    					clearInterval(interval);
+    					updateData();
+    				}
+    			}, 1000);
+    		}
+ 			
+	    }
+    
 	    
 	    $('.refresh').click(function () {
-	    	
-			updateData();
-			
-			var saveResponse={list:null, size:0};
-			
-			function updateData(){
-	    		$.ajax({
-	   	    		url:"main.test",
-	   	    		dataType:"json",
-	   	    		success:function(response){
-	  	    		
-						saveResponse.list=response;
-						saveResponse.size=response.length;
-						
-						updateSensor();
-						
-	   	    		}, error:function(request, error){
-	   	    			console.log("ajax 통신 실패");
-	   	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-	   	    		}
-	   	    	});
-	    		
-	    		function updateSensor(){
-	    			var cnt=0;
-	    			var interval=setInterval(function(){
-	    				if(cnt++ < saveResponse.size-1){
-	    					
-	    					$('.circle-data_1').html(saveResponse.list[cnt].time);	
-	    					$('.critical-box-change-data').html(saveResponse.list[cnt].time);
-	    					$('.circle-data_2').html(saveResponse.list[cnt].loadcell3);
-	    					$('.critical-box-change-data-2').html(saveResponse.list[cnt].loadcell3);
-	    					$('.circle-data_3').html(saveResponse.list[cnt].loadcell4);
-	    					$('.critical-box-change-data-3').html(saveResponse.list[cnt].loadcell4);
-	    					$('.circle-data_4').html(saveResponse.list[cnt].loadcell5);
-	    					$('.critical-box-change-data-4').html(saveResponse.list[cnt].loadcell5);
-	    				}else{
-	    					clearInterval(interval);
-	    					updateData();
-	    				}
-	    			}, 1000);
-	    		}
-	    	}
 		    
 	        setInterval(function () {
 	        	
@@ -1999,44 +2003,8 @@
 	
 	    })
 	
+	   
 	    $('.refresh_2').click(function () {
-	    	
-	    	updateData();
-	    	
-	    	var saveResponse={list:null, size:0};
-		    
-		    function updateData(){
-	    		$.ajax({
-	   	    		url:"main.test",
-	   	    		dataType:"json",
-	   	    		success:function(response){
-	  	    			
-						saveResponse.list=response;
-						saveResponse.size=response.length;
-						updateSensor();
-						
-	   	    		}, error:function(request, error){
-	   	    			console.log("ajax 통신 실패");
-	   	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-	   	    		}
-	   	    	});
-	    		
-	    		function updateSensor(){
-	    			var cnt=0;
-	    			var interval=setInterval(function(){
-	    				
-	    				if(cnt++ < saveResponse.size-1){
-	    					$('.current-quality').html(saveResponse.list[cnt].loadcell1);	
-	    					$('.current-quality2').html(saveResponse.list[cnt].loadcell2);
-	    				} else {
-	    					clearInterval(interval);
-	    					updateData();
-	    				}
-	    			}, 1000);
-	    		}
-	 			
-		    }
-	    		
 	    	
 	        setInterval(function () {
 	
