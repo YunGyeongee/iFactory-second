@@ -39,7 +39,7 @@ public class SensorController {
 	}
 	*/
 	
-	/*
+	
 	@ResponseBody
 	@RequestMapping("main.test")
 	public List<Sensor> selectList(Sensor s, ModelAndView mv) {
@@ -53,7 +53,7 @@ public class SensorController {
 		
 		return sList;
 	}
-	*/
+	
 	
 
 }

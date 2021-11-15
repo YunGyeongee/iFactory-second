@@ -10,6 +10,7 @@
 		<result property="loadcell4" column="loadcell_4" />
 		<result property="loadcell5" column="loadcell_5" />
 		<result property="sensorDate" column="sensor_date" />
+		<!-- <result property="sensorStatus" column="sensor_status" /> -->
 	</resultMap>
 
 	<select id="selectSensor1" resultType="Sensor" parameterType="string">

@@ -1841,10 +1841,12 @@
 	    $('.refresh').click(function () {
 	    	
 			updateData();
-			let saveResponse={list:null, size:0};
-			function updateDate(){
+			
+			var saveResponse={list:null, size:0};
+			
+			function updateData(){
 	    		$.ajax({
-	   	    		url:"main.in",
+	   	    		url:"main.test",
 	   	    		dataType:"json",
 	   	    		success:function(response){
 	  	    		
@@ -1998,9 +2000,10 @@
 	    })
 	
 	    $('.refresh_2').click(function () {
+	    	
 	    	updateData();
 	    	
-	    	let saveResponse={list:null, size:0};
+	    	var saveResponse={list:null, size:0};
 		    
 		    function updateData(){
 	    		$.ajax({

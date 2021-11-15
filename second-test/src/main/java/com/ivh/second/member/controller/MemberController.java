@@ -3,9 +3,7 @@ package com.ivh.second.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -54,17 +52,9 @@ public class MemberController {
 		return mv;
 	}
 	
-	
 	@RequestMapping("main.in")
-	public List<Sensor> main(Sensor s, ModelAndView mv) {
-		ArrayList<Sensor> sList = sService.selectList(s);
-		//System.out.println(sList);
-		
-		mv.addObject("sList", sList)
-		  .addObject("s", s)
-		  .setViewName("common/errorPage");
-		
-		return sList;
+	public String main() {
+		return "main";
 	}
 	
 	
