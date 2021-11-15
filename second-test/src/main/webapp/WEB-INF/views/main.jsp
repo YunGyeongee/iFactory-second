@@ -1837,7 +1837,6 @@
 	        console.log(a)
 	    }
 	    
-	    let div = document.getElementById("dashboard-container");
         let saveResponse = {list:null, size:0};
         setInterval(()=>{
             updateData()},5000);
@@ -1848,8 +1847,6 @@
    	    		dataType:"json",
    	    		success:function(response){
    	    			
-   	    			let cnt = 0;
-  	    			
 					saveResponse.list=response;
 					saveResponse.size=response.length;
 					
@@ -1862,8 +1859,8 @@
    	    	});
     		
     		function updateSensor(){
-    			var cnt=0;
-    			var interval=setInterval(function(){
+    			let cnt=0;
+    			let interval=setInterval(function(){
     				
     				if(cnt++ < saveResponse.size-1){
     					$('.circle-data_1').html(saveResponse.list[cnt].time);	
