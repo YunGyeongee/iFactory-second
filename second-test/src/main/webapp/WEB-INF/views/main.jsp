@@ -1839,7 +1839,7 @@
 	    
         let saveResponse = {list:null, size:0};
         setInterval(()=>{
-            updateData()},5000);
+            updateData()},1000);
     
         function updateData(){
     		$.ajax({
@@ -1847,22 +1847,11 @@
    	    		dataType:"json",
    	    		success:function(response){
    	    			
+   	    			let cnt = 0;
 					saveResponse.list=response;
 					saveResponse.size=response.length;
 					
-					updateSensor();
-					
-   	    		}, error:function(request, error){
-   	    			console.log("ajax 통신 실패");
-   	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-   	    		}
-   	    	});
-    		
-    		function updateSensor(){
-    			let cnt=0;
-    			let interval=setInterval(function(){
-    				
-    				if(cnt++ < saveResponse.size-1){
+					if(cnt++ < saveResponse.size-1){
     					$('.circle-data_1').html(saveResponse.list[cnt].time);	
     					$('.critical-box-change-data').html(saveResponse.list[cnt].time);
     					$('.circle-data_2').html(saveResponse.list[cnt].loadcell3);
@@ -1877,9 +1866,13 @@
     				} else {
     					clearInterval(interval);
     				}
-    			}, 1000);
-    		}
- 			
+					
+   	    		}, error:function(request, error){
+   	    			console.log("ajax 통신 실패");
+   	    			console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+   	    		}
+   	    	});
+    		
 	    }
     
 	    
