@@ -266,7 +266,7 @@
 							<p class="forgot-signup">Forgot your password?</p>
 							<p class="forgot-signup"><a href="enrollForm.me">Sign up</a></p>
 						</div>
-						<button type="submit" class="signin-button">SIGN IN</button>
+						<p class="signin-button" align="center"><a href="main.in">SIGN IN</a></p>
 					</form>
 				</div>               
 			</div>
