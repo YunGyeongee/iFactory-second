@@ -41,7 +41,7 @@
 		       sensor_date as sensorDate
 		  from sensor
 		 order
-		    by sensor_date
+		    by sensor_date desc
 	</select>
 	
 </mapper>
