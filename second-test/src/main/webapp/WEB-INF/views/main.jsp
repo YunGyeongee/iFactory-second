@@ -1837,9 +1837,11 @@
 	        console.log(a)
 	    }
 	    
+	    // 수정 필요 -> ajax가 여러번 돌아가서 쌓임 -> 너무 많이 돌리면 서버터짐
+	    
         let saveResponse = {list:null, size:0};
         setInterval(()=>{
-            updateData()},1000);
+            updateData()},5000);
     
         function updateData(){
     		$.ajax({
@@ -1847,25 +1849,30 @@
    	    		dataType:"json",
    	    		success:function(response){
    	    			
-   	    			let cnt = 0;
-					saveResponse.list=response;
+   	    			saveResponse.list=response;
 					saveResponse.size=response.length;
+   	    			
+   	    			let cnt = 0;
+   	    			let interval=setInterval(function(){
+   	    				
+   	    				if(cnt++ < saveResponse.size-1){
+   	    					$('.circle-data_1').html(saveResponse.list[cnt].time);	
+   	    					$('.critical-box-change-data').html(saveResponse.list[cnt].time);
+   	    					$('.circle-data_2').html(saveResponse.list[cnt].loadcell3);
+   	    					$('.critical-box-change-data-2').html(saveResponse.list[cnt].loadcell3);
+   	    					$('.circle-data_3').html(saveResponse.list[cnt].loadcell4);
+   	    					$('.critical-box-change-data-3').html(saveResponse.list[cnt].loadcell4);
+   	    					$('.circle-data_4').html(saveResponse.list[cnt].loadcell5);
+   	    					$('.critical-box-change-data-4').html(saveResponse.list[cnt].loadcell5);
+   	    					
+   	    					$('.current-quality').html(saveResponse.list[cnt].loadcell1);	
+   	    					$('.current-quality2').html(saveResponse.list[cnt].loadcell2);
+   	    				} else {
+   	    					clearInterval(interval);
+   	    				}
+   	    			}, 1000);
 					
-					if(cnt++ < saveResponse.size-1){
-    					$('.circle-data_1').html(saveResponse.list[cnt].time);	
-    					$('.critical-box-change-data').html(saveResponse.list[cnt].time);
-    					$('.circle-data_2').html(saveResponse.list[cnt].loadcell3);
-    					$('.critical-box-change-data-2').html(saveResponse.list[cnt].loadcell3);
-    					$('.circle-data_3').html(saveResponse.list[cnt].loadcell4);
-    					$('.critical-box-change-data-3').html(saveResponse.list[cnt].loadcell4);
-    					$('.circle-data_4').html(saveResponse.list[cnt].loadcell5);
-    					$('.critical-box-change-data-4').html(saveResponse.list[cnt].loadcell5);
-    					
-    					$('.current-quality').html(saveResponse.list[cnt].loadcell1);	
-    					$('.current-quality2').html(saveResponse.list[cnt].loadcell2);
-    				} else {
-    					clearInterval(interval);
-    				}
+					updateSensor();
 					
    	    		}, error:function(request, error){
    	    			console.log("ajax 통신 실패");
