@@ -1530,7 +1530,7 @@
                     <h4>Smart Dashboard</h4>
 
                     <video id="vid" class="machine-video" autoplay="autoplay" muted="muted">
-                        <source src="resources/video/machine.mp4" type="video/mp4">
+                        <source src="resources/video/machine_Blue_1116.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="dashboard-container-half1-footer-container">
@@ -1756,7 +1756,14 @@
     
     
     <script>
-		document.getElementById('vid').play();
+    
+    	$(function(){
+    		let interval = setInterval(function(){
+    			document.getElementById('vid').play();
+    		}, 100);
+    	})
+    	
+		
     
 	    $('.btn-custom').click(function () {
 	        if ($('.btn-custom').hasClass("sidebar-btn-click")) {
